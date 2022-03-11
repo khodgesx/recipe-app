@@ -6,7 +6,8 @@ We are going to import files from the Spoonacular API to add to the recipe datab
 
 The two models we will be working with are users and recipes. 
 
-To Start:
-Kelly: recipe controller & recipe model ?
-Bransilav:
-Vickie:
+Duties:
+
+***Kelly: recipe controller & recipe model ? ++
+***Branislav: users controller, users model ? ++
+***Vickie: 
