@@ -10,4 +10,7 @@ Duties:
 
 ***Kelly: recipe controller & recipe model ? ++
 ***Branislav: users controller, users model ? ++
-***Vickie: 
+***Vickie: views folders, public files, front-end 
+
+Recipe User Flow:
+![alt text](/public/images/recipe-app-userflow.PNG "recipe userflow")
