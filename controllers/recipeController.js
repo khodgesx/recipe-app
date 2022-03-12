@@ -4,15 +4,15 @@ const router = express.Router();
 
 
 //INDEX: show all recipes 
-router.get('/', async(req, res)=>{
-    try{
+router.get('/', async (req, res) => {
+    try {
         const recipes = await Recipe.find();
-    res.render('recipes/index.ejs', {
-        recipes: recipes
-    })
-    }catch{
+        res.render('recipes/index.ejs', {
+            recipes: recipes
+        })
+    } catch {
         res.sendStatus(500)
-    }  
+    }
 })
 
 //INDEX: show search of recipes from our database
@@ -25,63 +25,63 @@ router.get('/', async(req, res)=>{
 // })
 
 //NEW: form to create new recipe 
-router.get('/new', (req, res)=>{
+router.get('/new', (req, res) => {
     res.render('recipes/new-recipe.ejs')
 })
 
 //SHOW: show specific recipe page
-router.get('/:id', async (req, res)=>{
-    try{
+router.get('/:id', async (req, res) => {
+    try {
         const recipe = await Recipe.findById(req.pararms.id).populate('user')
-    res.render('recipes/show.ejs', {
-        recipe:recipe
-    })
-    }catch{
+        res.render('recipes/show.ejs', {
+            recipe: recipe,
+        })
+    } catch {
         res.sendStatus(500)
     }
 })
 
 //CREATE: create new recipe
-router.post('/', async (req, res)=>{
-    try{
+router.post('/', async (req, res) => {
+    try {
         req.body.user = req.session.userId
         const newRecipe = await Recipe.create(req.body)
         res.redirect('recipes/show.ejs', {
-            newRecipe : newRecipe
+            newRecipe: newRecipe
         })
-    }catch{
+    } catch {
         res.sendStatus(500)
     }
 })
 
 //EDIT: form to edit a specific recipe 
-router.get('/:id/edit', async (req, res)=>{
-    try{
+router.get('/:id/edit', async (req, res) => {
+    try {
         const recipe = await Recipe.findById(req.params.id)
-    res.render('recipes/edit.ejs', {
-        recipe: recipe
-    })
-    }catch{
+        res.render('recipes/edit.ejs', {
+            recipe: recipe
+        })
+    } catch {
         res.sendStatus(500)
-    } 
+    }
 })
 
 //UPDATE: update recipe with data from edit form
-router.put('/:id', async (req, res)=>{
-    try{
+router.put('/:id', async (req, res) => {
+    try {
         await Recipe.findByIdAndUpdate(req.params.id, req.body)
         res.redirect(`/recipes/${req.params.id}`)
-    }catch{
+    } catch {
         res.sendStatus(500)
     }
 })
 
 //DELETE: delete a specific recipe 
-router.delete('/:id', async (req, res)=>{
-    try{
+router.delete('/:id', async (req, res) => {
+    try {
         await Recipe.findByIdAndDelete(req.params.id)
         res.redirect('/recipes')
-    }catch{
+    } catch {
         res.sendStatus(500)
     }
 })
