@@ -1,11 +1,9 @@
-const recipe = require('../models/recipe')
+const Recipe = require('../models/recipe')
 const express = require('express');
-const Recipe = require('../models/recipe');
-const { response } = require('express');
 const router = express.Router();
 
 
-//INDEX: show all created recipes 
+//INDEX: show all recipes 
 router.get('/', async(req, res)=>{
     try{
         const recipes = await Recipe.find();
@@ -17,9 +15,18 @@ router.get('/', async(req, res)=>{
     }  
 })
 
+//INDEX: show search of recipes from our database
+//need to route to a show page of results
+// router.get('/search/:id', async(req, res)=>{
+//     const matchedRecipes = await Recipe.find();
+//     res.render('/recipes/show.ejs', {
+//         matchedRecipes : matchedRecipes
+//     })
+// })
+
 //NEW: form to create new recipe 
 router.get('/new', (req, res)=>{
-    res.render('recipes/new.ejs')
+    res.render('recipes/new-recipe.ejs')
 })
 
 //SHOW: show specific recipe page
@@ -32,7 +39,6 @@ router.get('/:id', async (req, res)=>{
     }catch{
         res.sendStatus(500)
     }
-    
 })
 
 //CREATE: create new recipe

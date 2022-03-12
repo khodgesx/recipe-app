@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
     name: {type:String, required: true},
-    extendedIngredients:[
+    extendedIngredients:
+    [
         {name: String, 
         amount: Number,
         unit: Number,
