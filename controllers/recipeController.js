@@ -1,6 +1,7 @@
 const Recipe = require('../models/recipe')
 const express = require('express');
 const router = express.Router();
+const isLoggedIn = require('../middleware/isLoggedIn')
 
 
 //INDEX: show all recipes 
@@ -25,7 +26,8 @@ router.get('/', async (req, res) => {
 // })
 
 //NEW: form to create new recipe 
-router.get('/new', (req, res) => {
+//adding [isLoggedIn] to this route specifically
+router.get('/new', [isLoggedIn], (req, res) => {
     res.render('recipes/new-recipe.ejs')
 })
 
@@ -43,15 +45,16 @@ router.get('/:id', async (req, res) => {
 
 //CREATE: create new recipe
 router.post('/', async (req, res) => {
-    try {
-        req.body.user = req.session.userId
-        const newRecipe = await Recipe.create(req.body)
-        res.redirect('recipes/show.ejs', {
-            newRecipe: newRecipe
-        })
-    } catch {
-        res.sendStatus(500)
-    }
+        try {
+            req.body.user = req.session.userId
+            const newRecipe = await Recipe.create(req.body)
+            res.redirect('recipes/show.ejs', {
+                newRecipe: newRecipe
+            })
+        } catch {
+            res.sendStatus(500)
+        }
+   
 })
 
 //EDIT: form to edit a specific recipe 
