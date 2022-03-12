@@ -10,7 +10,13 @@
 
 <body>
     <h2>This is <%= user.username %>'s page</h2>
-    <a href="/"><button>LOG OUT</button></a>
+    <% if (isLoggedIn && (user._id == currentUserId)){ %>
+        <form action="/logout" method="GET">
+            <a href="/"><button>LOG OUT</button></a>
+        </form>
+   <% }%>
+    
+   
 </body>
 
 </html>

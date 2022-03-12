@@ -10,21 +10,24 @@
     
     <h1>Add your own recipe:</h1>
 
-    <form action="" method="POST">
-        <label for="ing-name">Ingredients (separate ingredients with a ','):</label>
-        <input type="text" name="ing-name" required>
+    <form action="/recipes" method="POST">
+        <label for="name">Recipe Name:</label>
+        <input type="text" name="name" required>
+
+        <!-- <label for="extendedIngredients">Ingredients (separate ingredients with a ','):</label>
+        <input type="text" name="ingredients" required>
 
         <label for="ing-amount">Amount (separate amounts with a ','):</label>
         <input type="number" name="ing-amount" required>
 
         <label for="ing-unit">Unit (separate units with a ','):</label>
-        <input type="number" name="ing-unit" required>
+        <input type="text" name="ing-unit" required>
 
         <label for="ing-meta">Method (separate methods with a ','):</label>
-        <input type="number" name="ing-meta">
+        <input type="text" name="ing-meta">
 
-        <label for="ing-summary">Ingredients (separate ingredients with a ','):</label>
-        <input type="text" name="ing-summary" required>
+        <label for="ing-summary"> Summary (separate ingredients with a ','):</label>
+        <input type="text" name="ing-summary" required> -->
 
         <input type="submit" value="Add Recipe!">
 

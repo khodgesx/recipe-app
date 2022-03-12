@@ -31,10 +31,21 @@ router.get('/new', (req, res) => {
 // Shows users profile page
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id)
+    const currentUserId = res.locals.userId
     res.render("users/show.ejs", {
         user: user,
+        currentUserId : currentUserId
     })
 })
+
+
+
+
+
+
+
+
+
 
 // SHOW: GET
 // /users/:id/created
@@ -53,6 +64,7 @@ router.get('/:id/saved', async (req, res) => {
     const user = await User.findById(req.params.id)
     res.render("users/index-saved.ejs", {
         user: user
+    
     })
 })
 

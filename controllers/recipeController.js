@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipe')
+const User = require("../models/user")
 const express = require('express');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn')
@@ -34,11 +35,23 @@ router.get('/new', [isLoggedIn], (req, res) => {
 //SHOW: show specific recipe page
 router.get('/:id', async (req, res) => {
     try {
-        const recipe = await Recipe.findById(req.pararms.id).populate('user')
+        const recipe = await Recipe.findById(req.params.id)
+        console.log(recipe)
+        const currentUserId = res.locals.userId
+        // console.log(currentUserId)
+        // console.log(res.locals.userId)
+        // const userRecipe = await Recipe.findById(req.params.id)
+        // const whatever = recipe.json()
+        // console.log(whatever)
         res.render('recipes/show.ejs', {
             recipe: recipe,
+            // userRecipe : userRecipe,
+            // currentUserId:currentUserId,
+            // whatever:whatever
+        
         })
     } catch {
+        console.log('hello')
         res.sendStatus(500)
     }
 })
@@ -46,10 +59,10 @@ router.get('/:id', async (req, res) => {
 //CREATE: create new recipe
 router.post('/', async (req, res) => {
         try {
-            req.body.user = req.session.userId
-            const newRecipe = await Recipe.create(req.body)
-            res.redirect('recipes/show.ejs', {
-                newRecipe: newRecipe
+            req.body.userId = req.session.userId
+            const recipe = await Recipe.create(req.body)
+            res.render('recipes/show.ejs', {
+               recipe: recipe
             })
         } catch {
             res.sendStatus(500)

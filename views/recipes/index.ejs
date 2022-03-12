@@ -19,7 +19,9 @@
     <h1>THIS IS THE RECIPE INDEX RENDER PAGE</h1>
 
     <main>
-
+        <% recipes.forEach((element )=> { %>
+            <a href="/recipes/<%=element._id%>"><p><%=element.name %></p></a>
+        <% }); %>
     </main>
 
     <script src=""></script>
