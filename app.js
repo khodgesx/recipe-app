@@ -12,6 +12,7 @@ const store = new MongoDBStore({
 require('./db-utils/connect')
 const recipeController = require('./controllers/recipeController')
 const userController = require('./controllers/userController')
+const homeController = require('./controllers/homeController')
 app.use(express.static("public"))
 app.use(methodOverride('_method'))
 app.use(require('./middleware/logger'))
@@ -39,6 +40,7 @@ app.get('/', (req, res)=>{
 })
 app.use('/recipes', recipeController)
 app.use('/users', userController)
+app.use('/', homeController)
 
 const port = process.env.PORT || 3000
 app.listen(port, ()=>{
