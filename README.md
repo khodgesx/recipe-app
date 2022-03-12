@@ -13,4 +13,4 @@ Duties:
 ***Vickie: views folders, public files, front-end 
 
 Recipe User Flow:
-![alt text](https://i.imgur.com/L0mqcph.png "recipe userflow")
+![alt text](https://i.imgur.com/Tawo8wS.png "recipe userflow")
