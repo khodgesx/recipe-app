@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-</head>
+    <head>
+        <%- include('../partials/head.ejs')  %> 
+    </head>
 
-<body>
-    <header>
-        <nav></nav>
-    </header>
+    <body>
+        <header>
+            <% if (isLoggedIn && (user._id == currentUserId)){ %>
+                <%- include('../partials/header-full-nav.ejs')  %> 
+            <% }else {%>
+                <%- include('../partials/header-buttons-only-nav.ejs')  %> 
+            <% }%>
+        </header>
 
-    <h1>THIS IS THE RECIPE INDEX RENDER PAGE</h1>
+        <h1>THIS IS THE RECIPE INDEX RENDER PAGE</h1>
 
-    <main>
-        <% recipes.forEach((element )=> { %>
-            <a href="/recipes/<%=element._id%>"><p><%=element.name %></p></a>
-        <% }); %>
-    </main>
+        <main>
+            <% recipes.forEach((element )=> { %>
+                <a href="/recipes/<%=element._id%>"><p><%=element.name %></p></a>
+            <% }); %>
+        </main>
 
-    <script src=""></script>
-</body>
+
+
+
+
+
+
+
+
+        <footer>
+            <%- include('../partials/footer.ejs')  %> 
+        </footer>
+
+
+    </body>
 
 </html>

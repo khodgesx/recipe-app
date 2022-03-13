@@ -1,0 +1,81 @@
+        <!-- RECIPES: INDEX.EJS (IF LOGGED IN) -->
+        <!-- RECIPES: SHOW.EJS (IF LOGGED IN) -->
+        <!-- RECIPES: NEW-RECIPE.EJS -->
+        <!-- RECIPES: EDIT.EJS -->
+        <!-- USERS: ALL EJS (EXCEPT NEW-USER.EJS) -->
+        <!-- <header> -->
+            <a href="" class="nav-logo-link">
+                <img class="nav-logo" src="images/ww_logo_black.svg" alt="logo-holder">
+            </a>
+        
+            <div class="nav-container detailed">
+                <p class="burger"><i class="fas fa-bars"></i></p>
+                <nav class="main-nav">
+                    <ul class="nav-list close">
+                        <li class="nav-item">
+                            <a class="nav-link" href="">All Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Saved</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">My Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">+ New</a>
+                        </li>
+                        <% if (isLoggedIn && (user._id == currentUserId)){ %>
+                        <li class="nav-item">
+                            <form action="/logout" method="GET">
+                                <input type="submit" class="nav-link logout" value="Logout">
+                            </form>
+                        </li>
+                        <% }%>
+                    </ul>
+                </nav>
+            </div>
+        <!-- </header> -->
+
+
+
+
+        <!-- HOME.EJS: -->
+        <!-- RECIPES: INDEX.EJS (IF NOT LOGGED IN): -->
+        <!-- <header>
+            <a href="" class="nav-logo-link">
+                <img class="nav-logo" src="images/ww_logo_black.svg" alt="logo-holder">
+            </a>
+        
+            <div class="nav-container">
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a class="button-treat-sub login" href="">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="button-treat-main register" href="">Register</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header> -->
+
+
+        <!-- USER: NEW-USER.EJS -->
+        <!-- <header>
+            <a href="" class="nav-logo-link">
+                <img class="nav-logo" src="images/ww_logo_black.svg" alt="logo-holder">
+            </a>
+        
+            <div class="nav-container">
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a class="nav-link" href="">All Recipes</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header> -->
+
+
