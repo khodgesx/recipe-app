@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
     const currentUserId = res.locals.userId
     res.render("users/show.ejs", {
         user: user,
-        currentUserId : currentUserId
+        currentUserId: currentUserId
     })
 })
 
@@ -64,7 +64,7 @@ router.get('/:id/saved', async (req, res) => {
     const user = await User.findById(req.params.id)
     res.render("users/index-saved.ejs", {
         user: user
-    
+
     })
 })
 
@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
     req.body.password = hashedPassword
     const newUser = await User.create(req.body);
     console.log(newUser)
-    res.redirect('/users')
+    res.redirect('/home/login')
 })
 
 // EDIT: GET
