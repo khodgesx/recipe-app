@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('views/partials/head.ejs')  %> 
+    <%- include('views/partials/header-full-nav.ejs')  %> 
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 
     <h1>Please Login: </h1>
 
-    <form action="/login" method="POST">
+    <form action="/home/login" method="POST">
         <label for="username">Username:</label>
         <input type="text" name="username" required>
 

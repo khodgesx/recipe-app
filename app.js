@@ -35,12 +35,12 @@ app.use(async (req, res, next)=>{
     }
     next()
 })
-app.get('/', (req, res)=>{
-    res.send("home.ejs")
-})
+// app.get('/', (req, res)=>{
+//     res.send("home.ejs")
+// })
 app.use('/recipes', recipeController)
 app.use('/users', userController)
-app.use('/', homeController)
+app.use('/home', homeController)
 
 const port = process.env.PORT || 3000
 app.listen(port, ()=>{

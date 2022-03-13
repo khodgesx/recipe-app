@@ -9,8 +9,10 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 router.get('/', async (req, res) => {
     try {
         const recipes = await Recipe.find();
+        const currentUserId = res.locals.userId
         res.render('recipes/index.ejs', {
-            recipes: recipes
+            recipes: recipes,
+            currentUserId: currentUserId
         })
     } catch {
         res.sendStatus(500)

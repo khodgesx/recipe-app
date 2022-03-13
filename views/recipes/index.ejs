@@ -7,11 +7,7 @@
 
     <body>
         <header>
-            <% if (isLoggedIn && (user._id == currentUserId)){ %>
-                <%- include('../partials/header-full-nav.ejs')  %> 
-            <% }else {%>
-                <%- include('../partials/header-buttons-only-nav.ejs')  %> 
-            <% }%>
+            <%- include('../partials/header-full-nav.ejs')  %> 
         </header>
 
         <h1>THIS IS THE RECIPE INDEX RENDER PAGE</h1>

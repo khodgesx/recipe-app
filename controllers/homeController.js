@@ -8,6 +8,10 @@ const router = express.Router()
 //     res.render('auth/signup')
 // })
 
+router.get('/', async (req, res) => {
+    res.render('../home.ejs', {
+    })
+})
 
 router.get('/login', (req, res) => {
     console.log("hello")
@@ -27,11 +31,11 @@ router.post("/login", async (req, res) => {
                 req.session.userId = possibleUser._id;
                 res.redirect("/users")
             } else {
-                res.redirect("/users/login")
+                res.redirect("/home/login")
             }
         } else {
             // Let them try again?
-            res.redirect("/users/login")
+            res.redirect("/home/login")
         }
     } catch (err) {
         console.log(err);
@@ -43,12 +47,7 @@ router.get('/logout', (req, res) => {
         res.redirect("/")
     })
 })
-router.get('/', async (req, res) => {
-    const users = await User.find({ username: req.query.username });
-    res.render('users/index.ejs', {
-        users: users
-    })
-})
+
 
 
 
