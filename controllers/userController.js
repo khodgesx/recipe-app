@@ -2,6 +2,7 @@ const User = require("../models/user")
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const Recipe = require("../models/recipe");
 
 
 
@@ -26,6 +27,21 @@ router.get('/new', (req, res) => {
     res.render('users/new-user.ejs')
 })
 
+
+
+// SHOW: GET
+// /users/:id/created
+// Shows a page displaying all the recipes created by the user
+router.get('/:id/created', async (req, res) => {
+    const user = await User.findById(req.params.id)
+    const recipes = await Recipe.find().populate('user')
+    console.log(recipes)
+    res.render("users/index-created.ejs", {
+        user: user,
+        recipes: recipes
+    })
+})
+
 // SHOW: GET
 // /users/:id
 // Shows users profile page
@@ -47,24 +63,15 @@ router.get('/:id', async (req, res) => {
 
 
 
-// SHOW: GET
-// /users/:id/created
-// Shows a page displaying all the recipes created by the user
-router.get('/:id/created', async (req, res) => {
-    const user = await User.findById(req.params.id)
-    res.render("users/index-created.ejs", {
-        user: user
-    })
-})
 
 // SHOW: GET
 // /users/:id/created
 // Shows a page displaying all the recipes saved by the user
 router.get('/:id/saved', async (req, res) => {
     const user = await User.findById(req.params.id)
+    const recipes = await Recipes.findById
     res.render("users/index-saved.ejs", {
         user: user
-
     })
 })
 

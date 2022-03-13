@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <%- include('../partials/head.ejs')  %> 
-    </head>
 
-    <body>
-        <header>
-            <%- include('../partials/header-full-nav.ejs')  %> 
-        </header>
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header-full-nav.ejs') %>
+    </header>
 
 
 
-        
 
-        <h1><%=recipe.name%></h1>
-        <a href="/"><h2>check out all recipes</h2></a>
-        <% if (2 === 2){ %>
-            <form action="/recipes/<%=recipe._id%>/edit" method="GET">
-                <a href="/"><button>Edit</button></a>
-            </form>
+
+    <h1>
+        <%=recipe.name%>
+    </h1>
+    <a href="/recipes">
+        <h2>check out all recipes</h2>
+    </a>
+    <% if (2===2){ %>
+        <form action="/recipes/<%=recipe._id%>/edit" method="GET">
+            <a href="/"><button>Edit</button></a>
+        </form>
         <% } %>
 
 
-    
 
 
 
 
-        <footer>
-            <%- include('../partials/head.ejs')  %> 
-        </footer>
 
-    </body>
+            <footer>
+                <%- include('../partials/head.ejs') %>
+            </footer>
+
+</body>
 
 </html>
