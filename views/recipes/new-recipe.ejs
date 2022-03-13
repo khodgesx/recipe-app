@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <h1>Add your own recipe:</h1>
+    <head>
+        <%- include('../partials/head.ejs')  %> 
+    </head>
 
-    <form action="/recipes" method="POST">
-        <label for="name">Recipe Name:</label>
-        <input type="text" name="name" required>
+    <body>        
+        <header>
+            <%- include('../partials/header-full-nav.ejs')  %> 
+        </header>
 
-        <!-- <label for="extendedIngredients">Ingredients (separate ingredients with a ','):</label>
-        <input type="text" name="ingredients" required>
 
-        <label for="ing-amount">Amount (separate amounts with a ','):</label>
-        <input type="number" name="ing-amount" required>
 
-        <label for="ing-unit">Unit (separate units with a ','):</label>
-        <input type="text" name="ing-unit" required>
+        <h1>Add your own recipe:</h1>
 
-        <label for="ing-meta">Method (separate methods with a ','):</label>
-        <input type="text" name="ing-meta">
+        <form action="/recipes" method="POST">
+            <label for="name">Recipe Name:</label>
+            <input type="text" name="name" required>
 
-        <label for="ing-summary"> Summary (separate ingredients with a ','):</label>
-        <input type="text" name="ing-summary" required> -->
+            <!-- <label for="extendedIngredients">Ingredients (separate ingredients with a ','):</label>
+            <input type="text" name="ingredients" required>
 
-        <input type="submit" value="Add Recipe!">
+            <label for="ing-amount">Amount (separate amounts with a ','):</label>
+            <input type="number" name="ing-amount" required>
 
-    </form>
+            <label for="ing-unit">Unit (separate units with a ','):</label>
+            <input type="text" name="ing-unit" required>
 
-</body>
+            <label for="ing-meta">Method (separate methods with a ','):</label>
+            <input type="text" name="ing-meta">
+
+            <label for="ing-summary"> Summary (separate ingredients with a ','):</label>
+            <input type="text" name="ing-summary" required> -->
+
+            <input type="submit" value="Add Recipe!">
+
+        </form>
+
+
+
+
+        
+        <footer>
+            <%- include('../partials/head.ejs')  %> 
+        </footer>
+
+    </body>
 </html>
 
 

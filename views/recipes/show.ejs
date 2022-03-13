@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <%- include('../partials/head.ejs')  %> 
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-<h1><%=recipe.name%></h1>
-<a href="/"><h2>check out all recipes</h2></a>
-<% if (2 === 2){ %>
-    <form action="/recipes/<%=recipe._id%>/edit" method="GET">
-        <a href="/"><button>Edit</button></a>
-    </form>
-<% } %>
+    <body>
+        <header>
+            <% if (isLoggedIn && (user._id == currentUserId)){ %>
+                <%- include('../partials/header-full-nav.ejs')  %> 
+            <% }else {%>
+                <%- include('../partials/header-buttons-only-nav.ejs')  %> 
+            <% }%>
+        </header>
 
 
-</body>
+
+        
+
+        <h1><%=recipe.name%></h1>
+        <a href="/"><h2>check out all recipes</h2></a>
+        <% if (2 === 2){ %>
+            <form action="/recipes/<%=recipe._id%>/edit" method="GET">
+                <a href="/"><button>Edit</button></a>
+            </form>
+        <% } %>
+
+
+    
+
+
+
+
+        <footer>
+            <%- include('../partials/head.ejs')  %> 
+        </footer>
+
+    </body>
 
 </html>
