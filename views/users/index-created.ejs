@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <%- include('../partials/head.ejs')  %> 
-    </head>
-    <body>
-        <header>
-            <%- include('../partials/header-full-nav.ejs')  %> 
-        </header>
 
-        <h1>THIS IS THE USER INDEX RENDER PAGE</h1>
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
 
-        <main><%=TEST CODE HERE TO SHOW RENDER%></main>
-        
+<body>
+    <header>
+        <%- include('../partials/header-full-nav.ejs') %>
+    </header>
+
+    <h1>THIS IS THE PAGE WHERE ALL USER CREATED RECIPES SHOW UP</h1>
+
+    <main>
+        <% recipes.forEach(element=> { %>
+            <a href="/recipes/<%=element._id%>">
+                <%= element.name %>
+            </a>
+            <% }); %>
+
+    </main>
 
 
-        <footer>
-            <%- include('../partials/footer.ejs')  %> 
-        </footer>
+
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
 
 
-    </body>
+</body>
+
 </html>

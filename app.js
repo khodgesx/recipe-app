@@ -17,7 +17,7 @@ app.use(express.static("public"))
 app.use(methodOverride('_method'))
 app.use(require('./middleware/logger'))
 const isLoggedIn = require('./middleware/isLoggedIn')
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -25,13 +25,15 @@ app.use(session({
     saveUninitialized: false,
     store: store,
 }))
-app.use(async (req, res, next)=>{
+app.use(async (req, res, next) => {
     // This will send info from session to templates
     res.locals.isLoggedIn = req.session.isLoggedIn
-    if(req.session.isLoggedIn){
+    if (req.session.isLoggedIn) {
         const currentUser = await User.findById(req.session.userId)
         res.locals.username = currentUser.username
+        res.locals.firstName = currentUser.firstName
         res.locals.userId = req.session.userId.toString()
+        currentUserId = res.locals.userId
     }
     next()
 })
@@ -43,6 +45,6 @@ app.use('/users', userController)
 app.use('/home', homeController)
 
 const port = process.env.PORT || 3000
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log('app running')
 })
