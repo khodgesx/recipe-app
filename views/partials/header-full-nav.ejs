@@ -5,7 +5,7 @@
 <!-- USERS: ALL EJS (EXCEPT NEW-USER.EJS) -->
 <!-- <header> -->
 <% if (isLoggedIn){ %>
-    <a href="" class="nav-logo-link">
+    <a href="/home" class="nav-logo-link">
         <img class="nav-logo" src="images/ww_logo_black.svg" alt="logo-holder">
     </a>
 
@@ -17,7 +17,7 @@
                     <a class="nav-link" href="/recipes">All Recipes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Saved</a>
+                    <a class="nav-link" href="/users/<%= currentUserId %>/saved">Saved</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/<%= currentUserId %>/created">My Recipes</a>
@@ -26,14 +26,15 @@
                     <a class="nav-link" href="/recipes/new">+ New</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/users/<%= currentUserId %>">Hi <%=firstName%></a>
+                </li>
+                <li class="nav-item">
                     <form action="/home/logout" method="GET">
                         <input type="submit" class="nav-link logout" value="Logout">
                     </form>
                 </li>
 
             </ul>
-            <h2>Hi <%=firstName%>
-            </h2>
         </nav>
     </div>
     <%} else {%>
