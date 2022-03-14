@@ -34,8 +34,8 @@ router.get('/new', (req, res) => {
 // Shows a page displaying all the recipes created by the user
 router.get('/:id/created', async (req, res) => {
     const user = await User.findById(req.params.id)
-    const recipes = await Recipe.find().populate('user')
-    console.log(recipes)
+    const recipes = await Recipe.find()
+
     res.render("users/index-created.ejs", {
         user: user,
         recipes: recipes

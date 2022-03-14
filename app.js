@@ -31,6 +31,7 @@ app.use(async (req, res, next) => {
     if (req.session.isLoggedIn) {
         const currentUser = await User.findById(req.session.userId)
         res.locals.username = currentUser.username
+        res.locals.firstName = currentUser.firstName
         res.locals.userId = req.session.userId.toString()
         currentUserId = res.locals.userId
     }
