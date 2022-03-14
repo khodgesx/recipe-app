@@ -38,8 +38,13 @@ router.get('/new', [isLoggedIn], (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id)
-        console.log(recipe)
-        const currentUserId = res.locals.userId
+        // console.log(recipe)
+        // const currentUserId = res.locals.userId
+        const currentUser = res.locals.username
+        const recipeCreator = await Recipe.findById(req.params.id).populate('user')
+        console.log(currentUser)
+        console.log(recipeCreator)
+        
         // console.log(currentUserId)
         // console.log(res.locals.userId)
         // const userRecipe = await Recipe.findById(req.params.id)
@@ -47,6 +52,8 @@ router.get('/:id', async (req, res) => {
         // console.log(whatever)
         res.render('recipes/show.ejs', {
             recipe: recipe,
+            currentUser : currentUser,
+            recipeCreator: recipeCreator            
             // userRecipe : userRecipe,
             // currentUserId:currentUserId,
             // whatever:whatever
