@@ -8,7 +8,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true },
     recipesMade: { type: Number, min: 0, default: 0 },
-    recipesSaved: [],
+    recipesSaved: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
     img: { type: String }
 }, { timestamps: true })
 

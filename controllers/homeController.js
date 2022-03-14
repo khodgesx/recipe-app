@@ -9,13 +9,15 @@ const router = express.Router()
 // })
 
 router.get('/', async (req, res) => {
-    res.render('../home.ejs', {
+    res.render('home.ejs', {
     })
 })
 
 router.get('/login', (req, res) => {
     console.log("hello")
-    res.render('../login.ejs')
+    res.render('login.ejs', {
+
+    })
 })
 
 router.post("/login", async (req, res) => {

@@ -3,16 +3,21 @@ const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
     name: { type: String, required: true },
-    ingredients:
-        [
-            {
-                name: String,
-                amount: Number,
-                unit: String,
-                meta: String
-            }
-        ],
+    // const ingredientsSchema = new Schema ({
+    //     [
+    //         {
+    //             name: String,
+    //             amount: Number,
+    //             unit: String,
+    //             meta: String
+    //         }
+    //     ]
+    // }),
+    ingredients: [String],
     summary: String,
+    readyInMinutes: Number,
+    serving: Number,
+    img: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 
