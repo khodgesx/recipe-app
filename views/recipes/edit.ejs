@@ -8,8 +8,12 @@
         <header>
             <%- include('../partials/header-full-nav.ejs')  %> 
         </header>
-
-
+        <h2>Edit your <%=recipe.name%> recipe here</h2> 
+        <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
+           Recipe Title: <input type="text" name="name" value="<%=recipe.name%>" required>
+           Summary: <input type="text" name="name" value="<%=recipe.summary%>">
+            <button type="submit">Submit</button>
+        </form>
         
 
         <footer>

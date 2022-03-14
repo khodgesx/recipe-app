@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head.ejs')  %> 
+</head>
+
+<body>
+    <header>
+        <%- include('partials/header-full-nav.ejs')  %> 
+    </header>
+
+    <main class="page-main login-page">
+        <div class="login-page-container">
+            <h1 class="page-title">Login</h1>
+            <section class="form-container">
+                <form class="login-form-container" action="/home/login" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" required>
+            
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" required>
+            
+                    <input class="button-treat-main login-form-button" type="submit" value="Login">
+            
+                </form>
+            </section>
+        </div>
+        
+        
+    </main>
+
+    <footer>
+        <%- include('partials/footer.ejs')  %> 
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

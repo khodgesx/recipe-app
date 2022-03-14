@@ -10,27 +10,42 @@
         </header>
 
 
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <h1>Add your own recipe:</h1>
 
         <form action="/recipes" method="POST">
             <label for="name">Recipe Name:</label>
             <input type="text" name="name" required>
 
-            <!-- <label for="extendedIngredients">Ingredients (separate ingredients with a ','):</label>
+            <label for="ingredients">Ingredients (separate ingredients with a ','):</label>
             <input type="text" name="ingredients" required>
 
-            <label for="ing-amount">Amount (separate amounts with a ','):</label>
-            <input type="number" name="ing-amount" required>
+            <!-- <label for="amount">Amount (separate amounts with a ','):</label>
+            <input type="number" name="amount" required>
 
-            <label for="ing-unit">Unit (separate units with a ','):</label>
-            <input type="text" name="ing-unit" required>
+            <label for="unit">Unit (separate units with a ','):</label>
+            <input type="text" name="unit" required>
 
-            <label for="ing-meta">Method (separate methods with a ','):</label>
-            <input type="text" name="ing-meta">
+            <label for="meta">Method:</label>
+            <input type="text" name="meta"> -->
 
-            <label for="ing-summary"> Summary (separate ingredients with a ','):</label>
-            <input type="text" name="ing-summary" required> -->
+            <label for="summary"> Summary:</label>
+            <input type="text" name="summary" required>
+
+            <label for="readyInMinutes"> Ready In Minutes:</label>
+            <input type="number" name="readyInMinutes" required>
+
+            <label for="img"> Image:</label>
+            <input type="string" name="img" required>
+
+            <label for="serving"> Serving:</label>
+            <input type="number" name="serving" required>
 
             <input type="submit" value="Add Recipe!">
 
@@ -39,9 +54,11 @@
 
 
 
+
+
         
         <footer>
-            <%- include('../partials/head.ejs')  %> 
+            <%- include('../partials/footer.ejs')  %> 
         </footer>
 
     </body>

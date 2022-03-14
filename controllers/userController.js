@@ -69,9 +69,15 @@ router.get('/:id', async (req, res) => {
 // Shows a page displaying all the recipes saved by the user
 router.get('/:id/saved', async (req, res) => {
     const user = await User.findById(req.params.id)
-    const recipes = await Recipes.findById
+    const recipes = await Recipe.findById
+    const currentUser = res.locals.username
+    const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
+    const recipeCreator = recipeWithUserProp.user.username
     res.render("users/index-saved.ejs", {
-        user: user
+        user: user,
+        currentUser : currentUser,
+        recipeCreator : recipeCreator,
+        recipes : recipes
     })
 })
 

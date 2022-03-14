@@ -3,29 +3,36 @@
 <html lang="en">
 
 <head>
-    <%- include('../partials/head.ejs') %>
+    <%- include('../partials/head.ejs')  %> 
 </head>
 
 <body>
     <header>
-        <%- include('../partials/header-full-nav.ejs') %>
+        <%- include('../partials/header-full-nav.ejs')  %> 
     </header>
 
     <h1>THIS IS THE PAGE WHERE ALL USER CREATED RECIPES SHOW UP</h1>
 
     <main>
         <% recipes.forEach(element=> { %>
+            <% if (currentUser == recipeCreator){ %>
             <a href="/recipes/<%=element._id%>">
                 <%= element.name %>
             </a>
+            <% } %>
             <% }); %>
+            
+        
+              
+           
+            
 
     </main>
 
 
 
     <footer>
-        <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs')  %> 
     </footer>
 
 

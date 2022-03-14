@@ -20,22 +20,29 @@
     <a href="/recipes">
         <h2>check out all recipes</h2>
     </a>
-    <% if (2===2){ %>
-        <form action="/recipes/<%=recipe._id%>/edit" method="GET">
-            <a href="/"><button>Edit</button></a>
-        </form>
+    <% if (currentUser == recipeCreator){ %>
+        
+            <a href="/recipes/<%=recipe._id%>/edit"><button>Edit</button></a>
+            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                <button type="submit">Delete <%= recipe.name %>?</button>
+            </form>
+       
         <% } %>
 
 
-        <h2><%=currentUser%></h2>
-        <h2><%=recipeCreator.user.username%></h2>
+        <h2>Hi, <%=currentUser%></h2>
+        <h2>Created by: <%=recipeCreator%></h2>
 
+       <form action="/recipes/<%=recipe._id%>/saved" method="POST">
+        <input hidden name="recipeId" value="<%= recipe._id %>">
+        <button type="submit">SAVE</button>
+       </form>
 
-
+        
 
 
             <footer>
-                <%- include('../partials/head.ejs') %>
+                <%- include('../partials/footer.ejs') %>
             </footer>
 
 </body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs')  %> 
+    </head>
+    <body>
+        <header>
+            <%- include('partials/header-full-nav.ejs')  %> 
+        </header>
+
+        <main class="page-main">
+            <section class="page-text-container">
+                <h1 class="page-title">Welcome!</h1>
+                <h3 class="page-subtitle">Your one stop shop for all your cravings. Browse recipes, save your favorites, or create your own to share with the community</h3>
+            </section>
+
+            <section class="recipe-grid-container">
+                <% for(let i=0; i<3; i++) { %>
+                    <article class="card-container">
+                        <img class="recipe-card-pic" src="https://i.imgur.com/pDrGNFB.jpg" alt="tacos">
+                        <div class="recipe-card-text">
+                            <h2 class="recipe-card-title">Recipe name here</h2>
+                            <p class="recipe-card-caption">This is description of the recipe that we do not have. We might want recipe description in recipe schema</p>
+                            <a class="button-treat-sub recipe-card-button" href="/recipes">All Recipes</a>
+                        </div>
+                    </article>
+                <% } %> 
+            </section>
+        </main>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <footer>
+            <%- include('partials/footer.ejs')  %> 
+        </footer>
+
+
+        <script src="js/script.js"></script>
+        
+    </body>
+</html>
+
