@@ -388,7 +388,9 @@ body {
 }
 
 .one-recipe-container-img {
-
+    grid-column-start: 1;
+    grid-column-end: 2;
+    overflow: hidden;
 }
 
 .one-recipe-container-title {
@@ -416,7 +418,7 @@ body {
 }
 
 .text-span {
-    
+
 }
 
 .back-button {

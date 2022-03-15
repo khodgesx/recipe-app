@@ -34,16 +34,24 @@ router.get('/new', (req, res) => {
 // /users/:id
 // Shows users profile page
 router.get('/:id', async (req, res) => {
-    const user = await User.findById(req.params.id)
-    const currentUserId = req.session.userId
-    const currentUserIdString = req.session.userId.toString()
-    // console.log(currentUserId)
-    // console.log(user._id)
-    res.render('users/show.ejs', {
-        currentUserIdString: currentUserIdString,
-        user: user,
-        currentUserId: currentUserId
-    })
+    try {
+        const user = await User.findById(req.params.id)
+        const currentUserId = req.session.userId
+        const currentUserIdString = req.session.userId.toString()
+        console.log("hello")
+        // console.log(currentUserId)
+        // console.log(user._id)
+        res.render('users/show.ejs', {
+            currentUserIdString: currentUserIdString,
+            user: user,
+            currentUserId: currentUserId
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+
+    }
+
 })
 
 
@@ -92,7 +100,11 @@ router.post('/', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
+            console.log("=========================")
             const user = await User.findById(req.params.id)
+            console.log("=========================")
+            console.log("=========================")
+
             res.render('users/edit-user.ejs', {
                 user: user
             })
@@ -109,16 +121,13 @@ router.get('/:id/edit', async (req, res) => {
 // UPDATE THE USER WITH THE SPECIFIC ID
 router.put('/:id', async (req, res) => {
     try {
-        // await User.findByIdAndUpdate(req.params.id, req.body)
-        // console.log(User.findById(req.params.id))
-        // const currentUser = await User.findById(req.params.id)
-        // currentUser.findOneAndUpdate(
-        //     currentUser.firstName = req.body.firstname,
-        //     currentUser.lastName = req.body.lastName)
-        // await currentUser.save()
+        console.log('hello')
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body)
+
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         res.send('aslkjdlasdkfj')
+        console.log(err)
     }
 })
 

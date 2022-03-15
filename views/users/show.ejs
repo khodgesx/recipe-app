@@ -18,10 +18,10 @@
     <br>
     <br>
 
-    <h2>This is <%= user.username %>'s page</h2>
+    <h2>This is <%= firstName %>'s page</h2>
 
     <% if (user._id==currentUserIdString) { %>
-        <a href="/users/<%=user._id%>/edit"><button>Edit <%= user.username %></button></a>
+        <a href="/users/<%=user._id%>/edit"><button>Edit <%= firstName %></button></a>
         <% } %>
 
             <footer>
