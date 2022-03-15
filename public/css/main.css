@@ -30,7 +30,7 @@ body {
 .button-treat-main {
     text-decoration: none;
     color: white;
-    background-color: var(--medium-blueG);
+    background-color: var(--dark-marigold);
     padding: 5px 20px;
     display: block;
     width: fit-content;
@@ -39,12 +39,12 @@ body {
 
 .button-treat-sub {
     text-decoration: none;
-    color: var(--medium-blueG);
+    color: var(--dark-marigold);
     padding: 5px 20px;
     display: block;
     width: fit-content;
     border-radius: 10px;
-    border: 1px solid var(--medium-blueG);
+    border: 1px solid var(--dark-marigold);
     background-color: white;
 }
 
@@ -101,7 +101,7 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: var(--dark-blueG);
+    color: var(--dark-marigold);
     transition: 0.5s ease-in-out;
     padding: 5px 0;
     display: block;
@@ -110,7 +110,7 @@ body {
 
 .nav-link:hover {
     transform: scale(1.1);
-    color: var(--medium-blueG);
+    color: var(--medium-marigold);
 }
 
 .nav-link.logout {
@@ -243,11 +243,12 @@ body {
     border: 1px solid var(--light-gray);
     border-radius: 10px;
     overflow: hidden;
+    /* height: auto; */
 }
 
 .recipe-card-pic {
     width: 100%;
-    height: auto;
+    height: 200px;
     object-fit: cover;
 }
 
@@ -256,21 +257,21 @@ body {
 }
 
 .recipe-card-title {
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
 
 .recipe-card-caption {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 300;
-    line-height: 18px;
+    line-height: 24px;
     margin-bottom: 10px;
 }
 
 .button-treat-sub.recipe-card-button {
-    font-size: 14px;
+    font-size: 16px;
     padding: 3px 15px;
 }
 
@@ -282,6 +283,9 @@ body {
     .card-container {
         width: 80%;
         margin: 0 auto;
+    }
+    .recipe-card-pic {
+        height: 250px;
     }
 }
 
@@ -296,10 +300,13 @@ body {
     .card-container {
         width: 100%;
     }
+    .recipe-card-pic {
+        height: 250px;
+    }
 }
 
 
-/* LOGIN/REGISTER SECTION STYLE - LOGIN.EJS + NEW-USER.EJS */
+/* LOGIN/REGISTER/NEW RECIPE SECTION STYLE - LOGIN.EJS + NEW-USER.EJS + NEW-RECIPE.EJS */
 .page-main.login-page {
     height: 95vh;
     display: flex;
@@ -315,7 +322,8 @@ body {
 }
 
 .login-page-container .page-title,
-.new-user-page-container .page-title {
+.new-user-page-container .page-title,
+.new-recipe-page-container .page-title {
     text-align: center;
     margin-bottom: 30px;
 }
@@ -325,44 +333,50 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin: 0 auto; */
 }
 
-.login-form-button,
-.register-form-button {
+.form-button {
     border: none;
     margin: 10px auto;
 }
 
-.page-main.new-user-page {
+.page-main.new-user-page,
+.page-main.new-recipe-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.new-user-page-container {
+.new-user-page-container,
+.new-recipe-page-container {
     border: 1px solid var(--light-gray);
     border-radius: 10px;
     padding: 20px;
 }
 
-.new-user-form-container label {
+.new-user-form-container label,
+.new-recipe-form-container label {
     display: block;
     font-weight: 300;
     font-size: 16px;
     margin-bottom: 5px;
 }
 
-.new-user-form-container input {
+.new-user-form-container input,
+.new-recipe-form-container input  {
     display: block;
     margin-bottom: 20px;
 }
 
-.user-img-caption {
+.img-label-caption {
     font-size: 10px;
     margin-bottom: 5px;
 }
+
+
+/* NEW RECIPE PAGE STYLES - NEW-RECIPE.EJS */
+
 
 /* FOOTER SECTION STYLES */
 footer {
