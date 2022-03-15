@@ -378,6 +378,58 @@ body {
 /* NEW RECIPE PAGE STYLES - NEW-RECIPE.EJS */
 
 
+/* SHOW RECIPE PAGE STYLES - RECIPES SHOW.EJS */
+.one-recipe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 2fr 2fr;
+    gap: 10px;
+    border: 1px solid black;
+}
+
+.one-recipe-container-img {
+
+}
+
+.one-recipe-container-title {
+
+}
+
+.one-recipe-container-details {
+
+}
+
+.one-recipe-container-ingredients {
+
+}
+
+.one-recipe-container-instructions {
+
+}
+
+.one-recipe-title {
+
+}
+
+.one-recipe-subtitle {
+
+}
+
+.text-span {
+    
+}
+
+.back-button {
+    color: var(--dark-marigold);
+}
+
+@media only screen and (min-width: 1200px) {
+    .one-recipe-grid {
+        grid-template-rows: repeat (4, 1fr);
+    }
+}
+
+
 /* FOOTER SECTION STYLES */
 footer {
     width: 100%;
@@ -400,6 +452,11 @@ footer {
 
 
 
+/* TEST USER EDIT */
+.no-show {
+    display: none;
+}
 
-
-
+.edit-user-form input[value] {
+    /* color: var(--light-gray); */
+}

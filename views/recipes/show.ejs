@@ -10,50 +10,76 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
+    <main class="page-main">
+        <!-- <section class="page-text-container">
+            <h1 class="page-title">
+            </h1>
+            <h3 class="page-subtitle">Your one stop shop for all of your cravings. Browse recipes, save your favorites,
+                or create your own to share with the community</h3>
+        </section> -->
+        <article class="one-recipe-grid">
+            <img class="one-recipe-container-img" src="<%=recipe.img%>" alt="<%=recipe.name%>">
+            <section class="one-recipe-container-title">
+                <h1 class="one-recipe-title">
+                    <%=recipe.name%>
+                </h1>
+                <p class="one-recipe-text"><span class="text-span">By:</span>
+                    <%=recipeCreator%>
+                </p>
+            </section>
+            <section class="one-recipe-container-details">
+                <p class="one-recipe-text"><span class="text-span">Yield:</span>
+                    <%=recipe.serving%> servings
+                </p>
+                <p class="one-recipe-text"><span class="text-span">Time:</span>
+                    <%=recipe.readyInMinutes%> minutes
+                </p>
+            </section>
+            <section class="one-recipe-container-ingredients">
+                <h3 class="one-recipe-subtitle">Ingredients</h3>
+                <ul>
+                    <% recipe.ingredients.forEach(n=> {%>
+                        <li class="one-recipe-text">
+                            <%=n%>
+                        </li>
+                        <%})%>
+                </ul>
+            </section>
+            <section class="one-recipe-container-instructions">
+                <h3 class="one-recipe-subtitle">Instructions:</h3>
+                <p class="one-recipe-text">
+                    <%=recipe.instructions%>
+                </p>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+                <% if (currentUser==recipeCreator){ %>
+                    <a class="button-treat-main" href="/recipes/<%=recipe._id%>/edit">Edit</a>
 
+                    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                        <input class="button-treat-sub" type="submit" value="Delete">
+                    </form>
+                    <% } else { %>
+                        <form action="/recipes/<%=recipe._id%>/saved" method="POST">
+                            <input hidden name="recipeId" value="<%= recipe._id %>">
+                            <input class="button-treat-main" type="submit" value="Save">
+                        </form>
+                        <% } %>
 
-    <h1>
-        <%=recipe.name%>
-    </h1>
-    <a href="/recipes">
-        <h2>check out all recipes</h2>
-    </a>
-    <% if (currentUser==recipeCreator){ %>
-
-        <a href="/recipes/<%=recipe._id%>/edit"><button>Edit</button></a>
-        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
-            <button type="submit">Delete <%= recipe.name %>?</button>
-        </form>
-
-        <% } %>
-
-
-
-            <h2>Hi, <%=currentUser%>
-            </h2>
-            <h2>Created by: <%=recipeCreator%>
-            </h2>
-
-            <form action="/recipes/<%=recipe._id%>/saved" method="POST">
-                <input hidden name="recipeId" value="<%= recipe._id %>">
-                <button type="submit">SAVE</button>
-            </form>
+                            <a class="back-button" href="javascript:history.back(-1)">Back</a>
 
 
 
 
-            <footer>
-                <%- include('../partials/footer.ejs') %>
-            </footer>
+            </section>
+        </article>
 
-            <script src="/js/script.js"></script>
+    </main>
+
+
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

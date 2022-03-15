@@ -9,22 +9,37 @@
     <header>
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <form action="/users/<%=user._id%>?_method=PUT" method="POST">
+    <form class="edit-user-form" action="/users/<%=user._id%>?_method=PUT" method="POST">
         <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" value="<%=user.firstName%>">
+        <input type="text" name="firstName" value="<%=user.firstName%>" required>
 
         <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" value="<%=user.lastName%>">
+        <input type="text" name="lastName" value="<%=user.lastName%>" required>
+
+        <input hidden name="username" value="<%=user.username%>">
+        <input hidden name="recipesMade" value="<%=user.recipesMade%>">
+        <input hidden name="recipesSaved" value="<%=user.recipesSaved%>">
+
 
         <label for="password">Password:</label>
-        <input type="text" name="password" value="<%=user.password%>">
+        <input type="text" name="password" value="password">
 
         <label for="email">email:</label>
         <input type="text" name="email" value="<%=user.email%>">
 
-        <label for="img">Profile Picture:</label>
+        <label for="img">Profile Picture URL:</label>
         <input type="text" name="img" value="<%=user.img%>">
+
+        <input class="button-treat-main form-button" type="submit" value="Update">
 
     </form>
 

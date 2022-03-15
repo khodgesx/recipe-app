@@ -6,7 +6,6 @@ const Recipe = require("../models/recipe");
 
 
 
-
 //test
 
 // INDEX: GET
@@ -29,38 +28,19 @@ router.get('/new', (req, res) => {
 
 
 
-// SHOW: GET
-// /users/:id/created
-// Shows a page displaying all the recipes created by the user
-router.get('/:id/created', async (req, res) => {
-    const user = await User.findById(req.params.id)
-    // const recipes = await Recipe.find()
 
-    const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
-    console.log(recipesWithUserProp)
-    // const recipeUserId = recipesWithUserProp.user._id
-    // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
-    // console.log(recipesCreatedByUser)
-    // const recipeCreator = recipesCreatedByUser.user.username
-    // const currentUser = await User.findById(req.session.userId)
-    res.render("users/index-created.ejs", {
-        // user: user,
-        recipesWithUserProp: recipesWithUserProp,
-        // recipeCreator: recipeCreator,
-        // currentUser: currentUser
-
-    })
-})
 
 // SHOW: GET
 // /users/:id
 // Shows users profile page
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id)
-    const currentUserId = req.session.userId.toString()
-    console.log(currentUserId)
-    console.log(user._id)
+    const currentUserId = req.session.userId
+    const currentUserIdString = req.session.userId.toString()
+    // console.log(currentUserId)
+    // console.log(user._id)
     res.render('users/show.ejs', {
+        currentUserIdString: currentUserIdString,
         user: user,
         currentUserId: currentUserId
     })
@@ -111,7 +91,7 @@ router.post('/', async (req, res) => {
 // SHOW THE FORM TO EDIT A USER
 router.get('/:id/edit', async (req, res) => {
     try {
-        if (req.session.userId === req.params.id) {
+        if (req.session.userId == req.params.id) {
             const user = await User.findById(req.params.id)
             res.render('users/edit-user.ejs', {
                 user: user
@@ -123,21 +103,48 @@ router.get('/:id/edit', async (req, res) => {
         res.sendStatus(500)
     }
 })
-
+// User.findOneAndUpdate({username: req.params.username}, { $set: req.body }, { new: true }, callback);
 // UPDATE: PUT
 // /users/:id
 // UPDATE THE USER WITH THE SPECIFIC ID
 router.put('/:id', async (req, res) => {
     try {
-        await User.findByIdAndUpdate({
-
-        })
-
+        // await User.findByIdAndUpdate(req.params.id, req.body)
+        // console.log(User.findById(req.params.id))
+        // const currentUser = await User.findById(req.params.id)
+        // currentUser.findOneAndUpdate(
+        //     currentUser.firstName = req.body.firstname,
+        //     currentUser.lastName = req.body.lastName)
+        // await currentUser.save()
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
-        res.sendStatus(500)
+        res.send('aslkjdlasdkfj')
     }
 })
+
+// SHOW: GET
+// /users/:id/created
+// Shows a page displaying all the recipes created by the user
+router.get('/:id/created', async (req, res) => {
+    const user = await User.findById(req.params.id)
+    // const recipes = await Recipe.find()
+
+    const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
+    console.log(recipesWithUserProp)
+    // const recipeUserId = recipesWithUserProp.user._id
+    // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
+    // console.log(recipesCreatedByUser)
+    // const recipeCreator = recipesCreatedByUser.user.username
+    // const currentUser = await User.findById(req.session.userId)
+    res.render("users/index-created.ejs", {
+        // user: user,
+        recipesWithUserProp: recipesWithUserProp,
+        // recipeCreator: recipeCreator,
+        // currentUser: currentUser
+
+    })
+})
+
 // DELETE: DELETE
 // /users/:id
 // DELETE THE USER WITH THE SPECIFIC ID
@@ -153,4 +160,4 @@ router.delete('/:id', async (req, res) => {
 
 
 
-module.exports = router;
+module.exports = router

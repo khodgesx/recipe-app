@@ -37,7 +37,7 @@ router.get('/new', [isLoggedIn], (req, res) => {
 
 //SHOW: show specific recipe page
 router.get('/:id', async (req, res) => {
-    
+
     try {
         const recipe = await Recipe.findById(req.params.id)
         // console.log(recipe._id)
@@ -50,9 +50,9 @@ router.get('/:id', async (req, res) => {
 
         res.render('recipes/show.ejs', {
             recipe: recipe,
-            currentUser : currentUser,
-            recipeCreator: recipeCreator            
-           
+            currentUser: currentUser,
+            recipeCreator: recipeCreator
+
         })
     } catch {
         res.send('error at the show: recipes/:id route')
@@ -78,11 +78,11 @@ router.get('/:id', async (req, res) => {
 
 
 // display a button to save the recipe on a show page
-    // form with a button
-    // hidden input where the value is that recipe's object id
-    // <input hidden name="recipeId" value=<%= recipe._id %>/>
+// form with a button
+// hidden input where the value is that recipe's object id
+// <input hidden name="recipeId" value=<%= recipe._id %>/>
 
-router.post('/:id/saved', async (req, res)=>{
+router.post('/:id/saved', async (req, res) => {
     const currentUser = await User.findById(req.session.userId)
     console.log(res.locals)
     console.log(currentUser.recipesSaved)
@@ -94,39 +94,39 @@ router.post('/:id/saved', async (req, res)=>{
 
 //CREATE: create new recipe
 router.post('/', async (req, res) => {
-        try {
-            req.body.user = req.session.userId
-            req.body.ingredients = req.body.ingredients.split(',')
-            const recipe = await Recipe.create(req.body)
-            // const recipe = {
-            //     name: req.body.name,
-            //     ingredients:
-            //         [
-            //             {
-            //                 name: req.body.ingredients,
-            //                 amount: req.body.amount,
-            //                 unit: req.body.unit,
-            //                 meta: req.body.meta
-            //             }
-            //         ],
-            //     summary: req.body.summary,
-            //     readyInMinutes: req.body.readyInMinutes,
-            //     serving: req.body.serving,
-            //     img: req.body.img
-            // }
-            await Recipe.create(recipe)
-            console.log(recipe._id)
-            const recipeId = recipe._id.toString()
-            console.log(recipeId)
-          
-            // const currentUser = res.locals.username
-            // const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
-            // const recipeCreator = recipeWithUserProp.user.username
-            res.redirect(`/recipes/${recipeId}`)
-        } catch {
-            res.sendStatus(500)
-        }
-   
+    try {
+        req.body.user = req.session.userId
+        req.body.ingredients = req.body.ingredients.split(',')
+        const recipe = await Recipe.create(req.body)
+        // const recipe = {
+        //     name: req.body.name,
+        //     ingredients:
+        //         [
+        //             {
+        //                 name: req.body.ingredients,
+        //                 amount: req.body.amount,
+        //                 unit: req.body.unit,
+        //                 meta: req.body.meta
+        //             }
+        //         ],
+        //     summary: req.body.summary,
+        //     readyInMinutes: req.body.readyInMinutes,
+        //     serving: req.body.serving,
+        //     img: req.body.img
+        // }
+        await Recipe.create(recipe)
+        console.log(recipe._id)
+        const recipeId = recipe._id.toString()
+        console.log(recipeId)
+
+        // const currentUser = res.locals.username
+        // const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
+        // const recipeCreator = recipeWithUserProp.user.username
+        res.redirect(`/recipes/${recipeId}`)
+    } catch {
+        res.sendStatus(500)
+    }
+
 })
 
 //EDIT: form to edit a specific recipe 
