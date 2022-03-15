@@ -122,7 +122,12 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         console.log('hello')
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body)
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            password: bcrypt.hashSync(req.body.password, 10)
+        })
+        console.log(updatedUser)
 
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
