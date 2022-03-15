@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <%- include('../partials/head.ejs')  %> 
-    </head>
-    <body>
-        <header>
-            <%- include('../partials/header-full-nav.ejs')  %> 
-        </header>
 
-        <main class="page-main">
-            <section class="page-text-container">
-                <h1 class="page-title">Saved Recipes</h1>
-                <h3 class="page-subtitle">All your saved recipes in one spot for easy access.</h3>
-            </section>
-    
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header-full-nav.ejs') %>
+    </header>
+
+    <main class="page-main">
+        <section class="page-text-container">
+            <h1 class="page-title">Saved Recipes</h1>
+            <h3 class="page-subtitle">All your saved recipes in one spot for easy access.</h3>
+        </section>
+
+        <section class="recipe-grid-container">
+            <!-- COPY FROM RECIPES INDEX.EJS AND POPULATE WITH SAVED RECIPE VARIABLE -->
             <section class="recipe-grid-container">
-                <!-- COPY FROM RECIPES INDEX.EJS AND POPULATE WITH SAVED RECIPE VARIABLE -->
-
+                <% recipes.forEach(n=> {%>
+                    <article class="card-container">
+                        <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
+                        <div class="recipe-card-text">
+                            <h2 class="recipe-card-title">
+                                <%=n.name %>
+                            </h2>
+                            <p class="recipe-card-caption">
+                                <%=n.summary%>
+                            </p>
+                            <a class="button-treat-sub recipe-card-button" href="/recipes/<%=n._id%>">View</a>
+                        </div>
+                    </article>
+                    <% }) %>
             </section>
-        </main>
-        
+        </section>
+    </main>
 
 
 
 
-        <footer>
-            <%- include('../partials/footer.ejs')  %> 
-        </footer>
-        <script src="js/script.js"></script>
-    </body>
+
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
 </html>
