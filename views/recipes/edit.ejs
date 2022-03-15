@@ -8,16 +8,49 @@
         <header>
             <%- include('../partials/header-full-nav.ejs')  %> 
         </header>
-        <h2>Edit your <%=recipe.name%> recipe here</h2> 
-        <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
-           Recipe Title: <input type="text" name="name" value="<%=recipe.name%>" required>
-           Summary: <input type="text" name="name" value="<%=recipe.summary%>">
-            <button type="submit">Submit</button>
-        </form>
-        
+
+        <main class="page-main new-recipe-page">
+            <div class="new-user-page-container">
+                <h1 class="page-title">Edit <%=recipe.name%> recipe:</h1>
+                <section class="form-container">
+                    <form class="new-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
+                        <label for="name">Recipe Name:</label>
+                        <input type="text" name="name" value="<%=recipe.name%>" required>
+            
+                        <label for="ingredients">Ingredients (separate ingredients with a ','):</label>
+                        <input type="text" name="ingredients" value="<%=recipe.ingredients%>" required>
+            
+                        <label for="summary">Description:</label>
+                        <input type="text" name="summary" value="<%=recipe.summary%>" required>
+
+                        <label for="instructions">Instructions:</label>
+                        <input type="text" name="instructions" value="<%=recipe.instructions%>" required>
+
+                        <label for="readyInMinutes">Ready In Minutes:</label>
+                        <input type="number" name="readyInMinutes" value="<%=recipe.readyInMinutes%>" required>
+
+                        <label for="serving">Serving:</label>
+                        <input type="number" name="serving" value="<%=recipe.serving%>" required>
+
+                        <label for="img">Image URL:</label>
+                        <p class="img-label-caption">(provide a link to your profile image)</p>
+                        <input type="string" name="img" value="<%=recipe.img%>" required>
+            
+            
+                        <input class="button-treat-main form-button" type="submit" value="Update">
+            
+                    </form>
+            
+                
+                </section>
+            </div>
+        </main>
+
 
         <footer>
             <%- include('../partials/footer.ejs')  %> 
         </footer>
+
+        <script src="js/script.js"></script>
     </body>
 </html>
