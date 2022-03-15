@@ -34,11 +34,21 @@ router.get('/new', (req, res) => {
 // Shows a page displaying all the recipes created by the user
 router.get('/:id/created', async (req, res) => {
     const user = await User.findById(req.params.id)
-    const recipes = await Recipe.find()
+    // const recipes = await Recipe.find()
 
+    const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
+    console.log(recipesWithUserProp)
+    // const recipeUserId = recipesWithUserProp.user._id
+    // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
+    // console.log(recipesCreatedByUser)
+    // const recipeCreator = recipesCreatedByUser.user.username
+    // const currentUser = await User.findById(req.session.userId)
     res.render("users/index-created.ejs", {
-        user: user,
-        recipes: recipes
+        // user: user,
+        recipesWithUserProp: recipesWithUserProp,
+        // recipeCreator: recipeCreator,
+        // currentUser: currentUser
+
     })
 })
 
@@ -65,19 +75,19 @@ router.get('/:id', async (req, res) => {
 
 
 // SHOW: GET
-// /users/:id/created
+// /users/:id/saved
 // Shows a page displaying all the recipes saved by the user
 router.get('/:id/saved', async (req, res) => {
     const user = await User.findById(req.params.id)
     const recipes = await Recipe.findById
-    const currentUser = res.locals.username
+    const currentUser = req.session.id
     const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
     const recipeCreator = recipeWithUserProp.user.username
     res.render("users/index-saved.ejs", {
         user: user,
-        currentUser : currentUser,
-        recipeCreator : recipeCreator,
-        recipes : recipes
+        currentUser: currentUser,
+        recipeCreator: recipeCreator,
+        recipes: recipes
     })
 })
 
@@ -94,7 +104,7 @@ router.post('/', async (req, res) => {
     req.body.password = hashedPassword
     const newUser = await User.create(req.body);
     console.log(newUser)
-    res.redirect('/home/login')
+    res.redirect('/login')
 })
 
 // EDIT: GET

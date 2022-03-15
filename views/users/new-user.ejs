@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <%- include('../partials/head.ejs')  %> 
-    </head>
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
 
-    <body>
-        <header>
-            <%- include('../partials/header-full-nav.ejs')  %> 
-        </header>
+<body>
+    <header>
+        <%- include('../partials/header-full-nav.ejs') %>
+    </header>
+
+    <main class="page-main new-user-page">
+        <div class="new-user-page-container">
+            <h1 class="page-title">Sign Up</h1>
+            <section class="form-container">
+                <form class="new-user-form-container" action="/users" method="POST">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" name="firstName" required>
+
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" name="lastName" required>
+
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" required>
+
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" required>
+
+                    <label for="img">User Profile Image URL:</label>
+                    <p class="user-img-caption">(provide a link to your profile image)</p>
+                    <input type="text" name="img">
+
+                    <input class="button-treat-main register-form-button" type="submit" value="Register">
+
+                </form>
+            </section>
+        </div>
+
+    </main>
 
 
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
 
-        <h1>Register as a new user:</h1>
-
-        <form action="/users" method="POST">
-            <label for="firstname">First Name:</label>
-            <input type="text" name="firstName" required> <br>
-
-            <label for="lastname">Last Name:</label>
-            <input type="text" name="lastName" required> <br>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required> <br>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required> <br>
-
-            <label for="email">Email:</label>
-            <input type="text" name="email" required> <br>
-
-            <label for="img">Please provide us with your profile img link:</label>
-            <input type="text" name="img"> <br>
-
-            <input type="submit" value="Register">
-
-        </form>
-
-
-        <footer>
-            <%- include('../partials/footer.ejs')  %> 
-        </footer>
-
-    </body>
+</body>
 
 </html>

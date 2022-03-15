@@ -5,7 +5,7 @@
 <!-- USERS: ALL EJS (EXCEPT NEW-USER.EJS) -->
 <!-- <header> -->
 <% if (isLoggedIn){ %>
-    <a href="/home" class="nav-logo-link">
+    <a href="/" class="nav-logo-link">
         <img class="nav-logo" src="images/ww_logo_black.svg" alt="logo-holder">
     </a>
 
@@ -29,7 +29,7 @@
                     <a class="nav-link" href="/users/<%= currentUserId %>">Hi <%=firstName%></a>
                 </li>
                 <li class="nav-item">
-                    <form action="/home/logout" method="GET">
+                    <form action="/logout" method="GET">
                         <input type="submit" class="nav-link logout" value="Logout">
                     </form>
                 </li>
@@ -47,7 +47,7 @@
             <nav class="main-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="button-treat-sub login" href="/home/login">Login</a>
+                        <a class="button-treat-sub login" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="button-treat-main register" href="/users/new">Register</a>

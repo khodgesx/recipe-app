@@ -299,7 +299,7 @@ body {
 }
 
 
-/* LOGIN SECTION STYLE - LOGIN.EJS */
+/* LOGIN/REGISTER SECTION STYLE - LOGIN.EJS + NEW-USER.EJS */
 .page-main.login-page {
     height: 95vh;
     display: flex;
@@ -314,7 +314,8 @@ body {
     padding: 50px 20px;
 }
 
-.login-page-container .page-title {
+.login-page-container .page-title,
+.new-user-page-container .page-title {
     text-align: center;
     margin-bottom: 30px;
 }
@@ -327,9 +328,40 @@ body {
     /* margin: 0 auto; */
 }
 
-.login-form-button {
+.login-form-button,
+.register-form-button {
     border: none;
     margin: 10px auto;
+}
+
+.page-main.new-user-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-user-page-container {
+    border: 1px solid var(--light-gray);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.new-user-form-container label {
+    display: block;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.new-user-form-container input {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.user-img-caption {
+    font-size: 10px;
+    margin-bottom: 5px;
 }
 
 /* FOOTER SECTION STYLES */

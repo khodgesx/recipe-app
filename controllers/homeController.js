@@ -33,11 +33,11 @@ router.post("/login", async (req, res) => {
                 req.session.userId = possibleUser._id;
                 res.redirect("/users")
             } else {
-                res.redirect("/home/login")
+                res.redirect("/login")
             }
         } else {
             // Let them try again?
-            res.redirect("/home/login")
+            res.redirect("/login")
         }
     } catch (err) {
         console.log(err);
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
 })
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
-        res.redirect("/home")
+        res.redirect("/")
     })
 })
 
