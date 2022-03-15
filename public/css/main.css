@@ -382,7 +382,7 @@ body {
 .one-recipe-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 2fr 2fr;
     gap: 10px;
     border: 1px solid black;
 }
@@ -391,22 +391,29 @@ body {
     grid-column-start: 1;
     grid-column-end: 2;
     overflow: hidden;
+    grid-row-start: 1;
+    grid-row-end: span 2;
 }
 
 .one-recipe-container-title {
-
+    grid-column-start: 2;
 }
 
 .one-recipe-container-details {
-
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 .one-recipe-container-ingredients {
-
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 3;
 }
 
 .one-recipe-container-instructions {
-
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 4;
 }
 
 .one-recipe-title {
