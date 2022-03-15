@@ -10,13 +10,29 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
+    <form action="/users/<%=user._id%>?_method=PUT" method="POST">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" value="<%=user.firstName%>">
 
-    bla bla blaaaa
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" value="<%=user.lastName%>">
+
+        <label for="password">Password:</label>
+        <input type="text" name="password" value="<%=user.password%>">
+
+        <label for="email">email:</label>
+        <input type="text" name="email" value="<%=user.email%>">
+
+        <label for="img">Profile Picture:</label>
+        <input type="text" name="img" value="<%=user.img%>">
+
+    </form>
+
 
     <footer>
         <%- include('../partials/footer.ejs') %>
     </footer>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

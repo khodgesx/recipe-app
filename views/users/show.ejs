@@ -2,26 +2,32 @@
 <html lang="en">
 
 <head>
-    <%- include('../partials/head.ejs')  %> 
+    <%- include('../partials/head.ejs') %>
 </head>
 
 <body>
     <header>
-        <%- include('../partials/header-full-nav.ejs')  %> 
+        <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
 
-
+    <br>
+    <br> <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <h2>This is <%= user.username %>'s page</h2>
-   
-    
 
-   
-   <footer>
-    <%- include('../partials/footer.ejs')  %> 
-   </footer>
-   <script src="js/script.js"></script>
+    <% if (user._id==currentUserId) { %>
+        <a href="/users/<%=user._id%>/edit"><button>Edit <%= user.username %></button></a>
+        <% } %>
+
+            <footer>
+                <%- include('../partials/footer.ejs') %>
+            </footer>
+            <script src="/js/script.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,12 @@
     </header>
 
 
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
     <h1>
@@ -20,32 +25,35 @@
     <a href="/recipes">
         <h2>check out all recipes</h2>
     </a>
-    <% if (currentUser == recipeCreator){ %>
-        
-            <a href="/recipes/<%=recipe._id%>/edit"><button>Edit</button></a>
-            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
-                <button type="submit">Delete <%= recipe.name %>?</button>
-            </form>
-       
+    <% if (currentUser==recipeCreator){ %>
+
+        <a href="/recipes/<%=recipe._id%>/edit"><button>Edit</button></a>
+        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+            <button type="submit">Delete <%= recipe.name %>?</button>
+        </form>
+
         <% } %>
 
 
-        <h2>Hi, <%=currentUser%></h2>
-        <h2>Created by: <%=recipeCreator%></h2>
 
-       <form action="/recipes/<%=recipe._id%>/saved" method="POST">
-        <input hidden name="recipeId" value="<%= recipe._id %>">
-        <button type="submit">SAVE</button>
-       </form>
+            <h2>Hi, <%=currentUser%>
+            </h2>
+            <h2>Created by: <%=recipeCreator%>
+            </h2>
 
-        
+            <form action="/recipes/<%=recipe._id%>/saved" method="POST">
+                <input hidden name="recipeId" value="<%= recipe._id %>">
+                <button type="submit">SAVE</button>
+            </form>
+
+
 
 
             <footer>
                 <%- include('../partials/footer.ejs') %>
             </footer>
 
-    <script src="js/script.js"></script>
+            <script src="/js/script.js"></script>
 </body>
 
 </html>

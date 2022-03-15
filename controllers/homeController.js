@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Recipe = require('../models/recipe')
 const bcrypt = require('bcryptjs');
 const express = require('express')
 const router = express.Router()
@@ -9,7 +10,9 @@ const router = express.Router()
 // })
 
 router.get('/', async (req, res) => {
+    const recipes = await Recipe.find()
     res.render('home.ejs', {
+        recipes: recipes
     })
 })
 

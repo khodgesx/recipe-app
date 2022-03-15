@@ -57,8 +57,10 @@ router.get('/:id/created', async (req, res) => {
 // Shows users profile page
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id)
-    const currentUserId = res.locals.userId
-    res.render("users/show.ejs", {
+    const currentUserId = req.session.userId.toString()
+    console.log(currentUserId)
+    console.log(user._id)
+    res.render('users/show.ejs', {
         user: user,
         currentUserId: currentUserId
     })
@@ -111,7 +113,7 @@ router.get('/:id/edit', async (req, res) => {
     try {
         if (req.session.userId === req.params.id) {
             const user = await User.findById(req.params.id)
-            res.render('users/edit.ejs', {
+            res.render('users/edit-user.ejs', {
                 user: user
             })
         } else {
@@ -127,7 +129,10 @@ router.get('/:id/edit', async (req, res) => {
 // UPDATE THE USER WITH THE SPECIFIC ID
 router.put('/:id', async (req, res) => {
     try {
-        await User.findByIdAndUpdate(req.params.id, req.body)
+        await User.findByIdAndUpdate({
+
+        })
+
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         res.sendStatus(500)
