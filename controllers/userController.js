@@ -38,10 +38,20 @@ router.get('/:id', async (req, res) => {
         const user = await User.findById(req.params.id)
         const currentUserId = req.session.userId
         const currentUserIdString = req.session.userId.toString()
+
         console.log("hello")
         // console.log(currentUserId)
         // console.log(user._id)
+
+
+        const recipesMadeArray = await Recipe.find({ user: req.params.id }).populate('user')
+        userWithSavedRecipes = await user.populate('recipesSaved')
+        const recipesSavedArray = userWithSavedRecipes.recipesSaved
+        console.log(recipesMadeArray)
+        console.log(recipesSavedArray)
         res.render('users/show.ejs', {
+            recipesSavedArray: recipesSavedArray,
+            recipesMadeArray: recipesMadeArray,
             currentUserIdString: currentUserIdString,
             user: user,
             currentUserId: currentUserId
@@ -73,7 +83,7 @@ router.get('/:id/saved', async (req, res) => {
     const recipes = userWithSavedRecipes.recipesSaved
     res.render("users/index-saved.ejs", {
         // user: user,
-        // currentUser: currentUser,
+        currentUser: currentUser,
         recipes: recipes
     })
 })
@@ -140,23 +150,28 @@ router.put('/:id', async (req, res) => {
 // /users/:id/created
 // Shows a page displaying all the recipes created by the user
 router.get('/:id/created', async (req, res) => {
-    const user = await User.findById(req.params.id)
-    // const recipes = await Recipe.find()
+    try {
+        const user = await User.findById(req.params.id)
+        // const recipes = await Recipe.find()
 
-    const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
-    console.log(recipesWithUserProp)
-    // const recipeUserId = recipesWithUserProp.user._id
-    // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
-    // console.log(recipesCreatedByUser)
-    // const recipeCreator = recipesCreatedByUser.user.username
-    // const currentUser = await User.findById(req.session.userId)
-    res.render("users/index-created.ejs", {
-        // user: user,
-        recipesWithUserProp: recipesWithUserProp,
-        // recipeCreator: recipeCreator,
-        // currentUser: currentUser
+        const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
+        console.log(recipesWithUserProp)
+        // const recipeUserId = recipesWithUserProp.user._id
+        // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
+        // console.log(recipesCreatedByUser)
+        // const recipeCreator = recipesCreatedByUser.user.username
+        // const currentUser = await User.findById(req.session.userId)
+        res.render("users/index-created.ejs", {
+            // user: user,
+            recipesWithUserProp: recipesWithUserProp,
+            // recipeCreator: recipeCreator,
+            // currentUser: currentUser
 
-    })
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
 })
 
 // DELETE: DELETE

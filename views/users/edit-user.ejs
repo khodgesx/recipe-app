@@ -9,36 +9,40 @@
     <header>
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    <form class="edit-user-form" action="/users/<%=user._id%>?_method=PUT" method="POST">
-        <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" value="<%=user.firstName%>" required>
+    <main class="page-main edit-user-page">
+        <div class="edit-user-page-container">
+            <h1 class="page-title">Edit Profile:</h1>
+            <section class="form-container">
 
-        <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" value="<%=user.lastName%>" required>
+                <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST">
+
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" value="<%=user.firstName%>" required>
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" value="<%=user.lastName%>" required>
 
 
-        <label for="password">password:</label>
-        <input type="password" name="password" value="password">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password">
 
 
-        <label for="email">email:</label>
-        <input type="text" name="email" value="<%=user.email%>">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" value="<%=user.email%>">
 
-        <label for="img">Profile Picture URL:</label>
-        <input type="text" name="img" value="<%=user.img%>">
+                    <label for="img">Profile Image URL:</label>
+                    <input type="text" name="img" value="<%=user.img%>">
 
-        <button type="submit">SUBMIT</button>>
+                    <input class="button-treat-main form-button" type="submit" value="Update">
+                </form>
 
-    </form>
+            </section>
+        </div>
+    </main>
+
+
+
 
 
     <footer>

@@ -10,13 +10,65 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
+    <main class="page-main user-profile-page">
+        <section class="user-profile-grid">
+            <section class="">
+                <img src="<%=user.img%>" alt="<%=user.firstName%> <%=user.lastName%>">
+                <h1>Hi, <%=user.firstName%>
+                        <%=user.lastName%>!</h1>
+            </section>
 
-    <br>
-    <br> <br>
-    <br>
-    <br>
-    <br>
-    <br>
+            <section class="user-profile-recipe-grid">
+                <h1>Your Recipes</h1>
+                <section class="recipe-grid-container">
+                    <% for(let i=0; i<3; i++) { %>
+                        <article class="card-container">
+                            <img class="recipe-card-pic" src="<%=recipesMadeArray[i].img %>"
+                                alt="<%=recipesMadeArray[i].name%>">
+                            <div class="recipe-card-text">
+                                <h2 class="recipe-card-title">
+                                    <%=recipesMadeArray[i].name %>
+                                </h2>
+                                <p class="recipe-card-caption">
+                                    <%=recipesMadeArray[i].summary%>
+                                </p>
+                                <a class="button-treat-sub recipe-card-button"
+                                    href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
+                            </div>
+                        </article>
+                        <% } %>
+                </section>
+            </section>
+
+            <section class="user-profile-recipe-grid">
+                <h1>Saved Recipes</h1>
+                <section class="recipe-grid-container">
+                    <% for(let i=0; i<3; i++) { %>
+                        <article class="card-container">
+                            <img class="recipe-card-pic" src="<%=recipesSavedArray[i].img%>"
+                                alt="<%=recipesSavedArray[i].name%>">
+                            <div class="recipe-card-text">
+                                <h2 class="recipe-card-title">
+                                    <%=recipesSavedArray[i].name %>
+                                </h2>
+                                <p class="recipe-card-caption">
+                                    <%=recipesSavedArray[i].summary%>
+                                </p>
+                                <a class="button-treat-sub recipe-card-button"
+                                    href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
+                            </div>
+                        </article>
+                        <% } %>
+                </section>
+            </section>
+
+
+
+        </section>
+
+
+    </main>
+
 
     <h2>This is <%= firstName %>'s page</h2>
 
@@ -27,6 +79,8 @@
             <footer>
                 <%- include('../partials/footer.ejs') %>
             </footer>
+
+
             <script src="/js/script.js"></script>
 </body>
 

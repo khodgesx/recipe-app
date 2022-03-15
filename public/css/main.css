@@ -323,7 +323,8 @@ body {
 
 .login-page-container .page-title,
 .new-user-page-container .page-title,
-.new-recipe-page-container .page-title {
+.new-recipe-page-container .page-title,
+.edit-recipe-page-container .page-title {
     text-align: center;
     margin-bottom: 30px;
 }
@@ -341,7 +342,8 @@ body {
 }
 
 .page-main.new-user-page,
-.page-main.new-recipe-page {
+.page-main.new-recipe-page,
+.page-main.edit-user-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -349,14 +351,16 @@ body {
 }
 
 .new-user-page-container,
-.new-recipe-page-container {
+.new-recipe-page-container,
+.edit-user-page-container {
     border: 1px solid var(--light-gray);
     border-radius: 10px;
     padding: 20px;
 }
 
 .new-user-form-container label,
-.new-recipe-form-container label {
+.new-recipe-form-container label,
+.edit-user-form-container label {
     display: block;
     font-weight: 300;
     font-size: 16px;
@@ -364,9 +368,11 @@ body {
 }
 
 .new-user-form-container input,
-.new-recipe-form-container input  {
+.new-recipe-form-container input,
+.edit-user-form-container input  {
     display: block;
     margin-bottom: 20px;
+    padding: 10px;
 }
 
 .img-label-caption {
@@ -386,9 +392,9 @@ body {
 .one-recipe-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3fr 1fr 3fr 3fr;
+    grid-template-rows: 3fr 1fr 3fr;
     gap: 10px;
-    border: 1px solid black;
+    /* border: 0.5px solid var(--light-gray); */
 }
 
 .one-recipe-container-img {
@@ -400,16 +406,19 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center;
+    /* border-radius: 10px 0 0 0; */
 }
 
 .one-recipe-container-title {
     grid-column-start: 2;
+    align-self: end;
 }
 
 .one-recipe-container-details {
     grid-column-start: 2;
     grid-row-start: 2;
+    align-self: end;
 }
 
 .one-recipe-container-ingredients {
@@ -429,15 +438,29 @@ body {
 }
 
 .one-recipe-title {
-
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .one-recipe-subtitle {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0.05rem;
+}
 
+.one-recipe-text {
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.05rem;
 }
 
 .text-span {
-
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
 .back-button {
@@ -449,6 +472,18 @@ body {
         grid-template-rows: repeat (4, 1fr);
     }
 }
+
+
+
+/* USER PROFILE PAGE STYLES */
+.page-main.user-profile-page {
+    height: auto;
+}
+
+.user-profile-grid {
+    grid-template-rows: repeat(3, 1fr);
+}
+
 
 
 /* FOOTER SECTION STYLES */
@@ -474,10 +509,6 @@ footer {
 
 
 /* TEST USER EDIT */
-.no-show {
-    display: none;
-}
 
-.edit-user-form input[value] {
-    /* color: var(--light-gray); */
-}
+
+

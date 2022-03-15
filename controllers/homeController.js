@@ -5,16 +5,31 @@ const express = require('express')
 const router = express.Router()
 
 
-// router.get('/signup', (req, res)=>{
-//     res.render('auth/signup')
-// })
+
 
 router.get('/', async (req, res) => {
-    const recipes = await Recipe.find()
-    res.render('home.ejs', {
-        recipes: recipes
-    })
+    try {
+        let recipes = await Recipe.find()
+        console.log(recipes)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        const recipesShuffled = shuffleArray(recipes)
+        console.log(recipesShuffled)
+        res.render('home.ejs', {
+            recipes: recipes
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
 })
+
 
 router.get('/login', (req, res) => {
     console.log("hello")

@@ -13,6 +13,7 @@
     <main class="page-main one-recipe-page">
         <article class="one-recipe-grid">
             <img class="one-recipe-container-img" src="<%=recipe.img%>" alt="<%=recipe.name%>">
+
             <section class="one-recipe-container-title">
                 <h1 class="one-recipe-title">
                     <%=recipe.name%>
@@ -21,6 +22,7 @@
                     <%=recipeCreator%>
                 </p>
             </section>
+
             <section class="one-recipe-container-details">
                 <p class="one-recipe-text"><span class="text-span">Yield:</span>
                     <%=recipe.serving%> servings
@@ -29,6 +31,7 @@
                     <%=recipe.readyInMinutes%> minutes
                 </p>
             </section>
+
             <section class="one-recipe-container-ingredients">
                 <h3 class="one-recipe-subtitle">Ingredients</h3>
                 <ul class="ingredients-list">
@@ -38,8 +41,7 @@
                         </li>
                         <%})%>
                 </ul>
-            </section>
-            <section class="one-recipe-container-instructions">
+
                 <h3 class="one-recipe-subtitle">Instructions:</h3>
                 <p class="one-recipe-text">
                     <%=recipe.instructions%>
@@ -52,18 +54,31 @@
                         <input class="button-treat-sub" type="submit" value="Delete">
                     </form>
                     <% } else { %>
-                        <form action="/recipes/<%=recipe._id%>/saved" method="POST">
-                            <input hidden name="recipeId" value="<%= recipe._id %>">
-                            <input class="button-treat-main" type="submit" value="Save">
-                        </form>
-                        <% } %>
+                        <% if (isItInTheArray) { %>
+                            <form action="/recipes/<%=recipe._id%>/unsaved" method="POST">
+                                <input hidden name="recipeId" value="<%= recipe._id %>">
+                                <input class="button-treat-main" type="submit" value="UnSave">
+                            </form>
+                            <% } else { %>
+                                <form action="/recipes/<%=recipe._id%>/saved" method="POST">
+                                    <input hidden name="recipeId" value="<%= recipe._id %>">
+                                    <input class="button-treat-main" type="submit" value="Save">
+                                </form>
+                                <% } %>
 
-                            <a class="back-button" href="javascript:history.back(-1)">Back</a>
+                                    <% } %>
+
+
+                                        <a class="back-button" href="javascript:history.back(-1)">Back</a>
 
 
 
 
             </section>
+            <!-- <section class="one-recipe-container-instructions">
+                
+
+            </section> -->
         </article>
 
     </main>

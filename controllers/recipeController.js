@@ -47,8 +47,14 @@ router.get('/:id', async (req, res) => {
         // const recipeToSave = await User.findById(req.params.id).populate('recipe')
         // console.log(recipeToSave)
         // console.log(res.locals)
-
+        // const isItInTheArray = true
+        const currentUserObject = await User.findById(req.session.userId)
+        console.log(currentUserObject.recipesSaved)
+        const isItInTheArray = currentUserObject.recipesSaved.includes(req.params.id)
+        console.log(req.params.id)
+        console.log(isItInTheArray)
         res.render('recipes/show.ejs', {
+            isItInTheArray: isItInTheArray,
             recipe: recipe,
             currentUser: currentUser,
             recipeCreator: recipeCreator
@@ -87,6 +93,17 @@ router.post('/:id/saved', async (req, res) => {
     console.log(res.locals)
     console.log(currentUser.recipesSaved)
     currentUser.recipesSaved.push(req.params.id)
+    await currentUser.save()
+    console.log(currentUser.recipesSaved)
+    res.redirect(`/recipes/${req.params.id}`)
+})
+
+//unsave route:
+router.post('/:id/unsave', async (req, res) => {
+    const currentUser = await User.findById(req.session.userId)
+    // console.log(res.locals)
+    console.log(currentUser.recipesSaved)
+    currentUser.recipesSaved.pop(req.params.id)
     await currentUser.save()
     console.log(currentUser.recipesSaved)
     res.redirect(`/recipes/${req.params.id}`)
