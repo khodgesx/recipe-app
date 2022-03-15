@@ -10,19 +10,25 @@
             <%- include('../partials/header-full-nav.ejs')  %> 
         </header>
 
-        <h1>THIS IS THE RECIPE INDEX RENDER PAGE</h1>
-
-        <main>
-            <% recipes.forEach((element )=> { %>
-                <a href="/recipes/<%=element._id%>"><p><%=element.name %></p></a>
-            <% }); %>
+        <main class="page-main">
+            <section class="page-text-container">
+                <h1 class="page-title">All Recipes</h1>
+                <h3 class="page-subtitle">Browse all recipes.</h3>
+            </section>
+    
+            <section class="recipe-grid-container">
+                <% recipes.forEach(n => {%>
+                    <article class="card-container">
+                        <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
+                        <div class="recipe-card-text">
+                            <h2 class="recipe-card-title"><%=n.name %></h2>
+                            <p class="recipe-card-caption"><%=n.summary%></p>
+                            <a class="button-treat-sub recipe-card-button" href="/recipes/<%=n._id%>">View</a>
+                        </div>
+                    </article>
+                <% }) %>
+            </section>
         </main>
-
-
-
-
-
-
 
 
 

@@ -18,6 +18,7 @@ const recipeSchema = new Schema({
     readyInMinutes: Number,
     serving: Number,
     img: String,
+    instructions: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 

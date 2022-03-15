@@ -11,24 +11,25 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
-    <h1>THIS IS THE PAGE WHERE ALL USER CREATED RECIPES SHOW UP</h1>
+    <main class="page-main">
+        <section class="page-text-container">
+            <h1 class="page-title">All Recipes</h1>
+            <h3 class="page-subtitle">Browse all recipes.</h3>
+        </section>
 
-    <main>
-        <% recipesWithUserProp.forEach(element=> { %>
-
-            <a href="/recipes/<%=element._id%>">
-                <%= element.name %>
-            </a>
-
-            <% }); %>
-
-
-
-
-
-
+        <section class="recipe-grid-container">
+            <% recipesWithUserProp.forEach(n => {%>
+                <article class="card-container">
+                    <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
+                    <div class="recipe-card-text">
+                        <h2 class="recipe-card-title"><%=n.name %></h2>
+                        <p class="recipe-card-caption"><%=n.summary%></p>
+                        <a class="button-treat-sub recipe-card-button" href="/recipes/<%=n._id%>">View</a>
+                    </div>
+                </article>
+            <% }) %>
+        </section>
     </main>
-
 
 
     <footer>
