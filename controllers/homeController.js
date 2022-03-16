@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
                 // It's a match! Successful login!
                 req.session.isLoggedIn = true;
                 req.session.userId = possibleUser._id;
-                res.redirect("/users")
+                res.redirect(`/users/${req.session.userId}`)
             } else {
                 res.redirect("/login")
             }
