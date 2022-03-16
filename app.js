@@ -2,6 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const User = require('./models/user');
+const cloudinary = require('cloudinary').v2;
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 const app = express();
@@ -9,6 +10,13 @@ const store = new MongoDBStore({
     uri: process.env.MONGO_URI,
     collection: 'mySessions'
 });
+
+cloudinary.config({ 
+    cloud_name: 'dqa6xyvq1', 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+
 require('./db-utils/connect')
 const recipeController = require('./controllers/recipeController')
 const userController = require('./controllers/userController')

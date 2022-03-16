@@ -23,18 +23,16 @@
                     <label for="lastName">Last Name:</label>
                     <input type="text" name="lastName" value="<%=user.lastName%>" required>
 
-
                     <label for="password">Password:</label>
-                    <input type="password" name="password">
-
-
+                    <a href="/users/<%=user._id%>/editpassword">Edit Password</a>
+                    
                     <label for="email">Email:</label>
                     <input type="text" name="email" value="<%=user.email%>">
 
                     <label for="img">Profile Image URL:</label>
-                    <input type="text" name="img" value="<%=user.img%>">
+                    <input type="file" name="img" accept="image/png, image/jpeg" value="<%=user.img%>">
 
-                    <input class="button-treat-main form-button" type="submit" value="Update">
+                    <input class="button-treat-main form-button" id="" type="submit" value="Update">
                 </form>
 
             </section>

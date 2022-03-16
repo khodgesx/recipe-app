@@ -309,7 +309,7 @@ body {
 
 /* LOGIN/REGISTER/NEW RECIPE SECTION STYLE - LOGIN.EJS + NEW-USER.EJS + NEW-RECIPE.EJS */
 .page-main.login-page {
-    height: 95vh;
+    /* height: 95vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
