@@ -35,9 +35,9 @@
             <section class="one-recipe-container-info">
                 <div class="info-section">
                     <h3 class="one-recipe-subtitle">Ingredients</h3>
-                    <ul class="ingredients-list">
+                    <ul class="ingredients-list">                        
                         <% recipe.ingredients.forEach(n=> {%>
-                            <li class="ingredients-list item one-recipe-text">
+                            <li class="ingredients-list-item one-recipe-text"><i class="fas fa-circle"></i>
                                 <%=n%>
                             </li>
                             <%})%>
@@ -51,6 +51,7 @@
                     </p>
                 </div>
 
+                <div class="info-section-button">
                 <% if (currentUser==recipeCreator){ %>
                     <a class="button-treat-main one-recipe-edit-button" href="/recipes/<%=recipe._id%>/edit">Edit</a>
 
@@ -61,20 +62,20 @@
                         <% if (isItInTheArray) { %>
                             <form action="/recipes/<%=recipe._id%>/unsaved" method="POST">
                                 <input hidden name="recipeId" value="<%= recipe._id %>">
-                                <input class="button-treat-main" type="submit" value="UnSave">
+                                <input class="button-treat-main save-unsave-button" type="submit" value="Unsave">
                             </form>
                             <% } else { %>
                                 <form action="/recipes/<%=recipe._id%>/saved" method="POST">
                                     <input hidden name="recipeId" value="<%= recipe._id %>">
-                                    <input class="button-treat-main" type="submit" value="Save">
+                                    <input class="button-treat-main save-unsave-button" type="submit" value="Save">
                                 </form>
                                 <% } %>
 
                                     <% } %>
 
-
+                                </div>
                                         <a class="back-button" href="javascript:history.back(-1)">Back</a>
-
+                                    
 
 
 

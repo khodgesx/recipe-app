@@ -136,6 +136,7 @@ router.put('/:id', async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+            img: req.body.img,
             password: bcrypt.hashSync(req.body.password, 10)
         })
         console.log(updatedUser)
