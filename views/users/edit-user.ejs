@@ -24,8 +24,8 @@
                     <input type="text" name="lastName" value="<%=user.lastName%>" required>
 
 
-                    <label for="password">Password:</label>
-                    <input type="password" name="password">
+                    <!-- <label for="password">Password:</label>
+                    <input type="password" name="password"> -->
 
 
                     <label for="email">Email:</label>
@@ -36,6 +36,8 @@
 
                     <input class="button-treat-main form-button" type="submit" value="Update">
                 </form>
+
+                <a href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
 
             </section>
         </div>

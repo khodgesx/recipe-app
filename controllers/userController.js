@@ -107,20 +107,37 @@ router.post('/', async (req, res) => {
 
 // EDIT: GET
 // /users/:id/edit
-// SHOW THE FORM TO EDIT A USER
+// SHOW THE FORM TO EDIT A USER 
 router.get('/:id/edit', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
             console.log("=========================")
             const user = await User.findById(req.params.id)
-            console.log("=========================")
-            console.log("=========================")
 
             res.render('users/edit-user.ejs', {
                 user: user
             })
         } else {
             throw new Error("Unfortunately, you won't be able to edit other peoples profiles!")
+        }
+    } catch (err) {
+        res.sendStatus(500)
+    }
+})
+
+// EDIT: GET
+// /users/:id/edit
+// SHOW THE FORM TO EDIT USER PASSWORD
+router.get('/:id/editpassword', async (req, res) => {
+    try {
+        if (req.session.userId == req.params.id) {
+            const user = await User.findById(req.params.id)
+
+            res.render('users/edit-password.ejs', {
+                user: user
+            })
+        } else {
+            throw new Error("Unfortunately, you won't be able to edit someone else's password!")
         }
     } catch (err) {
         res.sendStatus(500)
