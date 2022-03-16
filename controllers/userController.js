@@ -105,6 +105,32 @@ router.post('/', async (req, res) => {
     res.redirect('/login')
 })
 
+//cloudinary upload image for user 
+router.post('/:id/image-upload', async (req, res)=>{
+    const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
+    const CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
+    const image = document.querySelector('#userpicupload');
+    image.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+  fetch(CLOUDINARY_URL, {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then((data) => {
+      if (data.secure_url !== '') {
+        const uploadedFileUrl = data.secure_url;
+        localStorage.setItem('passportUrl', uploadedFileUrl);
+      }
+    })
+    .catch(err => console.error(err));
+});
+})
+
 // EDIT: GET
 // /users/:id/edit
 // SHOW THE FORM TO EDIT A USER 
@@ -126,7 +152,7 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 // EDIT: GET
-// /users/:id/edit
+// /users/:id/editpassword
 // SHOW THE FORM TO EDIT USER PASSWORD
 router.get('/:id/editpassword', async (req, res) => {
     try {
