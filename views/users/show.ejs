@@ -21,44 +21,60 @@
             <section class="user-profile-recipe-grid">
                 <h1>Your Recipes</h1>
                 <section class="recipe-grid-container">
-                    <% for(let i=0; i<3; i++) { %>
-                        <article class="card-container">
-                            <img class="recipe-card-pic" src="<%=recipesMadeArray[i].img %>"
-                                alt="<%=recipesMadeArray[i].name%>">
-                            <div class="recipe-card-text">
-                                <h2 class="recipe-card-title">
-                                    <%=recipesMadeArray[i].name %>
-                                </h2>
-                                <p class="recipe-card-caption">
-                                    <%=recipesMadeArray[i].summary%>
-                                </p>
-                                <a class="button-treat-sub recipe-card-button"
-                                    href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
-                            </div>
-                        </article>
-                        <% } %>
+                    <% let j=0; %>
+
+
+                        <% for (let i=recipesMadeArray.length - 1; i>= 0; i--) { %>
+                            <% if (j==3) { %>
+                                <% break %>
+                                    <% } %>
+                                        <article class="card-container">
+                                            <img class="recipe-card-pic" src="<%=recipesMadeArray[i].img %>"
+                                                alt="<%=recipesMadeArray[i].name%>">
+                                            <div class="recipe-card-text">
+                                                <h2 class="recipe-card-title">
+                                                    <%=recipesMadeArray[i].name %>
+                                                </h2>
+                                                <p class="recipe-card-caption">
+                                                    <%=recipesMadeArray[i].summary%>
+                                                </p>
+                                                <a class="button-treat-sub recipe-card-button"
+                                                    href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
+                                            </div>
+                                        </article>
+                                        <% j++ %>
+                                            <% } %>
+
+
+
+
                 </section>
             </section>
 
             <section class="user-profile-recipe-grid">
                 <h1>Saved Recipes</h1>
                 <section class="recipe-grid-container">
-                    <% for(let i=0; i<3; i++) { %>
-                        <article class="card-container">
-                            <img class="recipe-card-pic" src="<%=recipesSavedArray[i].img%>"
-                                alt="<%=recipesSavedArray[i].name%>">
-                            <div class="recipe-card-text">
-                                <h2 class="recipe-card-title">
-                                    <%=recipesSavedArray[i].name %>
-                                </h2>
-                                <p class="recipe-card-caption">
-                                    <%=recipesSavedArray[i].summary%>
-                                </p>
-                                <a class="button-treat-sub recipe-card-button"
-                                    href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
-                            </div>
-                        </article>
-                        <% } %>
+                    <% let k=0 %>
+                        <% for (let i=recipesSavedArray.length - 1; i>= 0; i--) { %>
+                            <% if (k==3) { %>
+                                <% break %>
+                                    <% } %>
+                                        <article class="card-container">
+                                            <img class="recipe-card-pic" src="<%=recipesSavedArray[i].img%>"
+                                                alt="<%=recipesSavedArray[i].name%>">
+                                            <div class="recipe-card-text">
+                                                <h2 class="recipe-card-title">
+                                                    <%=recipesSavedArray[i].name %>
+                                                </h2>
+                                                <p class="recipe-card-caption">
+                                                    <%=recipesSavedArray[i].summary%>
+                                                </p>
+                                                <a class="button-treat-sub recipe-card-button"
+                                                    href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
+                                            </div>
+                                        </article>
+                                        <% k++ %>
+                                            <% } %>
                 </section>
             </section>
 

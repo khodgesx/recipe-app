@@ -35,6 +35,7 @@ router.get('/new', (req, res) => {
 // Shows users profile page
 router.get('/:id', async (req, res) => {
     try {
+        console.log('hello entering')
         const user = await User.findById(req.params.id)
         const currentUserId = req.session.userId
         const currentUserIdString = req.session.userId.toString()

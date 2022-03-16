@@ -32,26 +32,30 @@
                 </p>
             </section>
 
-            <section class="one-recipe-container-ingredients">
-                <h3 class="one-recipe-subtitle">Ingredients</h3>
-                <ul class="ingredients-list">
-                    <% recipe.ingredients.forEach(n=> {%>
-                        <li class="ingredients-list item one-recipe-text">
-                            <%=n%>
-                        </li>
-                        <%})%>
-                </ul>
+            <section class="one-recipe-container-info">
+                <div class="info-section">
+                    <h3 class="one-recipe-subtitle">Ingredients</h3>
+                    <ul class="ingredients-list">
+                        <% recipe.ingredients.forEach(n=> {%>
+                            <li class="ingredients-list item one-recipe-text">
+                                <%=n%>
+                            </li>
+                            <%})%>
+                    </ul>
+                </div>
 
-                <h3 class="one-recipe-subtitle">Instructions:</h3>
-                <p class="one-recipe-text">
-                    <%=recipe.instructions%>
-                </p>
+                <div class="info-section">
+                    <h3 class="one-recipe-subtitle">Instructions:</h3>
+                    <p class="one-recipe-text">
+                        <%=recipe.instructions%>
+                    </p>
+                </div>
 
                 <% if (currentUser==recipeCreator){ %>
-                    <a class="button-treat-main" href="/recipes/<%=recipe._id%>/edit">Edit</a>
+                    <a class="button-treat-main one-recipe-edit-button" href="/recipes/<%=recipe._id%>/edit">Edit</a>
 
                     <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
-                        <input class="button-treat-sub" type="submit" value="Delete">
+                        <input class="button-treat-sub one-recipe-delete-button" type="submit" value="Delete">
                     </form>
                     <% } else { %>
                         <% if (isItInTheArray) { %>
