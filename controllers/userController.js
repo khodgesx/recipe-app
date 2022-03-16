@@ -133,14 +133,12 @@ router.post('/:id/image-upload', async (req, res)=>{
 
 // EDIT: GET
 // /users/:id/edit
-// SHOW THE FORM TO EDIT A USER
+// SHOW THE FORM TO EDIT A USER 
 router.get('/:id/edit', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
             console.log("=========================")
             const user = await User.findById(req.params.id)
-            console.log("=========================")
-            console.log("=========================")
 
             res.render('users/edit-user.ejs', {
                 user: user

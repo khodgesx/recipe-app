@@ -23,9 +23,6 @@
                     <label for="lastName">Last Name:</label>
                     <input type="text" name="lastName" value="<%=user.lastName%>" required>
 
-                    <label for="password">Password:</label>
-                    <a href="/users/<%=user._id%>/editpassword">Edit Password</a>
-                    
                     <label for="email">Email:</label>
                     <input type="text" name="email" value="<%=user.email%>">
 
@@ -34,6 +31,8 @@
 
                     <input class="button-treat-main form-button" id="" type="submit" value="Update">
                 </form>
+
+                <a href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
 
             </section>
         </div>
