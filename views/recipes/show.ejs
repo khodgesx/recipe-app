@@ -60,7 +60,7 @@
                     </form>
                     <% } else { %>
                         <% if (isItInTheArray) { %>
-                            <form action="/recipes/<%=recipe._id%>/unsaved" method="POST">
+                            <form action="/recipes/<%=recipe._id%>/unsave" method="POST">
                                 <input hidden name="recipeId" value="<%= recipe._id %>">
                                 <input class="button-treat-main save-unsave-button" type="submit" value="Unsave">
                             </form>
