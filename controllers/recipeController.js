@@ -114,23 +114,8 @@ router.post('/', async (req, res) => {
     try {
         req.body.user = req.session.userId
         req.body.ingredients = req.body.ingredients.split(',')
+        console.log(req.body.ingredients)
         const recipe = await Recipe.create(req.body)
-        // const recipe = {
-        //     name: req.body.name,
-        //     ingredients:
-        //         [
-        //             {
-        //                 name: req.body.ingredients,
-        //                 amount: req.body.amount,
-        //                 unit: req.body.unit,
-        //                 meta: req.body.meta
-        //             }
-        //         ],
-        //     summary: req.body.summary,
-        //     readyInMinutes: req.body.readyInMinutes,
-        //     serving: req.body.serving,
-        //     img: req.body.img
-        // }
         await Recipe.create(recipe)
         console.log(recipe._id)
         const recipeId = recipe._id.toString()
@@ -161,6 +146,9 @@ router.get('/:id/edit', async (req, res) => {
 //UPDATE: update recipe with data from edit form
 router.put('/:id', async (req, res) => {
     try {
+        // const recipe = Recipe.findByIdAndUpdate(req.params.id)
+        req.body.ingredients = req.body.ingredients.split(',')
+        console.log(req.body.ingredients)
         await Recipe.findByIdAndUpdate(req.params.id, req.body)
         res.redirect(`/recipes/${req.params.id}`)
     } catch {

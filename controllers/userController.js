@@ -137,7 +137,8 @@ router.put('/:id', async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             img: req.body.img,
-            password: bcrypt.hashSync(req.body.password, 10)
+            password: bcrypt.hashSync(req.body.password, 10),
+            email: req.body.email
         })
         console.log(updatedUser)
 
