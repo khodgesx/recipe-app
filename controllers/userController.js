@@ -6,6 +6,8 @@ const Recipe = require("../models/recipe");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
 const cloudinary = require('cloudinary');
+const isLoggedIn = require('../middleware/isLoggedIn')
+
 
 // const storage = new CloudinaryStorage({
 //     cloudinary: cloudinary,
@@ -24,9 +26,14 @@ const upload = multer({ dest: "./uploads/" })
 // Gives a page displaying all the users
 router.get('/', async (req, res) => {
     const users = await User.find();
-    res.render('users/index.ejs', {
-        users: users
-    })
+    if(res.locals.isLoggedIn) {
+        res.render('users/index.ejs', {
+            users: users
+        })
+    } else {
+        res.redirect('/login')
+    }
+
 })
 
 
@@ -41,7 +48,7 @@ router.get('/new', (req, res) => {
 // SHOW: GET
 // /users/:id
 // Shows users profile page
-router.get('/:id', async (req, res) => {
+router.get('/:id', [isLoggedIn], async (req, res) => {
     try {
         console.log('hello entering')
         const user = await User.findById(req.params.id)
