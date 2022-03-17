@@ -1,6 +1,6 @@
 <% if (isLoggedIn){ %>
     <a href="/" class="nav-logo-link">
-        <img class="nav-logo" src="/images/ww_logo_black.svg" alt="logo-holder">
+        <img class="nav-logo" src="/images/feastr-logo.svg" alt="feastr">
     </a>
 
     <div class="nav-container detailed">
@@ -18,6 +18,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/recipes/new">+ New</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users">Community</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/<%= currentUserId %>">Hi <%=firstName%></a>

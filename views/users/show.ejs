@@ -16,12 +16,29 @@
 
             <section class="user-profile-info">
                 <img class="user-profile-pic" src="<%=user.img%>" alt="<%=user.firstName%> <%=user.lastName%>">
-                <h1 class="user-profile-title">Hi, <%=user.firstName%>
+
+                <% if (user._id==currentUserIdString) { %>
+                    <h1 class="user-profile-title">Hi, <%=user.firstName%>
                         <%=user.lastName%>!</h1>
+                    <% } else { %> 
+                        <h1 class="user-profile-title"><%=user.firstName%>'s Profile</h1>
+                    <% } %>
+                        
+                <% if (user._id==currentUserIdString) { %>
+                    <a class="button-treat-sub edit-user-button" href="/users/<%=user._id%>/edit">Edit Profile</a>
+                <% } %>
             </section>
 
+
+
             <section class="user-profile-recipe-grid create">
-                <h1>Your Recipes</h1>
+
+                <% if (user._id==currentUserIdString) { %>
+                <h1>My Recipes</h1>
+                <% } else {%>
+                <h1><%=user.firstName%>'s Recipes</h1>
+                <% } %>
+
                 <section class="recipe-grid-container user-page">
                     <% let j=0; %>
                         <% for (let i=recipesMadeArray.length - 1; i>= 0; i--) { %>
@@ -44,6 +61,9 @@
                 </section>
             </section>
 
+
+            <% if (user._id==currentUserIdString) { %>
+                
             <section class="user-profile-recipe-grid save">
                 <h1>Saved Recipes</h1>
                 <section class="recipe-grid-container user-page">
@@ -68,7 +88,7 @@
                                             <% } %>
                 </section>
             </section>
-
+            <% } %>
 
 
         </section>
@@ -77,9 +97,6 @@
     </main>
 
 
-    <% if (user._id==currentUserIdString) { %>
-        <a href="/users/<%=user._id%>/edit"><button>Edit <%= firstName %></button></a>
-        <% } %>
 
             <footer>
                 <%- include('../partials/footer.ejs') %>

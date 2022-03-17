@@ -15,7 +15,7 @@
             <h1 class="page-title">Edit Profile:</h1>
             <section class="form-container">
 
-                <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST">
+                <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
                     <label for="firstName">First Name:</label>
                     <input type="text" name="firstName" value="<%=user.firstName%>" required>

@@ -63,7 +63,7 @@ body {
 
 /* NAV STYLES */
 .nav-logo-link {
-    width: 20%;
+    width: 15%;
     position: fixed;
     top: 15px;
     left: 15px;
@@ -153,7 +153,7 @@ body {
     .nav-logo-link {
         top: 25px;
         left: 35px;
-        width: 15%;
+        width: 10%;
     }
     .nav-container {
         padding: 25px 35px;
@@ -211,18 +211,19 @@ body {
 /* MAIN SECTION - HOME.EJS */
 .page-main {
     margin: 0 40px;
-    padding: 80px 0;
+    padding: 120px 0;
 }
 
 .page-text-container {
     margin-bottom: 40px;
+    padding-left: 20px;
 }
 
 .page-title {
-    font-family: 'Pacifico', cursive;
-    font-size: 46px;
-    color: var(--dark-marigold);
-    letter-spacing: 0.2rem;
+    font-size: 36px;
+    text-transform: uppercase;
+    /* color: var(--dark-marigold); */
+    letter-spacing: 0.1rem;
     margin-bottom: 5px;
 }
 
@@ -276,7 +277,11 @@ body {
     padding: 3px 15px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {    
+    .page-text-container {
+        padding-left: 40px;
+        text-align: center;
+    }
     .recipe-grid-container {
         padding: 0 40px;
         gap: 40px;
@@ -292,7 +297,10 @@ body {
 
 @media only screen and (min-width: 1200px) {
     .page-main {
-        padding: 100px 0;
+        padding: 150px 0 100px 0;
+    }
+    .page-text-container {
+        text-align: left;
     }
     .recipe-grid-container {
         grid-template-columns: 1fr 1fr 1fr;
@@ -573,11 +581,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .user-profile-recipe-grid.create {
     grid-row-start: 2;
+    margin-bottom: 30px;
 }
 
 .user-profile-recipe-grid.save {
@@ -586,14 +595,9 @@ body {
 
 .recipe-grid-container.user-page,
 .recipe-grid-container.user-page {
-    /* width: 80%; */
     grid-template-columns: repeat(3, 1fr);
     padding: 0;
     gap: 5px;
-}
-
-.user-page .card-container {
-    
 }
 
 .user-page .recipe-card-pic {
@@ -626,7 +630,22 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    
+    border-radius: 10px;
+}
+
+.user-profile-title {
+    margin: 5px auto 3px auto;
+}
+
+.button-treat-sub.edit-user-button {
+    font-size: 12px;
+    text-decoration: underline;
+    border: none;
+    padding: 0;
+}
+
+@media only screen and (min-width: 768px) {
+
 }
 
 /* FOOTER SECTION STYLES */

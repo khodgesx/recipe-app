@@ -3,6 +3,19 @@ const User = require("../models/user")
 const express = require('express');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn')
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+const cloudinary = require('cloudinary');
+
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary,
+//     params: {
+//       folder: "Pics",
+//     },
+//   });
+//   const upload = multer({ storage: storage });
+
+const upload = multer({ dest: "./uploads/" })
 
 
 
@@ -109,27 +122,75 @@ router.post('/:id/unsave', async (req, res) => {
     res.redirect(`/recipes/${req.params.id}`)
 })
 
+
+
+
+
+
+
+
+
+
 //CREATE: create new recipe
-router.post('/', async (req, res) => {
-    try {
-        req.body.user = req.session.userId
-        req.body.ingredients = req.body.ingredients.split(',')
-        console.log(req.body.ingredients)
-        const recipe = await Recipe.create(req.body)
-        await Recipe.create(recipe)
-        console.log(recipe._id)
-        const recipeId = recipe._id.toString()
-        console.log(recipeId)
+// router.post('/', async (req, res) => {
+//     try {
+//         req.body.user = req.session.userId
+//         req.body.ingredients = req.body.ingredients.split(',')
+//         console.log(req.body.ingredients)
+//         const recipe = await Recipe.create(req.body)
+//         await Recipe.create(recipe)
+//         console.log(recipe._id)
+//         const recipeId = recipe._id.toString()
+//         console.log(recipeId)
 
         // const currentUser = res.locals.username
         // const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
         // const recipeCreator = recipeWithUserProp.user.username
-        res.redirect(`/recipes/${recipeId}`)
-    } catch {
-        res.sendStatus(500)
-    }
+//         res.redirect(`/recipes/${recipeId}`)
+//     } catch {
+//         res.sendStatus(500)
+//     }
+// })
 
+router.post("/", upload.single("img"), (req, res) => {
+    const recipeData = req.body
+    cloudinary.uploader.upload(req.file.path, res => {
+        // console.log("this is the request\n", req.file.path)
+        // userData.img = res.url
+        console.log("this is the img result\n", res.url)
+    })
+    .then(imgObj => {
+        console.log("is this img", imgObj)
+        
+        Recipe.create({
+            name: recipeData.name,
+            ingredients: recipeData.ingredients.split(','),
+            summary: recipeData.summary,
+            instructions: recipeData.instructions,
+            readyInMinutes: recipeData.readyInMinutes,
+            serving: recipeData.serving,
+            img: imgObj.url,
+            user: req.session.userId
+        })
+        .then(createdRecipe => {
+            const createdRecipeId = createdRecipe._id.toString()
+            console.log("created recipe", createdRecipe)
+            res.redirect(`/recipes/${createdRecipeId}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
 })
+
+
+
+
+
+
+
+
+
 
 //EDIT: form to edit a specific recipe 
 router.get('/:id/edit', async (req, res) => {
@@ -144,15 +205,39 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 //UPDATE: update recipe with data from edit form
-router.put('/:id', async (req, res) => {
+// router.put('/:id', async (req, res) => {
+//     try {
+//         // const recipe = Recipe.findByIdAndUpdate(req.params.id)
+//         req.body.ingredients = req.body.ingredients.split(',')
+//         console.log(req.body.ingredients)
+//         await Recipe.findByIdAndUpdate(req.params.id, req.body)
+//         res.redirect(`/recipes/${req.params.id}`)
+//     } catch {
+//         res.sendStatus(500)
+//     }
+// })
+
+router.put('/:id', upload.single("img"), async (req, res) => {
     try {
-        // const recipe = Recipe.findByIdAndUpdate(req.params.id)
-        req.body.ingredients = req.body.ingredients.split(',')
-        console.log(req.body.ingredients)
-        await Recipe.findByIdAndUpdate(req.params.id, req.body)
+        const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
+            console.log('the cloudinary is doing its thing')
+        })
+        console.log(resImgObj)
+        console.log('hello')
+        const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            ingredients: req.body.ingredients.split(','),
+            summary: req.body.summary,
+            instructions: req.body.instructions,
+            readyInMinutes: req.body.readyInMinutes,
+            serving: req.body.serving,
+            img: resImgObj.url,
+        })
+        console.log(updatedRecipe)
         res.redirect(`/recipes/${req.params.id}`)
-    } catch {
-        res.sendStatus(500)
+    } catch (err) {
+        res.send('aslkjdlasdkfj')
+        console.log(err)
     }
 })
 
