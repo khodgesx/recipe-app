@@ -53,6 +53,13 @@ app.use(async (req, res, next) => {
         res.locals.firstName = currentUser.firstName
         res.locals.userId = req.session.userId.toString()
         currentUserId = res.locals.userId
+        res.locals.user = currentUser
+        // console.log("res.localsssssssss", res.locals.user)
+    } else {
+        res.locals.username = false
+        currentUserId = null
+        firstName = null
+        lastName = null
     }
     next()
 })

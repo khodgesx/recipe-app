@@ -274,14 +274,23 @@ body {
 .like-container {
     position: relative;
     z-index: -1;
+    overflow: hidden;
 }
 
-.fa-heart {
+.counter-wrap {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    right: 0;
+    bottom: 4px;
+    padding: 5px 7px 7px 5px;
     color: white;
-    font-size: 18px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.24);
+    /* border-radius: 10px 0 0 0; */
+    /* overflow: hidden; */
 }
 
 .community-card-text,
@@ -346,6 +355,10 @@ body {
     font-weight: 300;
 }
 
+.icon-container.one-recipe {
+    margin: 10px auto;
+}
+
 @media only screen and (min-width: 768px) {    
     .page-text-container {
         padding-left: 40px;
@@ -387,6 +400,9 @@ body {
     }
     .button-treat-sub.community-card-button {
         font-size: 14px;
+    }
+    .icon-container.one-recipe {
+        margin: 20px auto 10px auto;
     }
 }
 
@@ -843,11 +859,17 @@ input[type="file"] {
     padding: 0;
 }
 
+.button-treat-sub.edit-user-button:hover {
+    background: none;
+    color: #ff8944;
+}
+
 .user-page.recipe-card-caption {
     display: none;
 }
 
-.edit-user-link button {
+.edit-user-link button,
+.edit-recipe-link button {
     padding: 2px;
 }
 

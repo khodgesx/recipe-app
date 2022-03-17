@@ -13,3 +13,9 @@ const toggleMe = (e) => {
 
 
 document.querySelector('.burger').addEventListener('click', toggleMe);
+
+
+
+
+
+let counter = document.querySelector('.counter');
