@@ -10,33 +10,49 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
-    <main class="page-main new-recipe-page">
-        <div class="new-user-page-container">
-            <h1 class="page-title">Edit <%=recipe.name%> recipe:</h1>
+    <main class="page-main edit-recipe-page">
+        <div class="edit-recipe-page-container">
+            <h1 class="page-title">Edit Recipe</h1>
             <section class="form-container">
-                <form class="new-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <form class="edit-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
-                    <label for="name">Recipe Name:</label>
-                    <input type="text" name="name" value="<%=recipe.name%>" required>
+                    <div class="form-row-container">
+                        <label for="name">Recipe Name:</label>
+                        <input type="text" name="name" value="<%=recipe.name%>" required>                    
+                    </div>
 
-                    <label for="ingredients">Ingredients (separate ingredients with a ','):</label>
-                    <input type="text" name="ingredients" value="<%=recipe.ingredients%>" required>
+                    <div class="form-row-container">
+                        <div>
+                            <label for="ingredients">Ingredients:</label>
+                            <p class="img-label-caption">(separate ingredients with a ',')</p>
+                        </div>
+                        <input type="text" name="ingredients" value="<%=recipe.ingredients%>" required>                    
+                    </div>
 
-                    <label for="summary">Description:</label>
-                    <input type="text" name="summary" value="<%=recipe.summary%>" required>
+                    <div class="form-row-container">
+                        <label for="summary">Description:</label>
+                        <input type="text" name="summary" value="<%=recipe.summary%>" required>                    
+                    </div>
 
-                    <label for="instructions">Instructions:</label>
-                    <input type="text" name="instructions" value="<%=recipe.instructions%>" required>
+                    <div class="form-row-container">
+                        <label for="instructions">Instructions:</label>
+                        <input type="text" name="instructions" value="<%=recipe.instructions%>" required>                    
+                    </div>
 
-                    <label for="readyInMinutes">Ready In Minutes:</label>
-                    <input type="number" name="readyInMinutes" value="<%=recipe.readyInMinutes%>" required>
+                    <div class="form-row-container">
+                        <label for="readyInMinutes">Ready In Minutes:</label>
+                        <input type="number" name="readyInMinutes" value="<%=recipe.readyInMinutes%>" required>                    
+                    </div>
 
-                    <label for="serving">Serving:</label>
-                    <input type="number" name="serving" value="<%=recipe.serving%>" required>
+                    <div class="form-row-container">
+                        <label for="serving">Serving:</label>
+                        <input type="number" name="serving" value="<%=recipe.serving%>" required>                    
+                    </div>
 
-                    <label for="img">Image URL:</label>
-                    <p class="img-label-caption">(provide a link to your profile image)</p>
-                    <input type="file" name="img" accept="image/png, image/jpeg" value="<%=recipe.img%>" required>
+                    <div class="form-row-container">
+                        <label for="img">Recipe Photo:</label>
+                        <input type="file" name="img" accept="image/png, image/jpeg" value="<%=recipe.img%>" required>                    
+                    </div>
 
 
                     <input class="button-treat-main form-button" id="" type="submit" value="Update">

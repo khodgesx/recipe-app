@@ -19,7 +19,10 @@
         <section class="recipe-grid-container">
             <% recipes.forEach(n=> {%>
                 <article class="card-container">
-                    <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
+                    <div class="like-container">
+                        <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
+                        <i class="fas fa-heart"></i>
+                    </div>
                     <div class="recipe-card-text">
                         <h2 class="recipe-card-title">
                             <%=n.name %>
@@ -27,6 +30,44 @@
                         <p class="recipe-card-caption">
                             <%=n.summary%>
                         </p>
+
+                        <section class="icon-container">
+
+                            <!-- ICONS HARDCODED FOR SAMPLE RIGHT NOW -->
+                            <div class="icon-wrapper">
+                                <i class="fas fa-hamburger"></i>
+                                <p class="icon-caption">main</p>
+                            </div>
+                            <div class="icon-wrapper">
+                                <i class="fas fa-seedling"></i>
+                                <p class="icon-caption">vegetarian</p>
+                            </div>
+
+                            <!-- LOGIC FOR ICONS ONCE RECIPE FORM INPUT AND MODEL SOLIDIFIED AND UPDATED -->
+                            <% if (n.course==="main") { %>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-hamburger"></i>
+                                    <p class="icon-caption">main</p>
+                                </div>
+                            <% }else if (n.course==="appetizer") { %>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <p class="icon-caption">snack</p>
+                                </div>
+                            <% }else if (n.course==="dessert") { %>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-cheese"></i>
+                                    <p class="icon-caption">dessert</p>
+                                </div>
+                            <% } %> 
+
+                            <% if (n.vegetarian) { %>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-seedling"></i>
+                                    <p class="icon-caption">vegetarian</p>
+                                </div>
+                            <% } %> 
+                        </section>
                         <a class="button-treat-sub recipe-card-button" href="/recipes/<%=n._id%>">View</a>
                     </div>
                 </article>

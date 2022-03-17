@@ -34,9 +34,9 @@
             <section class="user-profile-recipe-grid create">
 
                 <% if (user._id==currentUserIdString) { %>
-                <h1>My Recipes</h1>
+                <h1 class="user-profile-subtitle">My Recipes</h1>
                 <% } else {%>
-                <h1><%=user.firstName%>'s Recipes</h1>
+                <h1 class="user-profile-subtitle"><%=user.firstName%>'s Recipes</h1>
                 <% } %>
 
                 <section class="recipe-grid-container user-page">
@@ -52,6 +52,9 @@
                                                 <h2 class="recipe-card-title">
                                                     <%=recipesMadeArray[i].name %>
                                                 </h2>
+                                                <p class="user-page recipe-card-caption">
+                                                    <%=recipesMadeArray[i].summary %>
+                                                </p>
                                                 <a class="button-treat-sub recipe-card-button"
                                                     href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
                                             </div>
@@ -65,7 +68,7 @@
             <% if (user._id==currentUserIdString) { %>
                 
             <section class="user-profile-recipe-grid save">
-                <h1>Saved Recipes</h1>
+                <h1 class="user-profile-subtitle">Saved Recipes</h1>
                 <section class="recipe-grid-container user-page">
                     <% let k=0 %>
                         <% for (let i=recipesSavedArray.length - 1; i>= 0; i--) { %>
@@ -79,7 +82,9 @@
                                                 <h2 class="recipe-card-title">
                                                     <%=recipesSavedArray[i].name %>
                                                 </h2>
-                                                
+                                                <p class="user-page recipe-card-caption">
+                                                    <%=recipesSavedArray[i].summary %>
+                                                </p>
                                                 <a class="button-treat-sub recipe-card-button"
                                                     href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
                                             </div>
