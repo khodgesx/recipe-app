@@ -15,7 +15,7 @@
             <h1 class="page-title">Edit Profile:</h1>
             <section class="form-container">
 
-                <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST">
 
                     <div class="form-row-container">
                         <label for="firstName">First Name:</label>
@@ -28,24 +28,24 @@
                     </div>                    
 
                     <div class="form-row-container">
-                        <label for="password">Password:</label>
-                        <a class="edit-user-link" href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
-                    </div>
-
-                    <div class="form-row-container">
                         <label for="email">Email:</label>
                         <input type="text" name="email" value="<%=user.email%>">                    
                     </div>                    
-
-                    <div class="form-row-container">
-                        <label for="img">Profile Photo:</label>
-                        <input type="file" name="img" accept="image/png, image/jpeg" value="<%=user.img%>" required>                    
-                    </div>                    
-
-                    <input class="button-treat-main form-button" id="" type="submit" value="Update">
+                    
+                    <input class="button-treat-main form-button" type="submit" value="Update">
                 </form>
 
-
+                <section class="outside-form-container">
+                    <div class="form-row-container">
+                        <label for="img">Profile Photo:</label>
+                        <a class="edit-user-link" href="/users/<%=user._id%>/updatephoto"><button>Update Photo</button></a>
+                                         
+                    </div>    
+                    <div class="form-row-container">
+                        <label for="password">Password:</label>
+                        <a class="edit-user-link" href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
+                    </div>
+                </section>
 
             </section>
         </div>

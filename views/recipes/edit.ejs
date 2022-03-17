@@ -14,7 +14,7 @@
         <div class="edit-recipe-page-container">
             <h1 class="page-title">Edit Recipe</h1>
             <section class="form-container">
-                <form class="edit-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <form class="edit-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
 
                     <div class="form-row-container">
                         <label for="name">Recipe Name:</label>
@@ -49,16 +49,64 @@
                         <input type="number" name="serving" value="<%=recipe.serving%>" required>                    
                     </div>
 
-                    <div class="form-row-container">
-                        <label for="img">Recipe Photo:</label>
-                        <input type="file" name="img" accept="image/png, image/jpeg" value="<%=recipe.img%>" required>                    
+                    <div class="form-row-container course-row">
+                        <label for="course">Course Type:</label>
+                        <div class="radio-row-container">
+                            <div class="radio-option-container">
+                                <input type="radio" name="course" value="main">                        
+                                <label for="course-main">Main</label>
+                            </div>
+                            <div class="radio-option-container">
+                                <input type="radio" name="course" value="appetizer">    
+                                <label for="course-appetizer">Appetizer</label>
+                            </div>
+                            <div class="radio-option-container">
+                                <input type="radio" name="course" value="dessert">                     
+                                <label for="course-dessert">Dessert</label>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="form-row-container">
+                        <label for="vegetarian">Vegetarian:</label>
+                        <div class="radio-row-container">
+                            <div class="radio-option-container">
+                                <input type="radio" name="vegetarian" value="true">                        
+                                <label for="vegetarian-yes">Yes</label>
+                            </div>
+                            <div class="radio-option-container">
+                                <input type="radio" name="vegetarian" value="false">                        
+                                <label for="vegetarian-no">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row-container">
+                        <label for="keto">Keto-Friendly:</label>
+                        <div class="radio-row-container">
+                            <div class="radio-option-container">
+                                <input type="radio" name="keto" value="true">                        
+                                <label for="keto-yes">Yes</label>
+                            </div>
+                            <div class="radio-option-container">
+                                <input type="radio" name="keto" value="false">                        
+                                <label for="keto-no">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                  
 
 
                     <input class="button-treat-main form-button" id="" type="submit" value="Update">
 
                 </form>
 
+                <div class="form-row-container">
+                    <label for="img">Recipe Photo:</label>
+                    <a class="edit-recipe-link" href="/recipes/<%=recipe._id%>/updatephoto"><button>Update Photo</button></a>
+                    <input type="file" name="img" accept="image/png, image/jpeg" required>
+                </div>
 
             </section>
         </div>

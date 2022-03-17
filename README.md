@@ -14,3 +14,8 @@ Duties:
 
 Recipe User Flow:
 ![alt text](https://i.imgur.com/Tawo8wS.png "recipe userflow")
+
+
+
+WHAT IS NEEDED IN README:
+A README.md file with a link to your hosted app, explanations of the technologies used, the approach was taken, unsolved problems, user stories, and notes to yourself so you can come back to your project later in the course and be able to pick up your train of thought, etc.
