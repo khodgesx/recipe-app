@@ -15,24 +15,36 @@
             <h1 class="page-title">Sign Up</h1>
             <section class="form-container">
                 <form class="new-user-form-container" action="/users" method="POST" enctype="multipart/form-data">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" name="firstName" required>
+                    
+                    <div class="form-row-container">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" name="firstName" required>
+                    </div>
 
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" name="lastName" required>
+                    <div class="form-row-container">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" name="lastName" required>
+                    </div>
 
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" required>
+                    <div class="form-row-container">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" required>
+                    </div>
 
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" required>
+                    <div class="form-row-container">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" required>
+                    </div>
 
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" required>
+                    <div class="form-row-container">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" required>
+                    </div>
 
-                    <label for="img">Profile Image URL:</label>
-                    <p class="img-label-caption">(provide a link to your profile image)</p>
-                    <input type="file" name="img" id="userpicupload" accept="image/png, image/jpeg">
+                    <div class="form-row-container">
+                        <label for="img">Profile Photo:</label>
+                        <input type="file" name="img" id="userpicupload" accept="image/png, image/jpeg">
+                    </div>
 
 
                     <input class="button-treat-main form-button" type="submit" value="Register">

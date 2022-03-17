@@ -10,21 +10,28 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    // THIS IS ALL OF THE USERS OF OUR FINE APPLICATION: //
-    <ul>
-        <% users.forEach(element=> { %>
-            <li><a href="/users/<%=element._id%>">
-                    <%= element.username %>
-                </a>
-                <% }); %>
-            </li>
-    </ul>
+
+    <main class="page-main">
+        <section class="page-text-container">
+            <h1 class="page-title">Community Members</h1>
+            <h3 class="page-subtitle">View all members of the Feastr community.</h3>
+        </section>
+
+        <section class="community-grid-container">
+            <% users.forEach(n=> {%>
+                <article class="card-container">
+                    <img class="community-card-pic" src="<%=n.img %>" alt="<%=n.firstName%>">
+                    <div class="community-card-text">
+                        <h2 class="community-card-title">
+                            <%=n.firstName%> <%=n.lastName%>
+                        </h2>
+                        <a class="button-treat-sub community-card-button" href="/users/<%=n._id%>">View</a>
+                    </div>
+                </article>
+                <% }) %>
+        </section>
+    </main>
+
 
     <footer>
         <%- include('../partials/footer.ejs') %>

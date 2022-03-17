@@ -17,22 +17,35 @@
 
                 <form class="edit-user-form-container" action="/users/<%=user._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
 
-                    <label for="firstName">First Name:</label>
-                    <input type="text" name="firstName" value="<%=user.firstName%>" required>
+                    <div class="form-row-container">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" name="firstName" value="<%=user.firstName%>" required>                    
+                    </div>                    
 
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" name="lastName" value="<%=user.lastName%>" required>
+                    <div class="form-row-container">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" name="lastName" value="<%=user.lastName%>" required>                    
+                    </div>                    
 
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" value="<%=user.email%>">
+                    <div class="form-row-container">
+                        <label for="password">Password:</label>
+                        <a class="edit-user-link" href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
+                    </div>
 
-                    <label for="img">Profile Image URL:</label>
-                    <input type="file" name="img" accept="image/png, image/jpeg" value="<%=user.img%>">
+                    <div class="form-row-container">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" value="<%=user.email%>">                    
+                    </div>                    
+
+                    <div class="form-row-container">
+                        <label for="img">Profile Photo:</label>
+                        <input type="file" name="img" accept="image/png, image/jpeg" value="<%=user.img%>" required>                    
+                    </div>                    
 
                     <input class="button-treat-main form-button" id="" type="submit" value="Update">
                 </form>
 
-                <a href="/users/<%=user._id%>/editpassword"><button>Edit Password</button></a>
+
 
             </section>
         </div>
