@@ -3,6 +3,11 @@ const Recipe = require('../models/recipe')
 const bcrypt = require('bcryptjs');
 const express = require('express')
 const router = express.Router()
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oidc');
+const mongoose = require("mongoose");
+const db = mongoose.connection;
+
 
 
 
@@ -31,12 +36,14 @@ router.get('/', async (req, res) => {
 })
 
 
-router.get('/login', (req, res) => {
+router.get('/login', (req, res, next) => {
     console.log("hello")
     res.render('login.ejs', {
 
     })
 })
+
+router.get('/login/google', passport.authenticate('google'))
 
 router.post("/login", async (req, res) => {
     try {

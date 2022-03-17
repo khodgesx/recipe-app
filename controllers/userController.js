@@ -3,8 +3,19 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const Recipe = require("../models/recipe");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+const cloudinary = require('cloudinary');
 
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary,
+//     params: {
+//       folder: "Pics",
+//     },
+//   });
+//   const upload = multer({ storage: storage });
 
+const upload = multer({ dest: "./uploads/" })
 
 //test
 
@@ -25,9 +36,6 @@ router.get('/', async (req, res) => {
 router.get('/new', (req, res) => {
     res.render('users/new-user.ejs')
 })
-
-
-
 
 
 // SHOW: GET
@@ -91,45 +99,48 @@ router.get('/:id/saved', async (req, res) => {
 
 
 
-// CREATE: POST
+// CREATE: POST (OLD ROUTE)
 // /users
 // Creates an actual user, then...?
-router.post('/', async (req, res) => {
-    // req.body.password needs to be HASHED
-    console.log(req.body)
-    const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    console.log(hashedPassword)
-    req.body.password = hashedPassword
-    const newUser = await User.create(req.body);
-    console.log(newUser)
-    res.redirect('/login')
-})
+// router.post('/', async (req, res) => {
+//     // req.body.password needs to be HASHED
+//     console.log(req.body)
+//     const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+//     console.log(hashedPassword)
+//     req.body.password = hashedPassword
+//     const newUser = await User.create(req.body);
+//     console.log(newUser)
+//     res.redirect('/login')
+// })
 
-//cloudinary upload image for user 
-router.post('/:id/image-upload', async (req, res)=>{
-    const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
-    const CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
-    const image = document.querySelector('#userpicupload');
-    image.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-  fetch(CLOUDINARY_URL, {
-    method: 'POST',
-    body: formData,
-  })
-    .then(response => response.json())
-    .then((data) => {
-      if (data.secure_url !== '') {
-        const uploadedFileUrl = data.secure_url;
-        localStorage.setItem('passportUrl', uploadedFileUrl);
-      }
+//CREATE: POST create new user with image upload 
+router.post("/", upload.single("img"), (req, res) => {
+    const userData = req.body
+    cloudinary.uploader.upload(req.file.path, res => {
+        // console.log("this is the request\n", req.file.path)
+        // userData.img = res.url
+        console.log("this is the img result\n", res.url)
     })
-    .catch(err => console.error(err));
-});
+    .then(imgObj => {
+        console.log("is this img", imgObj)
+        User.create({
+            username: userData.username,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+            email: userData.email,
+            img: imgObj.url
+        })
+        .then(createdUser => {
+            console.log("created user", createdUser)
+            res.redirect('/login')
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
 })
+
 
 // EDIT: GET
 // /users/:id/edit
@@ -173,21 +184,45 @@ router.get('/:id/editpassword', async (req, res) => {
 // UPDATE: PUT
 // /users/:id
 // UPDATE THE USER WITH THE SPECIFIC ID
-router.put('/:id', async (req, res) => {
+// router.post("/", upload.single("img"), (req, res) => {
+//     const userData = req.body
+//     cloudinary.uploader.upload(req.file.path, res => {
+//         // console.log("this is the request\n", req.file.path)
+//         // userData.img = res.url
+//         console.log("this is the img result\n", res.url)
+//     })
+
+router.put('/:id', upload.single("img"), async (req, res) => {
     try {
+        const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
+            console.log('the cloudinary is doing its thing')
+        })
+        console.log(resImgObj)
         console.log('hello')
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            img: req.body.img,
-            password: bcrypt.hashSync(req.body.password, 10),
+            img: resImgObj.url,
             email: req.body.email
         })
         console.log(updatedUser)
-
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         res.send('aslkjdlasdkfj')
+        console.log(err)
+    }
+})
+
+// UPDATE THE USER'S PASSWORD WITH THE SPECIFIC ID
+router.put('/:id/editpassword', async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.session.userId, {
+            password: bcrypt.hashSync(req.body.password, 10),
+        })
+        console.log(updatedUser)
+        res.redirect(`/users/${req.params.id}`)
+    } catch (err) {
+        res.send('did not update password')
         console.log(err)
     }
 })

@@ -14,7 +14,8 @@
         <div class="new-user-page-container">
             <h1 class="page-title">Edit <%=recipe.name%> recipe:</h1>
             <section class="form-container">
-                <form class="new-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
+                <form class="new-recipe-form-container" action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+
                     <label for="name">Recipe Name:</label>
                     <input type="text" name="name" value="<%=recipe.name%>" required>
 
