@@ -51,15 +51,15 @@ app.use(session({
 app.use(passport.authenticate('session'));
 
 // RYANS SECRET MIDDLEWARE TO HOOK UP PASSPORTS IDEA OF LOGGING IN WITH YOURS
-// app.use((req, res, next) => {
-//     if (req.user && !req.session.isLoggedIn) {
-//         req.session.isLoggedIn = true;
-//         req.session.userId = req.session.passport.user._id
-//         console.log(req.user)
-//         console.log(req.session.passport.user._id)
-//     }
-//     next()
-// })
+app.use((req, res, next) => {
+    if (req.isAuthenticated()) {
+        req.session.isLoggedIn = true;
+        req.session.userId = req.session.passport.user
+        console.log(req.user)
+        console.log(req.session.passport.user)
+    }
+    next()
+})
 
 app.use(async (req, res, next) => {
     // This will send info from session to templates

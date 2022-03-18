@@ -31,18 +31,31 @@ passport.use(new GoogleStrategy({
             console.log(possibleUser)
             goodUser = possibleUser
         }
+
         console.log("hi")
         return cb(null, goodUser)
     })
 )
 
 passport.serializeUser(function (user, done) {
-    done(null, user._id.toString())
+    done(null, user.id)
 });
-passport.deserializeUser(function (user, cb) {
-    User.findById(user._id, (err, user) => {
-        cb(err, user)
-    })
+
+passport.deserializeUser(async (id, cb) => {
+    console.log('-----------')
+    try {
+        const passUser = await User.findById(id)
+        console.log('-----------')
+        if (passUser) {
+            console.log(passUser)
+            return cb(null, passUser)
+        } else {
+            return cb(null, false)
+        }
+    } catch (err) {
+        return cb(err, false)
+    }
+
 });
 
 
@@ -118,8 +131,8 @@ router.post("/login", async (req, res) => {
     }
 })
 router.get('/logout', (req, res) => {
+    req.logout();
     req.session.destroy(() => {
-        req.logout();
         res.redirect("/")
     })
 })
