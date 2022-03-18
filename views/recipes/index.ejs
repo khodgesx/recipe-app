@@ -21,9 +21,40 @@
                 <article class="card-container">
                     <div class="like-container">
                         <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
-                        <!-- <div class="counter-wrap">
-                            INSERT HEART SAVE COUNTER HERE
-                        </div> -->
+                        
+
+
+
+                        <!-- < % if(currentUserId === n.user.user._id) { %>
+                            <p class="counter">#ofTimesThisRecipeIsSaved</p>
+                            <i class="fas fa-heart"></i>
+                            < % } else { %>
+                                < % if (isItInTheArray) { %>
+                                    <i class="fas fa-heart white-heart">
+                                        <form action="/recipes/< %=recipe._id%>/unsave" method="POST">
+                                            <input hidden name="recipeId" value="< %= recipe._id %>">
+                                            <input class="button-treat-main save-unsave-button" type="submit"
+                                                value="Unsave">
+                                        </form>
+                                    </i>
+                                    < % } else { %>
+                                        <i class="fas fa-heart orange-heart">
+                                            <form action="/recipes/< %=recipe._id%>/saved" method="POST">
+                                                <input hidden name="recipeId" value="< %= recipe._id %>">
+                                                <input class="button-treat-main save-unsave-button" type="submit"
+                                                    value="Save">
+                                            </form>
+                                        </i>
+                                        < % } %>
+                                            < % } %> -->
+                                            
+
+
+
+
+
+
+
                     </div>
 
                     <div class="recipe-card-text">

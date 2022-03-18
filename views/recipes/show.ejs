@@ -31,7 +31,6 @@
                     <%=recipe.readyInMinutes%> minutes
                 </p>
                 <section class="icon-container one-recipe">
-                    <!-- LOGIC FOR ICONS ONCE RECIPE FORM INPUT AND MODEL SOLIDIFIED AND UPDATED -->
                     <% if (recipe.course==="main" ) { %>
                         <div class="icon-wrapper">
                             <i class="fas fa-hamburger"></i>
@@ -117,7 +116,17 @@
 
 
                 </div>
-                <a class="back-button" href="javascript:history.back(-1)">Back</a>
+
+                <!--  -->
+                <!-- let currentUrl = ';' -->
+                <!-- < % let currentUrl = window.location.href %> 
+                < % let previousUrl = history.back() %> 
+                < % while (currentUrl === previousUrl) { %> -->
+                    
+                    <a class="back-button double-back" href="javascript:history.back(-1)">Back</a>
+                    
+                    <!-- < % i++ %>
+                < % } %> -->
 
 
 
