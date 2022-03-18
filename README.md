@@ -1,18 +1,20 @@
 # recipe-app
-Created By: Kelly Hodges, Branislav Todorovic, Vickie Vien
+#H1 Feastr
 
-This is a recipe app in which a user can create, share, and search recipes. 
+#H2 Feastr is a recipe app in which a user can create, share, and search recipes. 
 We are going to import files from the Spoonacular API to add to the recipe database so users can not only share and search recipes created by other users, but also search recipes from Spoonacular. 
 
-The two models we will be working with are users and recipes. 
+#H4 Created By: Kelly Hodges, Branislav Todorovic, Vickie Vien
+
+#H2 Deployed App
+#H4[Feastr App](https://feastr.herokuapp.com/)
+
+The two models are users and recipes. 
 
 Duties:
 
-***Kelly: recipe controller & recipe model ? ++
-***Branislav: users controller, users model ? ++
-***Vickie: views folders, public files, front-end 
 
-Recipe User Flow:
+#H2 User Flow:
 ![alt text](https://i.imgur.com/Tawo8wS.png "recipe userflow")
 
 

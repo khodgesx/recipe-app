@@ -24,9 +24,10 @@ router.get('/', async (req, res) => {
     try {
         const recipes = await Recipe.find();
         const currentUserId = res.locals.userId
+
         res.render('recipes/index.ejs', {
             recipes: recipes,
-            currentUserId: currentUserId
+            currentUserId: currentUserId,
         })
     } catch {
         res.sendStatus(500)
@@ -69,14 +70,14 @@ router.get('/:id', async (req, res) => {
             isItInTheArray = currentUserObject.recipesSaved.includes(req.params.id)
         } else {
             isItInTheArray = false
-        }  
+        }
 
         res.render('recipes/show.ejs', {
             isItInTheArray: isItInTheArray,
             recipe: recipe,
             currentUser: currentUser,
             recipeCreator: recipeCreator,
-            isLoggedIn:isLoggedIn
+            isLoggedIn: isLoggedIn
             // user: res.locals.user
         })
     } catch (err) {
@@ -115,7 +116,7 @@ router.post('/:id/saved', async (req, res) => {
         // console.log(currentUser.recipesSaved)
         currentUser.recipesSaved.push(req.params.id)
         await currentUser.save()
-        console.log(currentUser.recipesSaved)
+        // console.log(currentUser.recipesSaved)
         res.redirect(`/recipes/${req.params.id}`)
     } catch (err) {
         console.log(err)
@@ -126,10 +127,10 @@ router.post('/:id/saved', async (req, res) => {
 router.post('/:id/unsave', async (req, res) => {
     const currentUser = await User.findById(req.session.userId)
     // console.log(res.locals)
-    console.log(currentUser.recipesSaved)
+    // console.log(currentUser.recipesSaved)
     currentUser.recipesSaved.pop(req.params.id)
     await currentUser.save()
-    console.log(currentUser.recipesSaved)
+    // console.log(currentUser.recipesSaved)
     res.redirect(`/recipes/${req.params.id}`)
 })
 
@@ -154,9 +155,9 @@ router.post('/:id/unsave', async (req, res) => {
 //         const recipeId = recipe._id.toString()
 //         console.log(recipeId)
 
-        // const currentUser = res.locals.username
-        // const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
-        // const recipeCreator = recipeWithUserProp.user.username
+// const currentUser = res.locals.username
+// const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
+// const recipeCreator = recipeWithUserProp.user.username
 //         res.redirect(`/recipes/${recipeId}`)
 //     } catch {
 //         res.sendStatus(500)
@@ -170,31 +171,31 @@ router.post("/", upload.single("img"), (req, res) => {
         // userData.img = res.url
         console.log("this is the img result\n", res.url)
     })
-    .then(imgObj => {
-        console.log("is this img", imgObj)
-        
-        Recipe.create({
-            name: recipeData.name,
-            ingredients: recipeData.ingredients.split(','),
-            summary: recipeData.summary,
-            instructions: recipeData.instructions,
-            readyInMinutes: recipeData.readyInMinutes,
-            serving: recipeData.serving,
-            img: imgObj.url,
-            user: req.session.userId,
-            course: req.body.course,
-            vegetarian: req.body.vegetarian,
-            keto: req.body.keto
+        .then(imgObj => {
+            console.log("is this img", imgObj)
+
+            Recipe.create({
+                name: recipeData.name,
+                ingredients: recipeData.ingredients.split(','),
+                summary: recipeData.summary,
+                instructions: recipeData.instructions,
+                readyInMinutes: recipeData.readyInMinutes,
+                serving: recipeData.serving,
+                img: imgObj.url,
+                user: req.session.userId,
+                course: req.body.course,
+                vegetarian: req.body.vegetarian,
+                keto: req.body.keto
+            })
+                .then(createdRecipe => {
+                    const createdRecipeId = createdRecipe._id.toString()
+                    console.log("created recipe", createdRecipe)
+                    res.redirect(`/recipes/${createdRecipeId}`)
+                })
         })
-        .then(createdRecipe => {
-            const createdRecipeId = createdRecipe._id.toString()
-            console.log("created recipe", createdRecipe)
-            res.redirect(`/recipes/${createdRecipeId}`)
+        .catch(err => {
+            console.log(err)
         })
-    })
-    .catch(err => {
-        console.log(err)
-    })
 })
 
 

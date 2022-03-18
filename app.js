@@ -1,10 +1,12 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const passport = require('passport');
 const User = require('./models/user');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+var logger = require('morgan');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 const app = express();
@@ -13,11 +15,11 @@ const store = new MongoDBStore({
     collection: 'mySessions'
 });
 
-cloudinary.config({ 
-    cloud_name: 'dqa6xyvq1', 
-    api_key: process.env.CLOUDINARY_API_KEY, 
+cloudinary.config({
+    cloud_name: 'dqa6xyvq1',
+    api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
-  });
+});
 
 //   const storage = new CloudinaryStorage({
 //     cloudinary: cloudinary,
@@ -44,6 +46,21 @@ app.use(session({
     saveUninitialized: false,
     store: store,
 }))
+
+
+app.use(passport.authenticate('session'));
+
+// RYANS SECRET MIDDLEWARE TO HOOK UP PASSPORTS IDEA OF LOGGING IN WITH YOURS
+// app.use((req, res, next) => {
+//     if (req.user && !req.session.isLoggedIn) {
+//         req.session.isLoggedIn = true;
+//         req.session.userId = req.session.passport.user._id
+//         console.log(req.user)
+//         console.log(req.session.passport.user._id)
+//     }
+//     next()
+// })
+
 app.use(async (req, res, next) => {
     // This will send info from session to templates
     res.locals.isLoggedIn = req.session.isLoggedIn
@@ -63,6 +80,9 @@ app.use(async (req, res, next) => {
     }
     next()
 })
+
+
+
 
 app.use('/recipes', recipeController)
 app.use('/users', userController)
