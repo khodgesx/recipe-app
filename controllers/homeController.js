@@ -26,6 +26,7 @@ passport.use(new GoogleStrategy({
             // Create a user with the given info from profile
             const goodUser = await User.create({ googleID: profile.id, googleDisplayName: profile.displayName, username: `Google:${profile.id}`, firstName: profile.name.givenName, email: "blah", password: "nothanksIgoogle" })
             console.log(goodUser)
+            isLoggedIn = true
         } else {
             console.log("found existing user");
             console.log(possibleUser)
