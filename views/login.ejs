@@ -12,6 +12,9 @@
 
     <main class="page-main login-page">
         <div class="login-page-container">
+            <ul class="pop-message fail">
+                <%= messages[0] %>
+            </ul>
             <h1 class="page-title">Login</h1>
             <section class="form-container">
                 <form class="login-form-container" action="/login" method="POST">
@@ -26,11 +29,11 @@
                     </div>
 
                     <input class="button-treat-main form-button" type="submit" value="Login">
-                    
+
                     <div class="google-login">
                         <p>or <a href="/login/google">sign in</a> with</p>
                         <img src="https://i.imgur.com/ie1uv6p.png" alt="Google">
-                        
+
                     </div>
 
                 </form>

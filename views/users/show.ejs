@@ -27,7 +27,8 @@
                         <% } %>
 
                             <% if (user._id==currentUserIdString) { %>
-                                <a class="button-treat-sub edit-user-button" href="/users/<%=user._id%>/edit">Edit
+                                <a class="button-treat-sub edit-user-button edit-profile"
+                                    href="/users/<%=user._id%>/edit">Edit
                                     Profile</a>
                                 <% } %>
             </section>
@@ -35,7 +36,6 @@
 
 
             <section class="user-profile-recipe-grid create">
-
                 <% if (user._id==currentUserIdString) { %>
                     <h1 class="user-profile-subtitle">My Recipes</h1>
                     <% } else {%>
@@ -70,8 +70,8 @@
             </section>
 
 
-            <% if (user._id==currentUserIdString) { %>
 
+            <% if (user._id==currentUserIdString) { %>
                 <section class="user-profile-recipe-grid save">
                     <h1 class="user-profile-subtitle">Saved Recipes</h1>
                     <section class="recipe-grid-container user-page">

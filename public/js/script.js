@@ -8,27 +8,18 @@ const toggleMe = (e) => {
 
     document.querySelector('.nav-list').classList.toggle('open');
     document.querySelector('.nav-list').classList.toggle('close');
-    
-}
 
+}
 
 document.querySelector('.burger').addEventListener('click', toggleMe);
 
 
 
-// const doubleBackBtn = document.querySelector('.double-back')
-// let currentUrl = window.location.href;
-// let previousUrl = history.back();
+// FADE OUT OF SUCCESSFUL LOGIN ON HOME SCREEN
+setTimeout(() => {
+    const loginSuccessPop = document.querySelector('.login-success');
 
-// console.log(currentUrl)
-// console.log(previousUrl)
+    loginSuccessPop.style.visibility = 'hidden';
 
-// const backMeUp = () => {
-//     while (currentUrl === previousUrl) {    
-        
-//         // <a class="back-button double-back" href="javascript:history.back(-1)">Back</a>
-//         // i++;
-//     }
-// }
+}, 2000)
 
-// doubleBackBtn.addEventListener('click', backMeUp)

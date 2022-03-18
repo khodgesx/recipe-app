@@ -9,7 +9,9 @@ const logger = require('morgan');
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const isLoggedIn = require('../middleware/isLoggedIn')
-
+const session = require('express-session');
+const path = require('path');
+const { flash } = require('express-flash-message');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -25,14 +27,11 @@ passport.use(new GoogleStrategy({
             console.log("failed to find existig user")
             // Create a user with the given info from profile
             const goodUser = await User.create({ googleID: profile.id, googleDisplayName: profile.displayName, username: `Google:${profile.id}`, firstName: profile.name.givenName, email: "blah", password: "nothanksIgoogle" })
-
             isLoggedIn = true
         } else {
             console.log("found existing user");
-
             goodUser = possibleUser
         }
-
         console.log("hi")
         return cb(null, goodUser)
     })
@@ -60,11 +59,28 @@ passport.deserializeUser(async (id, cb) => {
 });
 
 
+router.get('/flash', async function (req, res) {
+    // Set a flash message by passing the key, followed by the value, to req.flash().
+    await req.flash('info', 'Congratulations, you logged in successfully.');
+    res.redirect('/');
+});
+
+router.get('/flashloginfail', async function (req, res) {
+    // Set a flash message by passing the key, followed by the value, to req.flash().
+    await req.flash('loginfail', 'Username and/or password incorrect. Please try again.')
+    res.redirect('/login');
+});
+
+
+
+
 
 
 router.get('/', async (req, res) => {
     // THERE IS A REQ.SESSION.PASSPORT.USER THAT HAS THE OBJECTID IN IT
     try {
+        const messages = await req.consumeFlash('info');
+
         let recipes = await Recipe.find()
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -75,8 +91,10 @@ router.get('/', async (req, res) => {
             }
         }
         const recipesShuffled = shuffleArray(recipes)
+        console.log(messages)
         res.render('home.ejs', {
-            recipes: recipes
+            recipes: recipes,
+            messages: messages
         })
     } catch (err) {
         console.log(err)
@@ -85,10 +103,11 @@ router.get('/', async (req, res) => {
 })
 
 
-router.get('/login', (req, res, next) => {
+router.get('/login', async (req, res, next) => {
+    const messages = await req.consumeFlash('loginfail');
     console.log("hello")
     res.render('login.ejs', {
-
+        messages: messages
     })
 })
 
@@ -118,11 +137,13 @@ router.post("/login", async (req, res) => {
                 // It's a match! Successful login!
                 req.session.isLoggedIn = true;
                 req.session.userId = possibleUser._id;
-                res.redirect('/')
+
+                res.redirect('/flash')
             } else {
-                res.redirect("/login")
+                res.redirect('/flashloginfail')
             }
         } else {
+            res.redirect('/flashloginfail')
             // Let them try again?
             res.redirect("/login")
         }

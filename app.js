@@ -7,6 +7,8 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
 var logger = require('morgan');
+const path = require('path');
+const { flash } = require('express-flash-message');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 const app = express();
@@ -45,8 +47,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1week
+    },
 }))
 
+// app.use(flash({ sessionKeyName: 'flashMessage', useCookieSession: true }));
 
 app.use(passport.authenticate('session'));
 
@@ -81,8 +87,7 @@ app.use(async (req, res, next) => {
     next()
 })
 
-
-
+app.use(flash({ sessionKeyName: 'flashMessage' }));
 
 app.use('/recipes', recipeController)
 app.use('/users', userController)
