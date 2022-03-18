@@ -84,5 +84,5 @@ Alt-H2 Additional Notes:
 
 ###H3 Ownership:
 ⋅⋅⋅ ⋅⋅* **Branislav Todorovic:** 
-⋅⋅⋅ ⋅⋅* **Kelly Hodges:** 
+⋅⋅⋅ ⋅⋅* **Kelly Hodges:** Coordinated on back-end development of RESTful routes and use of Cloudinary API and framework implementation including passport and bcryptjs.
 ⋅⋅⋅ ⋅⋅* **Vickie Vien:** Managed all front-end development responsibilities from wireframing Feastr pages with Figma, coding, implementing and rendering all ejs files with a mobile-first approach, creating logo and favicon, applying partials accross all views, ensuring responsiveness across all devices (mobile, tablet, desktop), and styling of all pages with interactivity where necessary for a better user experience.
