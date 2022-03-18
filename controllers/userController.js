@@ -7,6 +7,7 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
 const cloudinary = require('cloudinary');
 const isLoggedIn = require('../middleware/isLoggedIn')
+const { flash } = require('express-flash-message');
 
 
 // const storage = new CloudinaryStorage({
@@ -20,6 +21,12 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 const upload = multer({ dest: "./uploads/" })
 
 //test
+//flash message for duplicate username
+router.get('/flashusername', async function (req, res) {
+    // Set a flash message by passing the key, followed by the value, to req.flash().
+    await req.flash('duplicateusername', 'Oops, that username is taken! Try again.');
+    res.redirect('/users/new');
+});
 
 // INDEX: GET
 // /users
@@ -33,15 +40,17 @@ router.get('/', async (req, res) => {
     } else {
         res.redirect('/login')
     }
-
 })
 
 
 // NEW: GET
 // /users/new
 // Shows a form to create a new user
-router.get('/new', (req, res) => {
-    res.render('users/new-user.ejs')
+router.get('/new', async (req, res) => {
+    const messages = await req.consumeFlash('duplicateusername');
+    res.render('users/new-user.ejs', {
+        messages: messages
+    })
 })
 
 
@@ -122,6 +131,7 @@ router.get('/:id/saved', async (req, res) => {
 
 //CREATE: POST create new user with image upload 
 router.post("/", upload.single("img"), (req, res) => {
+
     const userData = req.body
     cloudinary.uploader.upload(req.file.path, res => {
         // console.log("this is the request\n", req.file.path)
@@ -131,7 +141,7 @@ router.post("/", upload.single("img"), (req, res) => {
         .then(imgObj => {
             console.log("is this img", imgObj)
             if (User.find({ username: req.body.username })) {
-                res.redirect('/users/new')
+                res.redirect('/users/flashusername')
             } else {
                 User.create({
                     username: userData.username,

@@ -12,10 +12,15 @@
 
     <main class="page-main new-user-page">
         <div class="new-user-page-container">
+
+            <p class="pop-message username fail">
+                <%= messages[0] %>
+            </p>
+
             <h1 class="page-title">Sign Up</h1>
             <section class="form-container">
                 <form class="new-user-form-container" action="/users" method="POST" enctype="multipart/form-data">
-                    
+
                     <div class="form-row-container">
                         <label for="firstName">First Name:</label>
                         <input type="text" name="firstName" required>
