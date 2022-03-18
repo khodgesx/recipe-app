@@ -16,7 +16,7 @@ const { flash } = require('express-flash-message');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/oauth2/redirect/google',
+    callbackURL: 'https://feastr.herokuapp.com/oauth2/redirect/google',
     scope: ['profile']
 },
     async function (issuer, profile, cb) {
