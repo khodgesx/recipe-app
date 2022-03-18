@@ -13,20 +13,20 @@
     <main class="page-main edit-user-page">
         <div class="edit-user-page-container">
             <h1 class="page-title">Update Photo:</h1>
-            <section class="form-container">
+            <section class="form-container edit-photo">
 
-                <form class="edit-user-form-container" action="/users/<%=user._id%>/updatephoto?_method=PUT" method="POST" enctype="multipart/form-data">
+                <form class="edit-user-form-container edit-photo-form" action="/users/<%=user._id%>/updatephoto?_method=PUT" method="POST" enctype="multipart/form-data">
 
-                  
+                    <div class="form-row-container edit-photo-row">
                         <label for="img">Profile Photo:</label>
                         <input type="file" name="img" id="userpicupload" accept="image/png, image/jpeg">
-                  
+                    </div>
 
 
 
                     <input class="button-treat-main form-button" type="submit" value="Update">
                 </form>
-                <a class="back-button" href="javascript:history.back(-1)">Back</a>
+                <a class="back-button edit-pages" href="javascript:history.back(-1)">Back</a>
 
             </section>
         </div>
