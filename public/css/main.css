@@ -98,7 +98,7 @@ body {
     position: fixed;
     opacity: 0.95;
     background-color: white;
-    /* z-index: 2; */
+    z-index: 2;
 }
 
 .nav-list {
@@ -512,7 +512,6 @@ body {
 .edit-user-form-container {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     position: relative;
-    /* z-index: -1; */
 }
 
 .edit-user-form-container.edit-pw-form,
@@ -522,8 +521,6 @@ body {
 
 .edit-recipe-form-container {
     grid-template-rows: repeat(11, 1fr);
-    display: relative;
-    /* z-index: -1; */
 }
 
 .outside-form-container {
@@ -551,10 +548,8 @@ body {
 .edit-recipe-form-container label,
 .edit-user-form-container label,
 .login-form-container label {
-    /* display: block; */
     font-weight: 300;
     font-size: 14px;
-    /* margin-bottom: 5px; */
     text-transform: uppercase;
     align-self: center;
 }
@@ -562,13 +557,11 @@ body {
 
 
 .outside-form-container label {
-    /* display: block; */
     font-weight: 300;
     font-size: 14px;
     /* margin-bottom: 5px; */
     text-transform: uppercase;
     align-self: center;
-    /* justify-self: stretch; */
 }
 
 .new-user-form-container input,
@@ -576,8 +569,6 @@ body {
 .edit-recipe-form-container input,
 .edit-user-form-container input,
 .login-form-container input  {
-    /* display: block; */
-    /* margin-bottom: 20px; */
     padding: 5px;
 }
 
