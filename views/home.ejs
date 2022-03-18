@@ -30,22 +30,32 @@
 
 
 
-            <% for(let i=0; i<3; i++) { %>
-                <% const random=Math.floor(Math.random() * recipes.length) %>
-                    <article class="card-container">
-                        <img class="recipe-card-pic" src="<%=recipes[i].img%>" alt="<%=recipes[i].name %>">
-                        <div class="recipe-card-text">
-                            <h2 class="recipe-card-title">
-                                <%=recipes[i].name %>
-                            </h2>
-                            <p class="recipe-card-caption">
-                                <%=recipes[i].summary%>
-                            </p>
-                            <a class="button-treat-sub recipe-card-button" href="/recipes">All
-                                Recipes</a>
-                        </div>
-                    </article>
-                    <% } %>
+            <% let j=0; %>
+                <% for (let i=recipes.length - 1; i>= 0; i--) { %>
+                    <% if (j==3) { %>
+                        <% break %>
+                            <% } %>
+                                <article class="card-container">
+                                    <img class="recipe-card-pic" src="<%=recipes[i].img%>" alt="<%=recipes[i].name %>">
+                                    <div class="recipe-card-text">
+                                        <h2 class="recipe-card-title">
+                                            <%=recipes[i].name %>
+                                        </h2>
+                                        <p class="recipe-card-caption">
+                                            <%=recipes[i].summary%>
+                                        </p>
+                                        <a class="button-treat-sub recipe-card-button" href="/recipes">All
+                                            Recipes</a>
+                                    </div>
+
+
+                                </article>
+                                <% j++ %>
+                                    <% } %>
+
+
+
+
 
 
         </section>
