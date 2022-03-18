@@ -16,6 +16,19 @@ document.querySelector('.burger').addEventListener('click', toggleMe);
 
 
 
+// const doubleBackBtn = document.querySelector('.double-back')
+// let currentUrl = window.location.href;
+// let previousUrl = history.back();
 
+// console.log(currentUrl)
+// console.log(previousUrl)
 
-let counter = document.querySelector('.counter');
+// const backMeUp = () => {
+//     while (currentUrl === previousUrl) {    
+        
+//         // <a class="back-button double-back" href="javascript:history.back(-1)">Back</a>
+//         // i++;
+//     }
+// }
+
+// doubleBackBtn.addEventListener('click', backMeUp)

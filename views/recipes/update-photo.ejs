@@ -10,24 +10,24 @@
         <%- include('../partials/header-full-nav.ejs') %>
     </header>
 
-    <main class="page-main edit-user-page">
+    <main class="page-main edit-user-page edit-recipe-photo">
         <div class="edit-user-page-container">
             <h1 class="page-title">Update Photo:</h1>
-            <section class="form-container">
+            <section class="form-container edit-photo">
 
-                <form class="edit-user-form-container" action="/recipes/<%=recipe._id%>/updatephoto?_method=PUT"
+                <form class="edit-user-form-container edit-photo-form" action="/recipes/<%=recipe._id%>/updatephoto?_method=PUT"
                     method="POST" enctype="multipart/form-data">
 
-
-                    <label for="img">Recipe Photo:</label>
-                    <input type="file" name="img" id="" accept="image/png, image/jpeg">
-
+                    <div class="form-row-container edit-photo-row">
+                        <label for="img">Recipe Photo:</label>
+                        <input type="file" name="img" id="" accept="image/png, image/jpeg">
+                    </div>
 
 
 
                     <input class="button-treat-main form-button" type="submit" value="Update">
                 </form>
-                <a class="back-button" href="javascript:history.back(-1)">Back</a>
+                <a class="back-button edit-pages" href="javascript:history.back(-1)">Back</a>
             </section>
         </div>
     </main>
