@@ -63,8 +63,8 @@ router.get('/:id', [isLoggedIn], async (req, res) => {
         const recipesMadeArray = await Recipe.find({ user: req.params.id }).populate('user')
         userWithSavedRecipes = await user.populate('recipesSaved')
         const recipesSavedArray = userWithSavedRecipes.recipesSaved
-        console.log(recipesMadeArray)
-        console.log(recipesSavedArray)
+        // console.log(recipesMadeArray)
+        // console.log(recipesSavedArray)
         res.render('users/show.ejs', {
             recipesSavedArray: recipesSavedArray,
             recipesMadeArray: recipesMadeArray,
@@ -187,6 +187,25 @@ router.get('/:id/editpassword', async (req, res) => {
         res.sendStatus(500)
     }
 })
+
+//EDIT: GET
+//get the form to update the user photo:
+// /users/:id/updatephoto
+router.get('/:id/updatephoto', async (req, res) => {
+    try {
+        if (req.session.userId == req.params.id) {
+            const user = await User.findById(req.params.id)
+
+            res.render('users/update-photo.ejs', {
+                user: user
+            })
+        } else {
+            throw new Error("Unfortunately, you won't be able to edit someone else's photo!")
+        }
+    } catch (err) {
+        res.sendStatus(500)
+    }
+})
 // User.findOneAndUpdate({username: req.params.username}, { $set: req.body }, { new: true }, callback);
 // UPDATE: PUT
 // /users/:id
@@ -199,26 +218,47 @@ router.get('/:id/editpassword', async (req, res) => {
 //         console.log("this is the img result\n", res.url)
 //     })
 
-router.put('/:id', upload.single("img"), async (req, res) => {
+//UPDATE PUT: update user with :id 
+//this route does not work because of the photo part
+// router.put('/:id', upload.single("img"), async (req, res) => {
+//     try {
+//         const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
+//             console.log('the cloudinary is doing its thing')
+//         })
+//         console.log(resImgObj)
+//         console.log('hello')
+//         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             img: resImgObj.url,
+//             email: req.body.email
+//         })
+//         console.log(updatedUser)
+//         res.redirect(`/users/${req.params.id}`)
+//     } catch (err) {
+//         res.send('aslkjdlasdkfj')
+//         console.log(err)
+//     }
+// })
+//UPDATE PUT: update user with :id 
+//this route does not work because of the photo part
+router.put('/:id', async (req, res) => {
     try {
-        const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
-            console.log('the cloudinary is doing its thing')
-        })
-        console.log(resImgObj)
+
         console.log('hello')
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            img: resImgObj.url,
             email: req.body.email
         })
-        console.log(updatedUser)
+        console.log("update user:", updatedUser)
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
-        res.send('aslkjdlasdkfj')
         console.log(err)
     }
 })
+
+
 
 // UPDATE THE USER'S PASSWORD WITH THE SPECIFIC ID
 router.put('/:id/editpassword', async (req, res) => {
@@ -233,6 +273,50 @@ router.put('/:id/editpassword', async (req, res) => {
         console.log(err)
     }
 })
+//UPDATE USER PHOTO : /users/:id/updatephoto
+router.put('/:id/updatephoto', upload.single("img"), async (req, res) => {
+    try {
+        const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
+            console.log('the cloudinary is doing its thing')
+        })
+        console.log(resImgObj)
+        console.log('hello')
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+            
+            img: resImgObj.url
+     
+        })
+        // console.log(updatedUser)
+        res.redirect(`/users/${req.params.id}`)
+    } catch (err) {
+        res.send('aslkjdlasdkfj')
+        console.log(err)
+    }
+})
+
+//THIS WAS THE OLD ROUTE WITH EVERYTHING BUT PASSWORD IN THE FORM
+//UPDATE PUT: update user with :id 
+//this route does not work because of the photo part
+// router.put('/:id', upload.single("img"), async (req, res) => {
+//     try {
+//         const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
+//             console.log('the cloudinary is doing its thing')
+//         })
+//         console.log(resImgObj)
+//         console.log('hello')
+//         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             img: resImgObj.url,
+//             email: req.body.email
+//         })
+//         console.log(updatedUser)
+//         res.redirect(`/users/${req.params.id}`)
+//     } catch (err) {
+//         res.send('aslkjdlasdkfj')
+//         console.log(err)
+//     }
+// })
 
 // SHOW: GET
 // /users/:id/created

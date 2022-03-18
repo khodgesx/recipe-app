@@ -1,10 +1,12 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const passport = require('passport');
 const User = require('./models/user');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+var logger = require('morgan');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 const app = express();
@@ -13,11 +15,11 @@ const store = new MongoDBStore({
     collection: 'mySessions'
 });
 
-cloudinary.config({ 
-    cloud_name: 'dqa6xyvq1', 
-    api_key: process.env.CLOUDINARY_API_KEY, 
+cloudinary.config({
+    cloud_name: 'dqa6xyvq1',
+    api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
-  });
+});
 
 //   const storage = new CloudinaryStorage({
 //     cloudinary: cloudinary,
@@ -44,6 +46,21 @@ app.use(session({
     saveUninitialized: false,
     store: store,
 }))
+
+
+app.use(passport.authenticate('session'));
+
+// RYANS SECRET MIDDLEWARE TO HOOK UP PASSPORTS IDEA OF LOGGING IN WITH YOURS
+app.use((req, res, next) => {
+    if (req.isAuthenticated()) {
+        req.session.isLoggedIn = true;
+        req.session.userId = req.session.passport.user
+        console.log(req.user)
+        console.log(req.session.passport.user)
+    }
+    next()
+})
+
 app.use(async (req, res, next) => {
     // This will send info from session to templates
     res.locals.isLoggedIn = req.session.isLoggedIn
@@ -53,9 +70,19 @@ app.use(async (req, res, next) => {
         res.locals.firstName = currentUser.firstName
         res.locals.userId = req.session.userId.toString()
         currentUserId = res.locals.userId
+        res.locals.user = currentUser
+        // console.log("res.localsssssssss", res.locals.user)
+    } else {
+        res.locals.username = false
+        currentUserId = null
+        firstName = null
+        lastName = null
     }
     next()
 })
+
+
+
 
 app.use('/recipes', recipeController)
 app.use('/users', userController)

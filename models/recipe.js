@@ -19,6 +19,9 @@ const recipeSchema = new Schema({
     serving: Number,
     img: String,
     instructions: String,
+    vegetarian: Boolean,
+    keto: Boolean,
+    course: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 

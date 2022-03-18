@@ -9,7 +9,8 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     recipesMade: { type: Number, min: 0, default: 0 },
     recipesSaved: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
-    img: { type: String }
+    img: { type: String },
+    googleID: String
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema);
