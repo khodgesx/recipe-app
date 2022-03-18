@@ -57,7 +57,8 @@ router.get('/:id', async (req, res) => {
         const currentUser = res.locals.username
         const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
         const recipeCreator = recipeWithUserProp.user.username
-        console.log("res.locals.username", res.locals.username)
+        const creatorName = recipeWithUserProp.user.firstName
+        // console.log("res.locals.username", res.locals.username)
         // const recipeToSave = await User.findById(req.params.id).populate('recipe')
         // console.log(recipeToSave)
         // console.log(res.locals)
@@ -77,7 +78,8 @@ router.get('/:id', async (req, res) => {
             recipe: recipe,
             currentUser: currentUser,
             recipeCreator: recipeCreator,
-            isLoggedIn: isLoggedIn
+            isLoggedIn: isLoggedIn,
+            creatorName: creatorName
             // user: res.locals.user
         })
     } catch (err) {
@@ -111,8 +113,17 @@ router.get('/:id', async (req, res) => {
 
 router.post('/:id/saved', async (req, res) => {
     try {
+        console.log('entering saved route')
         const currentUser = await User.findById(req.session.userId)
-        console.log(res.locals)
+        const ourRecipe = await Recipe.findById(req.params.id)
+        // console.log(res.locals)
+        let savedNumber = ourRecipe.savedCounter
+        console.log("unupdated counter", ourRecipe.savedCounter)
+        savedNumber++
+        ourRecipe.savedCounter = savedNumber
+        console.log("new counter", ourRecipe.savedCounter)
+        await ourRecipe.save()
+        console.log("ourRecipe:", ourRecipe)
         // console.log(currentUser.recipesSaved)
         currentUser.recipesSaved.push(req.params.id)
         await currentUser.save()
@@ -128,6 +139,13 @@ router.post('/:id/unsave', async (req, res) => {
     const currentUser = await User.findById(req.session.userId)
     // console.log(res.locals)
     // console.log(currentUser.recipesSaved)
+    const ourRecipe = await Recipe.findById(req.params.id)
+    let savedNumber = ourRecipe.savedCounter
+    console.log("unupdated counter", ourRecipe.savedCounter)
+    savedNumber--
+    ourRecipe.savedCounter = savedNumber
+    await ourRecipe.save()
+    console.log("ourRecipe:", ourRecipe)
     currentUser.recipesSaved.pop(req.params.id)
     await currentUser.save()
     // console.log(currentUser.recipesSaved)

@@ -12,10 +12,10 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 // const storage = new CloudinaryStorage({
 //     cloudinary: cloudinary,
 //     params: {
-//       folder: "Pics",
+//         folder: "Pics",
 //     },
-//   });
-//   const upload = multer({ storage: storage });
+// });
+// const upload = multer({ storage: storage });
 
 const upload = multer({ dest: "./uploads/" })
 
@@ -26,7 +26,7 @@ const upload = multer({ dest: "./uploads/" })
 // Gives a page displaying all the users
 router.get('/', async (req, res) => {
     const users = await User.find();
-    if(res.locals.isLoggedIn) {
+    if (res.locals.isLoggedIn) {
         res.render('users/index.ejs', {
             users: users
         })
@@ -128,24 +128,24 @@ router.post("/", upload.single("img"), (req, res) => {
         // userData.img = res.url
         console.log("this is the img result\n", res.url)
     })
-    .then(imgObj => {
-        console.log("is this img", imgObj)
-        User.create({
-            username: userData.username,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-            email: userData.email,
-            img: imgObj.url
+        .then(imgObj => {
+            console.log("is this img", imgObj)
+            User.create({
+                username: userData.username,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+                email: userData.email,
+                img: imgObj.url
+            })
+                .then(createdUser => {
+                    console.log("created user", createdUser)
+                    res.redirect('/login')
+                })
         })
-        .then(createdUser => {
-            console.log("created user", createdUser)
-            res.redirect('/login')
+        .catch(err => {
+            console.log(err)
         })
-    })
-    .catch(err => {
-        console.log(err)
-    })
 })
 
 
@@ -282,9 +282,9 @@ router.put('/:id/updatephoto', upload.single("img"), async (req, res) => {
         console.log(resImgObj)
         console.log('hello')
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-            
+
             img: resImgObj.url
-     
+
         })
         // console.log(updatedUser)
         res.redirect(`/users/${req.params.id}`)

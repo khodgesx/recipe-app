@@ -19,7 +19,7 @@
                     <%=recipe.name%>
                 </h1>
                 <p class="one-recipe-text"><span class="text-span">By:</span>
-                    <%=recipeCreator%>
+                    <%=creatorName%>
                 </p>
             </section>
 
@@ -89,29 +89,28 @@
 
                     <% if (currentUser) { %>
                         <% if (currentUser==recipeCreator){ %>
-                                    <a class="button-treat-main one-recipe-edit-button"
-                                        href="/recipes/<%=recipe._id%>/edit">Edit</a>
+                            <a class="button-treat-main one-recipe-edit-button"
+                                href="/recipes/<%=recipe._id%>/edit">Edit</a>
 
-                                    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
-                                        <input class="button-treat-sub one-recipe-delete-button" type="submit"
-                                            value="Delete">
+                            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                                <input class="button-treat-sub one-recipe-delete-button" type="submit" value="Delete">
+                            </form>
+                            <% } else { %>
+                                <% if (isItInTheArray) { %>
+                                    <form action="/recipes/<%=recipe._id%>/unsave" method="POST">
+                                        <input hidden name="recipeId" value="<%= recipe._id %>">
+                                        <input class="button-treat-main save-unsave-button" type="submit"
+                                            value="Unsave">
                                     </form>
                                     <% } else { %>
-                                        <% if (isItInTheArray) { %>
-                                            <form action="/recipes/<%=recipe._id%>/unsave" method="POST">
-                                                <input hidden name="recipeId" value="<%= recipe._id %>">
-                                                <input class="button-treat-main save-unsave-button" type="submit"
-                                                    value="Unsave">
-                                            </form>
-                                            <% } else { %>
-                                                <form action="/recipes/<%=recipe._id%>/saved" method="POST">
-                                                    <input hidden name="recipeId" value="<%= recipe._id %>">
-                                                    <input class="button-treat-main save-unsave-button" type="submit"
-                                                        value="Save">
-                                                </form>
+                                        <form action="/recipes/<%=recipe._id%>/saved" method="POST">
+                                            <input hidden name="recipeId" value="<%= recipe._id %>">
+                                            <input class="button-treat-main save-unsave-button" type="submit"
+                                                value="Save">
+                                        </form>
+                                        <% } %>
+                                            <% } %>
                                                 <% } %>
-                                                    <% } %>
-                                                        <% } %>
 
 
 
@@ -122,10 +121,10 @@
                 <!-- < % let currentUrl = window.location.href %> 
                 < % let previousUrl = history.back() %> 
                 < % while (currentUrl === previousUrl) { %> -->
-                    
-                    <a class="back-button double-back" href="javascript:history.back(-1)">Back</a>
-                    
-                    <!-- < % i++ %>
+
+                <a class="back-button double-back" href="javascript:history.back(-1)">Back</a>
+
+                <!-- < % i++ %>
                 < % } %> -->
 
 
