@@ -130,21 +130,26 @@ router.post("/", upload.single("img"), (req, res) => {
     })
         .then(imgObj => {
             console.log("is this img", imgObj)
-            User.create({
-                username: userData.username,
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-                email: userData.email,
-                img: imgObj.url
-            })
-                .then(createdUser => {
-                    console.log("created user", createdUser)
-                    res.redirect('/login')
+            if (User.find({ username: req.body.username })) {
+                res.redirect('/users/new')
+            } else {
+                User.create({
+                    username: userData.username,
+                    firstName: userData.firstName,
+                    lastName: userData.lastName,
+                    password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+                    email: userData.email,
+                    img: imgObj.url
                 })
+                    .then(createdUser => {
+                        console.log("created user", createdUser)
+                        res.redirect('/login')
+                    })
+            }
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
+            res.redirect('/users/new')
         })
 })
 
