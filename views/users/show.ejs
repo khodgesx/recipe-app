@@ -19,14 +19,17 @@
 
                 <% if (user._id==currentUserIdString) { %>
                     <h1 class="user-profile-title">Hi, <%=user.firstName%>
-                        <%=user.lastName%>!</h1>
-                    <% } else { %> 
-                        <h1 class="user-profile-title"><%=user.firstName%>'s Profile</h1>
-                    <% } %>
-                        
-                <% if (user._id==currentUserIdString) { %>
-                    <a class="button-treat-sub edit-user-button" href="/users/<%=user._id%>/edit">Edit Profile</a>
-                <% } %>
+                            <%=user.lastName%>!</h1>
+                    <% } else { %>
+                        <h1 class="user-profile-title">
+                            <%=user.firstName%>'s Profile
+                        </h1>
+                        <% } %>
+
+                            <% if (user._id==currentUserIdString) { %>
+                                <a class="button-treat-sub edit-user-button" href="/users/<%=user._id%>/edit">Edit
+                                    Profile</a>
+                                <% } %>
             </section>
 
 
@@ -34,66 +37,68 @@
             <section class="user-profile-recipe-grid create">
 
                 <% if (user._id==currentUserIdString) { %>
-                <h1 class="user-profile-subtitle">My Recipes</h1>
-                <% } else {%>
-                <h1 class="user-profile-subtitle"><%=user.firstName%>'s Recipes</h1>
-                <% } %>
+                    <h1 class="user-profile-subtitle">My Recipes</h1>
+                    <% } else {%>
+                        <h1 class="user-profile-subtitle">
+                            <%=user.firstName%>'s Recipes
+                        </h1>
+                        <% } %>
 
-                <section class="recipe-grid-container user-page">
-                    <% let j=0; %>
-                        <% for (let i=recipesMadeArray.length - 1; i>= 0; i--) { %>
-                            <% if (j==3) { %>
-                                <% break %>
-                                    <% } %>
-                                        <article class="card-container">
-                                            <img class="recipe-card-pic" src="<%=recipesMadeArray[i].img %>"
-                                                alt="<%=recipesMadeArray[i].name%>">
-                                            <div class="recipe-card-text">
-                                                <h2 class="recipe-card-title">
-                                                    <%=recipesMadeArray[i].name %>
-                                                </h2>
-                                                <p class="user-page recipe-card-caption">
-                                                    <%=recipesMadeArray[i].summary %>
-                                                </p>
-                                                <a class="button-treat-sub recipe-card-button"
-                                                    href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
-                                            </div>
-                                        </article>
-                                        <% j++ %>
-                                            <% } %>
-                </section>
+                            <section class="recipe-grid-container user-page">
+                                <% let j=0; %>
+                                    <% for (let i=recipesMadeArray.length - 1; i>= 0; i--) { %>
+                                        <% if (j==3) { %>
+                                            <% break %>
+                                                <% } %>
+                                                    <article class="card-container">
+                                                        <img class="recipe-card-pic" src="<%=recipesMadeArray[i].img %>"
+                                                            alt="<%=recipesMadeArray[i].name%>">
+                                                        <div class="recipe-card-text">
+                                                            <h2 class="recipe-card-title">
+                                                                <%=recipesMadeArray[i].name %>
+                                                            </h2>
+                                                            <p class="user-page recipe-card-caption">
+                                                                <%=recipesMadeArray[i].summary %>
+                                                            </p>
+                                                            <a class="button-treat-sub recipe-card-button user-profile"
+                                                                href="/recipes/<%=recipesMadeArray[i]._id%>">View</a>
+                                                        </div>
+                                                    </article>
+                                                    <% j++ %>
+                                                        <% } %>
+                            </section>
             </section>
 
 
             <% if (user._id==currentUserIdString) { %>
-                
-            <section class="user-profile-recipe-grid save">
-                <h1 class="user-profile-subtitle">Saved Recipes</h1>
-                <section class="recipe-grid-container user-page">
-                    <% let k=0 %>
-                        <% for (let i=recipesSavedArray.length - 1; i>= 0; i--) { %>
-                            <% if (k==3) { %>
-                                <% break %>
-                                    <% } %>
-                                        <article class="card-container">
-                                            <img class="recipe-card-pic" src="<%=recipesSavedArray[i].img%>"
-                                                alt="<%=recipesSavedArray[i].name%>">
-                                            <div class="recipe-card-text">
-                                                <h2 class="recipe-card-title">
-                                                    <%=recipesSavedArray[i].name %>
-                                                </h2>
-                                                <p class="user-page recipe-card-caption">
-                                                    <%=recipesSavedArray[i].summary %>
-                                                </p>
-                                                <a class="button-treat-sub recipe-card-button"
-                                                    href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
-                                            </div>
-                                        </article>
-                                        <% k++ %>
-                                            <% } %>
+
+                <section class="user-profile-recipe-grid save">
+                    <h1 class="user-profile-subtitle">Saved Recipes</h1>
+                    <section class="recipe-grid-container user-page">
+                        <% let k=0 %>
+                            <% for (let i=recipesSavedArray.length - 1; i>= 0; i--) { %>
+                                <% if (k==3) { %>
+                                    <% break %>
+                                        <% } %>
+                                            <article class="card-container">
+                                                <img class="recipe-card-pic" src="<%=recipesSavedArray[i].img%>"
+                                                    alt="<%=recipesSavedArray[i].name%>">
+                                                <div class="recipe-card-text">
+                                                    <h2 class="recipe-card-title">
+                                                        <%=recipesSavedArray[i].name %>
+                                                    </h2>
+                                                    <p class="user-page recipe-card-caption">
+                                                        <%=recipesSavedArray[i].summary %>
+                                                    </p>
+                                                    <a class="button-treat-sub recipe-card-button"
+                                                        href="/recipes/<%=recipesSavedArray[i]._id%>">View</a>
+                                                </div>
+                                            </article>
+                                            <% k++ %>
+                                                <% } %>
+                    </section>
                 </section>
-            </section>
-            <% } %>
+                <% } %>
 
 
         </section>
@@ -103,12 +108,12 @@
 
 
 
-            <footer>
-                <%- include('../partials/footer.ejs') %>
-            </footer>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
 
 
-            <script src="/js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

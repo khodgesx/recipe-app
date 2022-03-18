@@ -285,14 +285,14 @@ body {
     position: absolute;
     right: 0;
     bottom: 4px;
-    padding: 5px 7px 7px 5px;
+    padding: 5px;
     color: white;
     font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 5px;
-    background-color: rgba(0, 0, 0, 0.24);
+    /* background-color: rgba(0, 0, 0, 0.24); */
     /* border-radius: 10px 0 0 0; */
     /* overflow: hidden; */
 }
@@ -330,8 +330,8 @@ body {
 
 .button-treat-sub.community-card-button:hover,
 .button-treat-sub.recipe-card-button:hover {
-    background-color: white;
-    color: #ff8944;
+    background-color: var(--dark-marigold);
+    color: white;
 }
 
 .button-treat-sub.community-card-button {
@@ -962,9 +962,10 @@ input[type="file"] {
     padding: 0;
 }
 
-.button-treat-sub.edit-user-button:hover {
-    background: none;
-    color: #ff8944;
+.button-treat-sub.community-card-button.user-profile:hover,
+.button-treat-sub.recipe-card-button.user-profile:hover {
+    background-color: white;
+    color: var(--dark-marigold);
 }
 
 .user-page.recipe-card-caption {

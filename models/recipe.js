@@ -22,7 +22,7 @@ const recipeSchema = new Schema({
     vegetarian: Boolean,
     keto: Boolean,
     course: String,
-    savedCounter: { type: Number, default: 0 },
+    savedCounter: { type: Number, default: 0, min: 0 },
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 
