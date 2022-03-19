@@ -31,6 +31,7 @@ passport.use(new GoogleStrategy({
             // isLoggedIn = true
             // req.isAuthenticated()
             // isLoggedIn()
+            goodUser = newUser
         } else {
             goodUser = possibleUser
         }
