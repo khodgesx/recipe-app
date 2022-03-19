@@ -22,12 +22,12 @@ passport.use(new GoogleStrategy({
     async function (issuer, profile, cb) {
         // Check the database for an existing user 
         let goodUser
-        const possibleUser = await User.findOne({ googleID: profile.id })
+        let possibleUser = await User.findOne({ googleID: profile.id })
         if (!possibleUser) {
             console.log("failed to find existig user")
             // Create a user with the given info from profile
-            const goodUser = await User.create({ googleID: profile.id, googleDisplayName: profile.displayName, username: `Google:${profile.id}`, firstName: profile.name.givenName, email: "blah", password: "nothanksIgoogle" })
-            req.session.isLoggedIn = true
+            await User.create({ googleID: profile.id, googleDisplayName: profile.displayName, username: `Google:${profile.id}`, firstName: profile.name.givenName, email: "blah", password: "nothanksIgoogle" })
+            isLoggedIn = true
 
         } else {
             console.log("found existing user");
