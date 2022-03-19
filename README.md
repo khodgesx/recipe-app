@@ -80,9 +80,9 @@ We utilized a two model approach in which users are able to create, edit, and de
 
 
 ## Additional Notes:
-Future stretch goals include implementing and seeding API data with search functionality for a more robust recipe application.
+Future stretch goals include implementing and seeding API data and search functionality for a more robust recipe application.
 
 ### Ownership:
-- **Branislav Todorovic:** Led responsibilities across all back-end development. Managed schemas and models of both users and recipes. Co-created and oversaw all RESTful routes creation and implementation. Took ownership of deployment of Feastr recipe app via Heroku. Collaborated  on implementation of the following APIs - Cloudinary and Passport.js.
+- **Branislav Todorovic:** Led responsibilities across all back-end development. Managed schemas and models of both users and recipes. Co-created and managed all RESTful routes creation and implementation. Took ownership of deployment of Feastr recipe app via Heroku. Collaborated  on implementation of the following APIs - Cloudinary and Passport.js.
 - **Kelly Hodges:** Supervised all back-end development responsibilities. Took ownership of the creation of user and recipe schemas and models. Managed and co-created all RESTful routes across all controllers - User, Recipe and Home.  Oversaw implementation of Cloudinary API, Passport.js and deployment of application on Heroku. 
 - **Vickie Vien:** Managed all front-end development responsibilities from wireframing Feastr pages with Figma, coding, implementing and rendering all ejs files with a mobile-first approach, creating logo and favicon, applying partials accross all views, ensuring responsiveness across all devices (mobile, tablet, desktop), and styling of all pages with interactivity where necessary for a better user experience.
