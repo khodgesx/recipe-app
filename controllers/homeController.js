@@ -30,7 +30,8 @@ passport.use(new GoogleStrategy({
             console.log(newUser)
             // isLoggedIn = true
             // req.isAuthenticated()
-            isLoggedIn()
+            // isLoggedIn()
+
         } else {
             console.log("found existing user");
             goodUser = possibleUser
