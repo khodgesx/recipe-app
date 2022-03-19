@@ -9,7 +9,7 @@ const cloudinary = require('cloudinary');
 const isLoggedIn = require('../middleware/isLoggedIn')
 const { flash } = require('express-flash-message');
 
-
+// Set remote cloudinary folder destination
 // const storage = new CloudinaryStorage({
 //     cloudinary: cloudinary,
 //     params: {
@@ -17,10 +17,8 @@ const { flash } = require('express-flash-message');
 //     },
 // });
 // const upload = multer({ storage: storage });
-
 const upload = multer({ dest: "./uploads/" })
 
-//test
 //flash message for duplicate username
 router.get('/flashusername', async function (req, res) {
     // Set a flash message by passing the key, followed by the value, to req.flash().
@@ -29,7 +27,6 @@ router.get('/flashusername', async function (req, res) {
 });
 
 // INDEX: GET
-// /users
 // Gives a page displaying all the users
 router.get('/', async (req, res) => {
     const users = await User.find();
@@ -41,9 +38,7 @@ router.get('/', async (req, res) => {
         res.redirect('/login')
     }
 })
-
 // NEW: GET
-// /users/new
 // Shows a form to create a new user
 router.get('/new', async (req, res) => {
     const messages = await req.consumeFlash('duplicateusername');
@@ -51,28 +46,16 @@ router.get('/new', async (req, res) => {
         messages: messages
     })
 })
-
-
 // SHOW: GET
-// /users/:id
 // Shows users profile page
 router.get('/:id', [isLoggedIn], async (req, res) => {
     try {
-        console.log('hello entering')
         const user = await User.findById(req.params.id)
         const currentUserId = req.session.userId
         const currentUserIdString = req.session.userId.toString()
-
-        console.log("hello")
-        // console.log(currentUserId)
-        // console.log(user._id)
-
-
         const recipesMadeArray = await Recipe.find({ user: req.params.id }).populate('user')
         userWithSavedRecipes = await user.populate('recipesSaved')
         const recipesSavedArray = userWithSavedRecipes.recipesSaved
-        // console.log(recipesMadeArray)
-        // console.log(recipesSavedArray)
         res.render('users/show.ejs', {
             recipesSavedArray: recipesSavedArray,
             recipesMadeArray: recipesMadeArray,
@@ -83,48 +66,26 @@ router.get('/:id', [isLoggedIn], async (req, res) => {
     } catch (err) {
         console.log(err)
         res.send(err)
-
     }
-
 })
-
-
-
 // SHOW: GET
-// /users/:id/saved
 // Shows a page displaying all the recipes saved by the user
 router.get('/:id/saved', async (req, res) => {
-    // const user = await User.findById(req.params.id)
-    // const recipes = await Recipe.findById
-    // const currentUser = req.session.id
-    // const recipeWithUserProp = await Recipe.findById(req.params.id).populate('user')
-    // const recipeCreator = recipeWithUserProp.user.username
-    // console.log(usersSavedRecipes)
-    // user.recipesSaved = user.recipesSaved.populate('Recipe')
-
     const currentUser = await User.findById(req.params.id)
     userWithSavedRecipes = await currentUser.populate('recipesSaved')
     const recipes = userWithSavedRecipes.recipesSaved
     res.render("users/index-saved.ejs", {
-        // user: user,
         currentUser: currentUser,
         recipes: recipes
     })
 })
-
-
-
 //CREATE: POST create new user with image upload
 router.post('/', upload.single('img'), async (req, res) => {
     const userData = req.body
     await cloudinary.uploader.upload(req.file.path, res => {
-        // console.log("this is the request\n", req.file.path)
-        // userData.img = res.url
-        console.log("this is the img result\n", res.url)
     })
     const ourUser = await User.findOne({ username: req.body.username })
     if (ourUser) {
-        console.log(userData.username)
         res.redirect('/users/flashusername')
     } else {
         await User.create({
@@ -138,21 +99,12 @@ router.post('/', upload.single('img'), async (req, res) => {
         res.redirect('/login')
     }
 })
-
-
-
-
-
-
 // EDIT: GET
-// /users/:id/edit
 // SHOW THE FORM TO EDIT A USER 
 router.get('/:id/edit', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
-            console.log("=========================")
             const user = await User.findById(req.params.id)
-
             res.render('users/edit-user.ejs', {
                 user: user
             })
@@ -163,15 +115,12 @@ router.get('/:id/edit', async (req, res) => {
         res.sendStatus(500)
     }
 })
-
 // EDIT: GET
-// /users/:id/editpassword
 // SHOW THE FORM TO EDIT USER PASSWORD
 router.get('/:id/editpassword', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
             const user = await User.findById(req.params.id)
-
             res.render('users/edit-password.ejs', {
                 user: user
             })
@@ -182,15 +131,12 @@ router.get('/:id/editpassword', async (req, res) => {
         res.sendStatus(500)
     }
 })
-
 //EDIT: GET
 //get the form to update the user photo:
-// /users/:id/updatephoto
 router.get('/:id/updatephoto', async (req, res) => {
     try {
         if (req.session.userId == req.params.id) {
             const user = await User.findById(req.params.id)
-
             res.render('users/update-photo.ejs', {
                 user: user
             })
@@ -201,148 +147,57 @@ router.get('/:id/updatephoto', async (req, res) => {
         res.sendStatus(500)
     }
 })
-// User.findOneAndUpdate({username: req.params.username}, { $set: req.body }, { new: true }, callback);
-// UPDATE: PUT
-// /users/:id
-// UPDATE THE USER WITH THE SPECIFIC ID
-// router.post("/", upload.single("img"), (req, res) => {
-//     const userData = req.body
-//     cloudinary.uploader.upload(req.file.path, res => {
-//         // console.log("this is the request\n", req.file.path)
-//         // userData.img = res.url
-//         console.log("this is the img result\n", res.url)
-//     })
-
-//UPDATE PUT: update user with :id 
-//this route does not work because of the photo part
-// router.put('/:id', upload.single("img"), async (req, res) => {
-//     try {
-//         const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
-//             console.log('the cloudinary is doing its thing')
-//         })
-//         console.log(resImgObj)
-//         console.log('hello')
-//         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             img: resImgObj.url,
-//             email: req.body.email
-//         })
-//         console.log(updatedUser)
-//         res.redirect(`/users/${req.params.id}`)
-//     } catch (err) {
-//         res.send('aslkjdlasdkfj')
-//         console.log(err)
-//     }
-// })
-//UPDATE PUT: update user with :id 
-//this route does not work because of the photo part
+//UPDATE PUT: update user with :id everything except password or photo
 router.put('/:id', async (req, res) => {
     try {
-
-        console.log('hello')
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        await User.findByIdAndUpdate(req.params.id, {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email
         })
-        console.log("update user:", updatedUser)
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         console.log(err)
     }
 })
-
-
-
 // UPDATE THE USER'S PASSWORD WITH THE SPECIFIC ID
 router.put('/:id/editpassword', async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.session.userId, {
+        await User.findByIdAndUpdate(req.session.userId, {
             password: bcrypt.hashSync(req.body.password, 10),
         })
-        console.log(updatedUser)
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         res.send('did not update password')
-        console.log(err)
     }
 })
 //UPDATE USER PHOTO : /users/:id/updatephoto
 router.put('/:id/updatephoto', upload.single("img"), async (req, res) => {
     try {
         const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
-            console.log('the cloudinary is doing its thing')
         })
-        console.log(resImgObj)
-        console.log('hello')
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-
+        await User.findByIdAndUpdate(req.params.id, {
             img: resImgObj.url
-
         })
-        // console.log(updatedUser)
         res.redirect(`/users/${req.params.id}`)
     } catch (err) {
         res.send('aslkjdlasdkfj')
         console.log(err)
     }
 })
-
-//THIS WAS THE OLD ROUTE WITH EVERYTHING BUT PASSWORD IN THE FORM
-//UPDATE PUT: update user with :id 
-//this route does not work because of the photo part
-// router.put('/:id', upload.single("img"), async (req, res) => {
-//     try {
-//         const resImgObj = await cloudinary.uploader.upload(req.file.path, resImgObj => {
-//             console.log('the cloudinary is doing its thing')
-//         })
-//         console.log(resImgObj)
-//         console.log('hello')
-//         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             img: resImgObj.url,
-//             email: req.body.email
-//         })
-//         console.log(updatedUser)
-//         res.redirect(`/users/${req.params.id}`)
-//     } catch (err) {
-//         res.send('aslkjdlasdkfj')
-//         console.log(err)
-//     }
-// })
-
 // SHOW: GET
-// /users/:id/created
 // Shows a page displaying all the recipes created by the user
 router.get('/:id/created', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id)
-        // const recipes = await Recipe.find()
-
         const recipesWithUserProp = await Recipe.find({ user: req.params.id }).populate('user')
-        console.log(recipesWithUserProp)
-        // const recipeUserId = recipesWithUserProp.user._id
-        // const recipesCreatedByUser = await Recipe.findById(recipes._id).populate('user')
-        // console.log(recipesCreatedByUser)
-        // const recipeCreator = recipesCreatedByUser.user.username
-        // const currentUser = await User.findById(req.session.userId)
         res.render("users/index-created.ejs", {
-            // user: user,
             recipesWithUserProp: recipesWithUserProp,
-            // recipeCreator: recipeCreator,
-            // currentUser: currentUser
-
         })
     } catch (err) {
-        console.log(err)
         res.send(err)
     }
 })
-
 // DELETE: DELETE
-// /users/:id
 // DELETE THE USER WITH THE SPECIFIC ID
 router.delete('/:id', async (req, res) => {
     try {
@@ -356,8 +211,5 @@ router.delete('/:id', async (req, res) => {
         res.sendStatus(500)
     }
 })
-
-
-
 
 module.exports = router

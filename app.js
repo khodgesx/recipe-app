@@ -4,7 +4,6 @@ const session = require('express-session');
 const passport = require('passport');
 const User = require('./models/user');
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
 var logger = require('morgan');
 const path = require('path');
@@ -16,22 +15,11 @@ const store = new MongoDBStore({
     uri: process.env.MONGO_URI,
     collection: 'mySessions'
 });
-
 cloudinary.config({
     cloud_name: 'dqa6xyvq1',
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
-
-//   const storage = new CloudinaryStorage({
-//     cloudinary: cloudinary,
-//     params: {
-//       folder: "DEV",
-//     },
-//   });
-
-// const upload = multer({ storage: storage });
-
 require('./db-utils/connect')
 const recipeController = require('./controllers/recipeController')
 const userController = require('./controllers/userController')
@@ -51,22 +39,15 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1week
     },
 }))
-
-// app.use(flash({ sessionKeyName: 'flashMessage', useCookieSession: true }));
-
 app.use(passport.authenticate('session'));
-
-// RYANS SECRET MIDDLEWARE TO HOOK UP PASSPORTS IDEA OF LOGGING IN WITH YOURS
+// RYANS SECRET MIDDLEWARE
 app.use((req, res, next) => {
     if (req.isAuthenticated()) {
         req.session.isLoggedIn = true;
         req.session.userId = req.session.passport.user
-        // console.log(req.user)
-        console.log(req.session.passport.user)
     }
     next()
 })
-
 app.use(async (req, res, next) => {
     // This will send info from session to templates
     res.locals.isLoggedIn = req.session.isLoggedIn
@@ -77,7 +58,6 @@ app.use(async (req, res, next) => {
         res.locals.userId = req.session.userId.toString()
         currentUserId = res.locals.userId
         res.locals.user = currentUser
-        // console.log("res.localsssssssss", res.locals.user)
     } else {
         res.locals.username = false
         currentUserId = null
@@ -86,9 +66,7 @@ app.use(async (req, res, next) => {
     }
     next()
 })
-
 app.use(flash({ sessionKeyName: 'flashMessage' }));
-
 app.use('/recipes', recipeController)
 app.use('/users', userController)
 app.use('/', homeController)

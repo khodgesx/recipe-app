@@ -24,33 +24,26 @@ passport.use(new GoogleStrategy({
         let goodUser
         let possibleUser = await User.findOne({ googleID: profile.id })
         if (!possibleUser) {
-            console.log("failed to find existig user")
             // Create a user with the given info from profile
             const newUser = await User.create({ googleID: profile.id, googleDisplayName: profile.displayName, username: `Google:${profile.id}`, firstName: profile.name.givenName, email: "blah", password: "nothanksIgoogle" })
             console.log(newUser)
+            // tried these to have auto login after google auth but didn't work
             // isLoggedIn = true
             // req.isAuthenticated()
             // isLoggedIn()
         } else {
-            console.log("found existing user");
             goodUser = possibleUser
         }
-        console.log("hi")
         return cb(null, goodUser)
     })
 )
-
 passport.serializeUser(function (user, done) {
     done(null, user.id)
 });
-
 passport.deserializeUser(async (id, cb) => {
-
     try {
         const passUser = await User.findById(id)
-
         if (passUser) {
-
             return cb(null, passUser)
         } else {
             return cb(null, false)
@@ -58,32 +51,21 @@ passport.deserializeUser(async (id, cb) => {
     } catch (err) {
         return cb(err, false)
     }
-
 });
-
-
 router.get('/flash', async function (req, res) {
     // Set a flash message by passing the key, followed by the value, to req.flash().
     await req.flash('info', 'Congratulations, you logged in successfully.');
     res.redirect('/');
 });
-
 router.get('/flashloginfail', async function (req, res) {
     // Set a flash message by passing the key, followed by the value, to req.flash().
     await req.flash('loginfail', 'Username and/or password incorrect. Please try again.')
     res.redirect('/login');
 });
-
-
-
-
-
-
 router.get('/', async (req, res) => {
     // THERE IS A REQ.SESSION.PASSPORT.USER THAT HAS THE OBJECTID IN IT
     try {
         const messages = await req.consumeFlash('info');
-
         let recipes = await Recipe.find()
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -93,8 +75,7 @@ router.get('/', async (req, res) => {
                 array[j] = temp;
             }
         }
-        const recipesShuffled = shuffleArray(recipes)
-        console.log(messages)
+        shuffleArray(recipes)
         res.render('home.ejs', {
             recipes: recipes,
             messages: messages
@@ -104,31 +85,18 @@ router.get('/', async (req, res) => {
         res.send(err)
     }
 })
-
-
 router.get('/login', async (req, res, next) => {
     const messages = await req.consumeFlash('loginfail');
-    console.log("hello")
     res.render('login.ejs', {
         messages: messages
     })
 })
-
-
-
 router.get('/login/google', passport.authenticate('google'))
-
-
-
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/login',
     session: true
 }));
-
-
-
-
 router.post("/login", async (req, res) => {
     try {
         // Grab the user from the database with the username from the form
@@ -140,7 +108,6 @@ router.post("/login", async (req, res) => {
                 // It's a match! Successful login!
                 req.session.isLoggedIn = true;
                 req.session.userId = possibleUser._id;
-
                 res.redirect('/flash')
                 return
             } else {
@@ -149,7 +116,7 @@ router.post("/login", async (req, res) => {
             }
         } else {
             res.redirect('/flashloginfail')
-            // Let them try again?
+            // Let them try again
             return
         }
     } catch (err) {
@@ -157,22 +124,10 @@ router.post("/login", async (req, res) => {
         res.send(500)
     }
 })
-
 router.get('/logout', (req, res) => {
     req.logout();
     req.session.destroy(() => {
         res.redirect("/")
     })
 })
-
-// router.post('/logout', function (req, res, next) {
-//     req.logout();
-//     res.redirect('/');
-// });
-
-
-
-
-
-
 module.exports = router
