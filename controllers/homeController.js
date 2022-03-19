@@ -146,7 +146,7 @@ router.post("/login", async (req, res) => {
         } else {
             res.redirect('/flashloginfail')
             // Let them try again?
-            res.redirect("/login")
+
         }
     } catch (err) {
         console.log(err);
