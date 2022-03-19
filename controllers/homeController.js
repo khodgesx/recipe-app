@@ -31,7 +31,7 @@ passport.use(new GoogleStrategy({
             // isLoggedIn = true
             // req.isAuthenticated()
             // isLoggedIn()
-            if (req.session.passport.user) {
+            if (newUser) {
                 req.session.isLoggedIn = true
             }
         } else {
