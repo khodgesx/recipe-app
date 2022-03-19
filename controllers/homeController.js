@@ -140,13 +140,15 @@ router.post("/login", async (req, res) => {
                 req.session.userId = possibleUser._id;
 
                 res.redirect('/flash')
+                return
             } else {
                 res.redirect('/flashloginfail')
+                return
             }
         } else {
             res.redirect('/flashloginfail')
             // Let them try again?
-
+            return
         }
     } catch (err) {
         console.log(err);
