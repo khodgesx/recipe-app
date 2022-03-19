@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head id="/#top">
     <%- include('../partials/head.ejs') %>
 </head>
 
@@ -12,7 +12,7 @@
 
     <main class="page-main">
         <section class="page-text-container">
-            <h1 class="page-title" id="top">All Recipes</h1>
+            <h1 class="page-title">All Recipes</h1>
             <h3 class="page-subtitle">Browse all recipes.</h3>
         </section>
 
@@ -24,7 +24,6 @@
 
                         <div class="counter-wrap">
                             <% if (n.savedCounter===0) { %>
-                                <i class="fas fa-heart"></i>
                                 <% } else { %>
                                     <p class="counter">
                                         <%= n.savedCounter %>
@@ -80,7 +79,7 @@
                 </article>
                 <% }) %>
         </section>
-        <a href="#top">Back to Top</a>
+        <a href="#top" class="to-top">Back to Top</a>
     </main>
 
 

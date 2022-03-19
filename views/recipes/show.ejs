@@ -21,6 +21,16 @@
                 <p class="one-recipe-text"><span class="text-span">By:</span>
                     <%=creatorName%>
                 </p>
+                <p class="one-recipe-text heart">
+                    <% if(recipe.savedCounter === 0) { %>
+                        <% } else if (recipe.savedCounter === 1) { %>
+                        <i class="fas fa-heart one-recipe"></i><%=recipe.savedCounter%>
+                        save
+                    <% } else { %>
+                        <i class="fas fa-heart one-recipe"></i><%=recipe.savedCounter%>
+                        saves
+                    <% } %>                    
+                </p>
             </section>
 
             <section class="one-recipe-container-details">
