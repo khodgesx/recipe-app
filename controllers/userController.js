@@ -347,7 +347,11 @@ router.get('/:id/created', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id)
-        res.redirect('/users')
+        req.session.isLoggedIn = false;
+        req.logout();
+        req.session.destroy(() => {
+            res.redirect("/")
+        })
     } catch (err) {
         res.sendStatus(500)
     }

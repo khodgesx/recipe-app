@@ -46,6 +46,12 @@
                         <a class="edit-user-link" href="/users/<%=user._id%>/editpassword"><button>Edit
                                 Password</button></a>
                     </div>
+                    <div class="form-row-container">
+                        <form action="/users/<%= user._id %>?_method=DELETE" method="post">
+                            <input class="button-treat-sub one-user-delete-button" type="submit" value="Delete">
+                            <!-- <button type="submit">Delete User</button> -->
+                        </form>
+                    </div>
                 </section>
 
             </section>

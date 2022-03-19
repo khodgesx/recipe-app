@@ -155,6 +155,7 @@ router.post("/login", async (req, res) => {
         res.send(500)
     }
 })
+
 router.get('/logout', (req, res) => {
     req.logout();
     req.session.destroy(() => {
