@@ -42,7 +42,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-
 // NEW: GET
 // /users/new
 // Shows a form to create a new user
@@ -115,53 +114,34 @@ router.get('/:id/saved', async (req, res) => {
 
 
 
-// CREATE: POST (OLD ROUTE)
-// /users
-// Creates an actual user, then...?
-// router.post('/', async (req, res) => {
-//     // req.body.password needs to be HASHED
-//     console.log(req.body)
-//     const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-//     console.log(hashedPassword)
-//     req.body.password = hashedPassword
-//     const newUser = await User.create(req.body);
-//     console.log(newUser)
-//     res.redirect('/login')
-// })
-
-//CREATE: POST create new user with image upload 
-router.post("/", upload.single("img"), (req, res) => {
-
+//CREATE: POST create new user with image upload
+router.post('/', upload.single('img'), async (req, res) => {
     const userData = req.body
-    cloudinary.uploader.upload(req.file.path, res => {
+    await cloudinary.uploader.upload(req.file.path, res => {
         // console.log("this is the request\n", req.file.path)
         // userData.img = res.url
         console.log("this is the img result\n", res.url)
     })
-        .then(imgObj => {
-            console.log("is this img", imgObj)
-            if (User.find({ username: req.body.username })) {
-                res.redirect('/users/flashusername')
-            } else {
-                User.create({
-                    username: userData.username,
-                    firstName: userData.firstName,
-                    lastName: userData.lastName,
-                    password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-                    email: userData.email,
-                    img: imgObj.url
-                })
-                    .then(createdUser => {
-                        console.log("created user", createdUser)
-                        res.redirect('/login')
-                    })
-            }
+    const ourUser = await User.findOne({ username: req.body.username })
+    if (ourUser) {
+        console.log(userData.username)
+        res.redirect('/users/flashusername')
+    } else {
+        await User.create({
+            username: userData.username,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+            email: userData.email,
+            img: res.url
         })
-        .catch(err => {
-            // console.log(err)
-            res.redirect('/users/new')
-        })
+        res.redirect('/login')
+    }
 })
+
+
+
+
 
 
 // EDIT: GET
