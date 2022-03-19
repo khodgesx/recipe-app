@@ -62,7 +62,7 @@ app.use((req, res, next) => {
         req.session.isLoggedIn = true;
         req.session.userId = req.session.passport.user
         // console.log(req.user)
-        // console.log(req.session.passport.user)
+        console.log(req.session.passport.user)
     }
     next()
 })
