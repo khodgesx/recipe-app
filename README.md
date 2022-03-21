@@ -55,7 +55,7 @@ Feastr is a recipe app in which a user can create, save, share and search recipe
 
 
 ## Restful Routes:
-
+![alt text](https://i.imgur.com/mDY6Qlh.png "RESTful Routes")
 
 
 ## Approach:
