@@ -23,13 +23,12 @@
                         <img class="recipe-card-pic" src="<%=n.img %>" alt="<%=n.name%>">
 
                         <div class="counter-wrap">
-                            <% if (n.savedCounter===0) { %>
-                                <% } else { %>
-                                    <p class="counter">
-                                        <%= n.savedCounter %>
-                                    </p>
-                                    <i class="fas fa-heart"></i>
-                                    <% } %>
+                            <% if (n.savedCounter> 0) { %>
+                                <p class="counter">
+                                    <%= n.savedCounter %>
+                                </p>
+                                <i class="fas fa-heart"></i>
+                                <% } %>
                         </div>
 
                     </div>
