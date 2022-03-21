@@ -69,9 +69,7 @@ router.post('/:id/saved', async (req, res) => {
     try {
         const currentUser = await User.findById(req.session.userId)
         const ourRecipe = await Recipe.findById(req.params.id)
-        let savedNumber = ourRecipe.savedCounter
-        savedNumber++
-        ourRecipe.savedCounter = savedNumber
+        ourRecipe.savedCounter++
         await ourRecipe.save()
         currentUser.recipesSaved.push(req.params.id)
         await currentUser.save()
@@ -84,9 +82,7 @@ router.post('/:id/saved', async (req, res) => {
 router.post('/:id/unsave', async (req, res) => {
     const currentUser = await User.findById(req.session.userId)
     const ourRecipe = await Recipe.findById(req.params.id)
-    let savedNumber = ourRecipe.savedCounter
-    savedNumber--
-    ourRecipe.savedCounter = savedNumber
+    ourRecipe.savedCounter--
     await ourRecipe.save()
     currentUser.recipesSaved.pop(req.params.id)
     await currentUser.save()

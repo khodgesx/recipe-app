@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: { type: String, unique: true, required: true, minlength: 2 },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    recipesMade: { type: Number, min: 0, default: 0 },
+    recipesMade: { type: Number, default: 0 },
     recipesSaved: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
     img: { type: String },
     googleID: String
