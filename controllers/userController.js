@@ -82,7 +82,7 @@ router.get('/:id/saved', async (req, res) => {
 //CREATE: POST create new user with image upload
 router.post('/', upload.single('img'), async (req, res) => {
     const userData = req.body
-    await cloudinary.uploader.upload(req.file.path, res => {
+    const imgObj = await cloudinary.uploader.upload(req.file.path, res => {
     })
     const ourUser = await User.findOne({ username: req.body.username })
     if (ourUser) {
@@ -94,7 +94,7 @@ router.post('/', upload.single('img'), async (req, res) => {
             lastName: userData.lastName,
             password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
             email: userData.email,
-            img: res.url
+            img: imgObj.url
         })
         res.redirect('/login')
     }
