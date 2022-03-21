@@ -55,7 +55,7 @@ Feastr is a recipe app in which a user can create, save, share and search recipe
 
 
 ## Restful Routes:
-![alt text](https://i.imgur.com/LIXmWKw.png "RESTful Routes")
+![alt text](https://i.imgur.com/0vWFWmC.png "RESTful Routes")
 
 
 ## Approach:
@@ -80,7 +80,7 @@ We utilized a two model approach in which users are able to create, edit, and de
 
 
 ## Additional Notes:
-Future stretch goals include implementing and seeding API data and search functionality for a more robust recipe application.
+Future stretch goals include implementing and seeding API data, adding search functionality for a more robust recipe application, and cloudinary's image cropping solution. Styling updates include enhancing photo ratio on community grid, displaying individual recipes from grid to flexbox.
 
 ### Ownership:
 - **Branislav Todorovic:** Led responsibilities across all back-end development. Managed schemas and models of both users and recipes. Co-created and managed all RESTful routes creation and implementation. Took ownership of deployment of Feastr recipe app via Heroku. Collaborated  on implementation of the following APIs - Cloudinary and Passport.js.
