@@ -9,7 +9,7 @@ Feastr is a recipe app in which a user can create, save, share and search recipe
 
 
 ## User Flow:
-![alt text](https://i.imgur.com/TqacmMv.png "recipe userflow")
+![alt text](https://i.imgur.com/24gD2BG.png "recipe userflow")
 
 
 ## Tech Stack:
