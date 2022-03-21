@@ -528,6 +528,10 @@ body {
     z-index: 0;
 }
 
+.outside-form-container.edit-recipe-row {
+    bottom: 40px;
+}
+
 .delete-button {
     border: none;
     background-color: white;
